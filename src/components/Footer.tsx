@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Home, Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -15,15 +16,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
-                <Home className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">Thamizh Aruvi</h3>
-                <p className="text-sm text-background/60">Real Estate</p>
-              </div>
-            </div>
+            <Link to="/">
+              <img 
+                src={logo} 
+                alt="Thamizh Aruvi Real Estate" 
+                className="h-16 w-auto object-contain brightness-0 invert hover:opacity-80 transition-opacity"
+              />
+            </Link>
             <p className="text-background/70 text-sm leading-relaxed">
               Building your future in Tiruvannamalai with premium plots and homes. 
               Trusted by 1000+ happy families over 20+ years of excellence.
