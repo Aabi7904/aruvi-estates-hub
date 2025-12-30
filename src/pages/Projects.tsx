@@ -5,78 +5,63 @@ import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { Button } from '@/components/ui/button';
 import { MapPin, ArrowRight, CheckCircle, Filter } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const allProjects = [
-  {
-    id: 1,
-    name: 'Semmozhi Nagar',
-    location: 'Tiruvannamalai',
-    status: 'Ongoing',
-    priceStart: 'Starts at ₹5 Lakhs',
-    features: ['DTCP Approved', 'RERA Registered', '30ft Tar Road', 'Solar Lights'],
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
-    plots: '60+ Plots',
-  },
-  {
-    id: 2,
-    name: 'Amudha Surabhi Nagar',
-    location: 'Near Girivalam Road',
-    status: 'Completed',
-    priceStart: 'Starts at ₹7 Lakhs',
-    features: ['DTCP Approved', '24ft Roads', 'Water Supply', 'Street Lights'],
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075',
-    plots: '45 Plots',
-  },
-  {
-    id: 3,
-    name: 'Thirumalai Garden',
-    location: 'Polur Road',
-    status: 'Ongoing',
-    priceStart: 'Starts at ₹4.5 Lakhs',
-    features: ['DTCP Approved', 'Compound Wall', 'Park', 'Wide Roads'],
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053',
-    plots: '80+ Plots',
-  },
-  {
-    id: 4,
-    name: 'Shiva Shakti Nagar',
-    location: 'Arani Road',
-    status: 'Completed',
-    priceStart: 'Starts at ₹3.5 Lakhs',
-    features: ['DTCP Approved', '20ft Roads', 'Temple Nearby', 'Good Connectivity'],
-    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070',
-    plots: '35 Plots',
-  },
-  {
-    id: 5,
-    name: 'Annamalai Heights',
-    location: 'Chengam Road',
-    status: 'Ongoing',
-    priceStart: 'Starts at ₹6 Lakhs',
-    features: ['RERA Registered', 'Hilltop View', 'Premium Location', 'Security'],
-    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070',
-    plots: '50 Plots',
-  },
-  {
-    id: 6,
-    name: 'Sri Lakshmi Enclave',
-    location: 'Vandavasi Road',
-    status: 'Completed',
-    priceStart: 'Starts at ₹4 Lakhs',
-    features: ['DTCP Approved', 'Corner Plots', 'Water Tank', 'Electricity'],
-    image: 'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=2070',
-    plots: '40 Plots',
-  },
-];
+// --- FIREBASE IMPORTS ---
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+
+// Define the shape of your project data from Firebase
+interface Project {
+  id: string;
+  title: string;
+  location: string;
+  price: string; // "price" in DB, mapped to UI
+  status: string;
+  features: string; // It comes as a long string "DTCP, RERA" from DB
+  imageUrl: string; // "imageUrl" in DB
+  // Optional fields if you add them later:
+  plots?: string; 
+}
 
 const Projects = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'ongoing' | 'completed'>('all');
 
-  const filteredProjects = allProjects.filter((project) => {
+  // 1. FETCH DATA FROM FIREBASE
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "projects"));
+        const projectList = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })) as Project[];
+        
+        setProjects(projectList);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  // 2. FILTER LOGIC
+  const filteredProjects = projects.filter((project) => {
     if (filter === 'all') return true;
-    return project.status.toLowerCase() === filter;
+    return project.status?.toLowerCase() === filter;
   });
+
+  // 3. HELPER TO CONVERT COMMA STRING TO ARRAY (e.g. "Road, Light" -> ["Road", "Light"])
+  const getFeaturesArray = (featuresString: string) => {
+    if (!featuresString) return [];
+    return featuresString.split(',').map(f => f.trim());
+  };
 
   return (
     <>
@@ -141,71 +126,86 @@ const Projects = () => {
         {/* Projects Grid */}
         <section className="section-padding pt-8">
           <div className="container-custom mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group"
-                >
-                  <div className="glass rounded-2xl overflow-hidden shadow-card hover:shadow-glow transition-all duration-300 h-full">
-                    {/* Image */}
-                    <div className="relative h-56 overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
-                      
-                      {/* Status Badge */}
-                      <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold ${
-                        project.status === 'Ongoing' 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-secondary text-secondary-foreground'
-                      }`}>
-                        {project.status}
-                      </div>
-
-                      {/* Plots Badge */}
-                      <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-background/90 text-foreground text-xs font-semibold">
-                        {project.plots}
-                      </div>
-
-                      {/* Title */}
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="text-xl font-bold text-background mb-1">{project.name}</h3>
-                        <div className="flex items-center gap-1 text-background/80 text-sm">
-                          <MapPin className="w-4 h-4" />
-                          {project.location}
+            
+            {loading ? (
+               <div className="text-center py-20 text-gray-500">Loading Projects...</div>
+            ) : filteredProjects.length === 0 ? (
+               <div className="text-center py-20 text-gray-500">No projects found. Add them in the Admin Panel!</div>
+            ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProjects.map((project, index) => (
+                    <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="group"
+                    >
+                    <div className="glass rounded-2xl overflow-hidden shadow-card hover:shadow-glow transition-all duration-300 h-full flex flex-col">
+                        {/* Image */}
+                        <div className="relative h-56 overflow-hidden shrink-0">
+                        <img
+                            src={project.imageUrl} // Changed from .image to .imageUrl (DB field name)
+                            alt={project.title}    // Changed from .name to .title (DB field name)
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
+                        
+                        {/* Status Badge */}
+                        <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold ${
+                            project.status?.toLowerCase() === 'ongoing' 
+                            ? 'bg-primary text-primary-foreground' 
+                            : 'bg-secondary text-secondary-foreground'
+                        }`}>
+                            {project.status}
                         </div>
-                      </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="p-6">
-                      <p className="text-primary font-semibold text-lg mb-4">{project.priceStart}</p>
-                      
-                      <div className="grid grid-cols-2 gap-2 mb-6">
-                        {project.features.map((feature) => (
-                          <div key={feature} className="flex items-center gap-2 text-muted-foreground text-sm">
-                            <CheckCircle className="w-4 h-4 text-secondary flex-shrink-0" />
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
+                        {/* Plots Badge (Optional, hardcoded or needs DB field) */}
+                        {project.plots && (
+                            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-background/90 text-foreground text-xs font-semibold">
+                            {project.plots}
+                            </div>
+                        )}
 
-                      <Button className="w-full">
-                        View Details
-                        <ArrowRight className="w-4 h-4" />
-                      </Button>
+                        {/* Title */}
+                        <div className="absolute bottom-4 left-4 right-4">
+                            <h3 className="text-xl font-bold text-background mb-1">{project.title}</h3>
+                            <div className="flex items-center gap-1 text-background/80 text-sm">
+                            <MapPin className="w-4 h-4" />
+                            {project.location}
+                            </div>
+                        </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="p-6 flex flex-col flex-grow">
+                        <p className="text-primary font-semibold text-lg mb-4">{project.price}</p>
+                        
+                        <div className="grid grid-cols-2 gap-2 mb-6">
+                            {/* Logic to split the comma-separated string from DB into pills */}
+                            {getFeaturesArray(project.features).slice(0, 4).map((feature, idx) => (
+                            <div key={idx} className="flex items-center gap-2 text-muted-foreground text-sm">
+                                <CheckCircle className="w-4 h-4 text-secondary flex-shrink-0" />
+                                <span>{feature}</span>
+                            </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-auto">
+                          <Link to={`/project/${project.id}`}>
+                            <Button className="w-full">
+                            View Details
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                            </Button>
+                            </Link>
+                        </div>
+                        </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                    </motion.div>
+                ))}
+                </div>
+            )}
+            
           </div>
         </section>
 

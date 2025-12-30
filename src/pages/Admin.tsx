@@ -1,116 +1,188 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AdminLogin from '@/components/admin/AdminLogin';
 import AdminDashboard from '@/components/admin/AdminDashboard';
 import { ProjectData } from '@/components/admin/ProjectForm';
 import { useToast } from '@/hooks/use-toast';
 
-// Simulated auth state - Replace with Firebase Auth
+// --- FIREBASE IMPORTS ---
+import { auth, db } from '@/lib/firebase'; 
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); 
   const [loginError, setLoginError] = useState('');
+  const [projects, setProjects] = useState<ProjectData[]>([]);
   const { toast } = useToast();
 
-  // Mock projects state - Replace with Firestore
-  const [projects, setProjects] = useState<ProjectData[]>([
-    {
-      id: '1',
-      title: 'Sunrise Valley Phase 1',
-      location: 'Tiruvannamalai',
-      price: 'Starts at 5 Lakhs',
-      status: 'completed',
-      features: 'DTCP Approved, RERA Registered, 24/7 Security',
-      imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400',
-    },
-    {
-      id: '2',
-      title: 'Green Meadows',
-      location: 'Tiruvannamalai',
-      price: 'Starts at 8 Lakhs',
-      status: 'ongoing',
-      features: 'Gated Community, Temple View, Wide Roads',
-      imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400',
-    },
-  ]);
+  // 1. CHECK AUTH STATUS & FETCH DATA ON LOAD
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+        fetchProjects(); 
+      } else {
+        setIsAuthenticated(false);
+        setProjects([]);
+      }
+      setIsLoading(false);
+    });
 
-  // TODO: Replace with Firebase Auth signInWithEmailAndPassword
+    return () => unsubscribe();
+  }, []);
+
+  // 2. HELPER: FETCH PROJECTS FROM FIRESTORE
+  const fetchProjects = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "projects"));
+      const projectList: any[] = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setProjects(projectList);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      toast({ title: "Error", description: "Failed to load projects.", variant: "destructive" });
+    }
+  };
+
+  // 3. HELPER: UPLOAD IMAGE TO CLOUDINARY (FIXED)
+  const uploadToCloudinary = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    
+    // FIX: Using import.meta.env and matching your .env variable names exactly
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_PRESET || "real_estate_preset";
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+
+    formData.append("upload_preset", uploadPreset);
+
+    if (!cloudName) {
+        console.error("Cloud Name is missing. Check .env file.");
+        throw new Error("Configuration Error: Cloud Name missing");
+    }
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        { method: "POST", body: formData }
+      );
+      
+      if (!response.ok) {
+        const errData = await response.json();
+        console.error("Cloudinary Error:", errData);
+        throw new Error(`Upload failed: ${errData.error?.message || response.statusText}`);
+      }
+      
+      const data = await response.json();
+      return data.secure_url;
+    } catch (error) {
+      console.error("Upload failed:", error);
+      throw error; 
+    }
+  };
+
+  // --- HANDLERS ---
+
   const handleLogin = async (email: string, password: string) => {
     setIsLoading(true);
     setLoginError('');
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock validation - Replace with Firebase Auth
-    if (email === 'admin@example.com' && password === 'admin123') {
-      setIsAuthenticated(true);
-      toast({
-        title: 'Welcome back!',
-        description: 'You have successfully logged in.',
-      });
-    } else {
-      setLoginError('Invalid email or password');
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      toast({ title: 'Welcome back!', description: 'Logged in successfully.' });
+    } catch (error: any) {
+      console.error("Login error:", error);
+      setLoginError(error.message || 'Invalid email or password');
     }
-    
     setIsLoading(false);
   };
 
-  // TODO: Replace with Firebase Auth signOut
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    toast({
-      title: 'Logged out',
-      description: 'You have been logged out successfully.',
-    });
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      toast({ title: 'Logged out', description: 'See you soon!' });
+    } catch (error) {
+      console.error("Logout error", error);
+    }
   };
 
-  // TODO: Replace with Firestore addDoc
-  const handleAddProject = (data: ProjectData) => {
-    const newProject = {
-      ...data,
-      id: Date.now().toString(),
-      imageUrl: data.imageFile 
-        ? URL.createObjectURL(data.imageFile) 
-        : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400',
-    };
-    setProjects(prev => [...prev, newProject]);
-    toast({
-      title: 'Project added',
-      description: `"${data.title}" has been added successfully.`,
-    });
+  const handleAddProject = async (data: ProjectData) => {
+    setIsLoading(true);
+    try {
+      let imageUrl = data.imageUrl || ""; 
+
+      if (data.imageFile) {
+        imageUrl = await uploadToCloudinary(data.imageFile);
+      }
+
+      const docRef = await addDoc(collection(db, "projects"), {
+        title: data.title,
+        location: data.location,
+        price: data.price,
+        status: data.status,
+        features: data.features,
+        imageUrl: imageUrl,
+        createdAt: new Date().toISOString()
+      });
+
+      const newProject = { ...data, id: docRef.id, imageUrl };
+      setProjects(prev => [...prev, newProject]);
+
+      toast({ title: 'Success', description: 'Project added successfully.' });
+    } catch (error) {
+      console.error("Add error:", error);
+      toast({ title: 'Error', description: 'Failed to add project. Check console for details.', variant: 'destructive' });
+    }
+    setIsLoading(false);
   };
 
-  // TODO: Replace with Firestore updateDoc
-  const handleEditProject = (data: ProjectData) => {
-    setProjects(prev =>
-      prev.map(p =>
-        p.id === data.id
-          ? {
-              ...data,
-              imageUrl: data.imageFile 
-                ? URL.createObjectURL(data.imageFile) 
-                : p.imageUrl,
-            }
-          : p
-      )
-    );
-    toast({
-      title: 'Project updated',
-      description: `"${data.title}" has been updated successfully.`,
-    });
+  const handleEditProject = async (data: ProjectData) => {
+    if (!data.id) return;
+    setIsLoading(true);
+    try {
+      let imageUrl = data.imageUrl;
+
+      if (data.imageFile) {
+        imageUrl = await uploadToCloudinary(data.imageFile);
+      }
+
+      const projectRef = doc(db, "projects", data.id);
+      await updateDoc(projectRef, {
+        title: data.title,
+        location: data.location,
+        price: data.price,
+        status: data.status,
+        features: data.features,
+        imageUrl: imageUrl
+      });
+
+      setProjects(prev => prev.map(p => p.id === data.id ? { ...data, imageUrl } : p));
+      toast({ title: 'Updated', description: 'Project updated successfully.' });
+
+    } catch (error) {
+      console.error("Edit error:", error);
+      toast({ title: 'Error', description: 'Failed to update project.', variant: 'destructive' });
+    }
+    setIsLoading(false);
   };
 
-  // TODO: Replace with Firestore deleteDoc
-  const handleDeleteProject = (id: string) => {
-    const project = projects.find(p => p.id === id);
-    setProjects(prev => prev.filter(p => p.id !== id));
-    toast({
-      title: 'Project deleted',
-      description: project ? `"${project.title}" has been deleted.` : 'Project deleted.',
-      variant: 'destructive',
-    });
+  const handleDeleteProject = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this project?")) return;
+    try {
+      await deleteDoc(doc(db, "projects", id));
+      setProjects(prev => prev.filter(p => p.id !== id));
+      toast({ title: 'Deleted', description: 'Project removed.', variant: 'destructive' });
+    } catch (error) {
+      console.error("Delete error:", error);
+      toast({ title: 'Error', description: 'Failed to delete project.', variant: 'destructive' });
+    }
   };
+
+  if (isLoading && !isAuthenticated && !loginError) {
+     return <div className="flex h-screen items-center justify-center">Loading...</div>;
+  }
 
   return (
     <>
