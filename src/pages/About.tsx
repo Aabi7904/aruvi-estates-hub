@@ -6,20 +6,21 @@ import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { Award, Users, Building2, Heart, Shield, Star, Target, Eye } from 'lucide-react';
 
 const milestones = [
-  { year: '2004', title: 'Foundation', description: 'Thamizh Aruvi Real Estate was founded with a vision to provide quality plots.' },
-  { year: '2008', title: 'First 10 Projects', description: 'Completed 10 successful residential projects in Tiruvannamalai.' },
-  { year: '2012', title: '500 Happy Families', description: 'Reached the milestone of serving 500 families with their dream plots.' },
-  { year: '2016', title: 'RERA Compliance', description: 'Became one of the first developers to achieve full RERA compliance.' },
-  { year: '2020', title: 'Digital Transformation', description: 'Launched virtual site visits and online booking platform.' },
-  { year: '2024', title: '1000+ Families', description: 'Celebrating 20 years with over 1000 happy families and 50+ projects.' },
+  { year: '2014', title: 'Foundation', description: 'Thamizh Aruvi Real Estate was founded with a vision to provide quality plots.' },
+  { year: '2016', title: 'First 10 Projects', description: 'Completed 10 successful residential projects in Tiruvannamalai.' },
+  { year: '2017', title: 'RERA Compliance', description: 'Became one of the first developers to achieve full RERA compliance.' },
+  { year: '2020', title: '500 Happy Families', description: 'Reached the milestone of serving 500 families with their dream plots.' },
+  { year: '2023', title: 'Digital Transformation', description: 'Launched virtual site visits and online booking platform.' },
+  { year: '2026', title: '1000+ Families', description: 'Celebrating 12 years with over 1000 happy families and 20+ projects.' },
 ];
+
 
 const About = () => {
   return (
     <>
       <Helmet>
         <title>About Us | Thamizh Aruvi Real Estate</title>
-        <meta name="description" content="Learn about Thamizh Aruvi Real Estate's 20+ year journey in building trust and delivering premium plots in Tiruvannamalai." />
+        <meta name="description" content="Learn about Thamizh Aruvi Real Estate's 12+ year journey in building trust and delivering premium plots in Tiruvannamalai." />
       </Helmet>
 
       <main className="min-h-screen bg-background">
@@ -42,18 +43,18 @@ const About = () => {
                   <span className="gradient-text">Trust & Excellence</span>
                 </h1>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  Since 2004, Thamizh Aruvi Real Estate has been the cornerstone of residential 
+                  Since 2014, Thamizh Aruvi Real Estate has been the cornerstone of residential 
                   development in Tiruvannamalai. Under the visionary leadership of Mr. Shabeer, 
                   we have transformed the real estate landscape, helping over 1000 families 
                   realize their dreams of property ownership.
                 </p>
                 <div className="grid grid-cols-3 gap-6">
                   <div className="text-center">
-                    <p className="text-3xl font-bold text-primary">20+</p>
+                    <p className="text-3xl font-bold text-primary">12+</p>
                     <p className="text-sm text-muted-foreground">Years</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-3xl font-bold text-primary">50+</p>
+                    <p className="text-3xl font-bold text-primary">20+</p>
                     <p className="text-sm text-muted-foreground">Projects</p>
                   </div>
                   <div className="text-center">
@@ -77,7 +78,7 @@ const About = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-2xl font-bold text-background mb-1">Mr. Shabeer</h3>
+                    <h3 className="text-2xl font-bold text-background mb-1">Mr.A.R.Shabeer Ahamed</h3>
                     <p className="text-background/80">Founder & Managing Director</p>
                   </div>
                 </div>
