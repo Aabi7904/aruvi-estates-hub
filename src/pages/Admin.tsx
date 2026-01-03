@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AdminLogin from '@/components/admin/AdminLogin';
 import AdminDashboard from '@/components/admin/AdminDashboard';
+// Ensure your ProjectForm exports this interface, or update it locally if needed
 import { ProjectData } from '@/components/admin/ProjectForm';
 import { useToast } from '@/hooks/use-toast';
 
@@ -48,12 +49,11 @@ const Admin = () => {
     }
   };
 
-  // 3. HELPER: UPLOAD IMAGE TO CLOUDINARY (FIXED)
+  // 3. HELPER: UPLOAD IMAGE TO CLOUDINARY
   const uploadToCloudinary = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
     
-    // FIX: Using import.meta.env and matching your .env variable names exactly
     const uploadPreset = import.meta.env.VITE_CLOUDINARY_PRESET || "real_estate_preset";
     const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
@@ -111,10 +111,16 @@ const Admin = () => {
   const handleAddProject = async (data: ProjectData) => {
     setIsLoading(true);
     try {
+      // 1. Upload Main Thumbnail
       let imageUrl = data.imageUrl || ""; 
-
       if (data.imageFile) {
         imageUrl = await uploadToCloudinary(data.imageFile);
+      }
+
+      // 2. Upload Layout / Master Plan Image (NEW)
+      let layoutImageUrl = data.layoutImage || "";
+      if (data.layoutFile) {
+        layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
       const docRef = await addDoc(collection(db, "projects"), {
@@ -123,17 +129,19 @@ const Admin = () => {
         price: data.price,
         status: data.status,
         features: data.features,
-        imageUrl: imageUrl,
+        imageUrl: imageUrl,       // Main Image
+        layoutImage: layoutImageUrl, // Master Plan Image
+        plots: data.plots || "",
         createdAt: new Date().toISOString()
       });
 
-      const newProject = { ...data, id: docRef.id, imageUrl };
+      const newProject = { ...data, id: docRef.id, imageUrl, layoutImage: layoutImageUrl };
       setProjects(prev => [...prev, newProject]);
 
       toast({ title: 'Success', description: 'Project added successfully.' });
     } catch (error) {
       console.error("Add error:", error);
-      toast({ title: 'Error', description: 'Failed to add project. Check console for details.', variant: 'destructive' });
+      toast({ title: 'Error', description: 'Failed to add project.', variant: 'destructive' });
     }
     setIsLoading(false);
   };
@@ -142,10 +150,16 @@ const Admin = () => {
     if (!data.id) return;
     setIsLoading(true);
     try {
+      // 1. Upload Main Thumbnail (if changed)
       let imageUrl = data.imageUrl;
-
       if (data.imageFile) {
         imageUrl = await uploadToCloudinary(data.imageFile);
+      }
+
+      // 2. Upload Layout Image (if changed)
+      let layoutImageUrl = data.layoutImage;
+      if (data.layoutFile) {
+        layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
       const projectRef = doc(db, "projects", data.id);
@@ -155,10 +169,12 @@ const Admin = () => {
         price: data.price,
         status: data.status,
         features: data.features,
-        imageUrl: imageUrl
+        imageUrl: imageUrl,
+        layoutImage: layoutImageUrl,
+        plots: data.plots || ""
       });
 
-      setProjects(prev => prev.map(p => p.id === data.id ? { ...data, imageUrl } : p));
+      setProjects(prev => prev.map(p => p.id === data.id ? { ...data, imageUrl, layoutImage: layoutImageUrl } : p));
       toast({ title: 'Updated', description: 'Project updated successfully.' });
 
     } catch (error) {

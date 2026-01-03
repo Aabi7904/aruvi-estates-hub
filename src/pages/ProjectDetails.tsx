@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // To get ID from URL
+import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Helmet } from 'react-helmet-async';
@@ -7,7 +7,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { Button } from '@/components/ui/button';
-import { MapPin, CheckCircle, ArrowLeft, Phone } from 'lucide-react';
+import { MapPin, CheckCircle, ArrowLeft, Phone, Map as MapIcon } from 'lucide-react';
+// IMPORT THE MASTER PLAN CONTAINER
+import { MasterPlanContainer } from '@/components/MasterPlan/MasterPlanContainer';
 
 interface Project {
   id: string;
@@ -17,10 +19,12 @@ interface Project {
   status: string;
   features: string;
   imageUrl: string;
+  // Added layoutImage field from Admin Panel
+  layoutImage?: string; 
 }
 
 const ProjectDetails = () => {
-  const { id } = useParams(); // Get the ID from the URL (e.g., /project/123)
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
@@ -68,70 +72,65 @@ const ProjectDetails = () => {
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
           </Button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* MAIN DETAILS GRID */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             
-            {/* Left Column: Image */}
+            {/* Left Column: Main Image */}
             <div className="space-y-6">
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white relative group">
                 <img 
                   src={project.imageUrl} 
                   alt={project.title} 
                   className="w-full h-auto object-cover"
                 />
-              </div>
-              
-              {/* Optional: Placeholder for future Gallery/Video tabs */}
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="font-semibold mb-2 text-gray-900">Project Layout</h3>
-                <p className="text-sm text-gray-500">
-                  (Add more layout images in Admin Panel to see them here in the future)
-                </p>
-              </div>
-            </div>
-
-            {/* Right Column: Details */}
-            <div className="space-y-8">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                    project.status === 'Ongoing' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                <div className="absolute top-4 left-4">
+                   <span className={`px-4 py-1.5 rounded-full text-sm font-bold shadow-sm ${
+                    project.status === 'Ongoing' || project.status === 'ongoing' 
+                    ? 'bg-green-500 text-white' 
+                    : 'bg-blue-500 text-white'
                   }`}>
                     {project.status}
                   </span>
                 </div>
+              </div>
+            </div>
+
+            {/* Right Column: Project Info */}
+            <div className="space-y-8">
+              <div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-2">{project.title}</h1>
-                <div className="flex items-center text-gray-600">
-                  <MapPin className="w-5 h-5 mr-2" />
+                <div className="flex items-center text-gray-600 text-lg">
+                  <MapPin className="w-5 h-5 mr-2 text-primary" />
                   {project.location}
                 </div>
               </div>
 
               <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-                <p className="text-sm text-gray-500 mb-1">Starting Price</p>
-                <div className="text-3xl font-bold text-orange-600">{project.price}</div>
+                <p className="text-sm text-gray-500 mb-1 font-medium uppercase tracking-wide">Price Range</p>
+                <div className="text-3xl font-bold text-primary">{project.price}</div>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Project Features</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Project Highlights</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {featuresList.map((feature, idx) => (
-                    <div key={idx} className="flex items-center p-3 bg-white rounded-lg border border-gray-100">
+                    <div key={idx} className="flex items-center p-3 bg-white rounded-lg border border-gray-100 shadow-sm">
                       <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-gray-700 font-medium">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Call to Action */}
+              {/* Call to Action Buttons */}
               <div className="pt-6 border-t border-gray-200">
-                <h3 className="text-lg font-semibold mb-4">Interested in this property?</h3>
+                <h3 className="text-lg font-semibold mb-4">Interested? Contact us directly:</h3>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button className="flex-1 h-12 text-lg" onClick={() => window.open(`https://wa.me/919443729991?text=Hi, I am interested in ${project.title}`)}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" className="w-6 h-6 mr-2" alt="WA"/>
-                    Chat on WhatsApp
+                  <Button className="flex-1 h-12 text-lg bg-[#25D366] hover:bg-[#128C7E] text-white" onClick={() => window.open(`https://wa.me/919443729991?text=Hi, I am interested in ${project.title}`)}>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" className="w-6 h-6 mr-2 filter brightness-0 invert" alt="WA"/>
+                    WhatsApp
                   </Button>
-                  <Button variant="outline" className="flex-1 h-12 text-lg" onClick={() => window.location.href = "tel:+919443729991"}>
+                  <Button variant="outline" className="flex-1 h-12 text-lg border-primary text-primary hover:bg-primary/5" onClick={() => window.location.href = "tel:+919443729991"}>
                     <Phone className="w-5 h-5 mr-2" />
                     Call Now
                   </Button>
@@ -140,6 +139,29 @@ const ProjectDetails = () => {
 
             </div>
           </div>
+
+          {/* --- MASTER PLAN SECTION (Conditional Render) --- */}
+          {/* Only shows if you uploaded a Layout Image in Admin Panel */}
+          {project.layoutImage && (
+            <div className="mt-16 pt-12 border-t border-gray-200">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-primary/10">
+                  <MapIcon className="w-8 h-8 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900">Master Plan & Availability</h2>
+                  <p className="text-gray-500">Explore the layout map. Click on plots to see real-time status.</p>
+                </div>
+              </div>
+              
+              <div className="rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white">
+                 {/* Pass the layout image URL to your container */}
+                 {/* @ts-ignore - Ignore this line if your Container doesn't have props defined yet */}
+                 <MasterPlanContainer imageUrl={project.layoutImage} />
+              </div>
+            </div>
+          )}
+
         </div>
       </main>
       <Footer />

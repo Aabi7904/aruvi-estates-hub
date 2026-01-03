@@ -17,12 +17,11 @@ interface Project {
   id: string;
   title: string;
   location: string;
-  price: string; // "price" in DB, mapped to UI
+  price: string;
   status: string;
-  features: string; // It comes as a long string "DTCP, RERA" from DB
-  imageUrl: string; // "imageUrl" in DB
-  // Optional fields if you add them later:
-  plots?: string; 
+  features: string;
+  imageUrl: string;
+  plots?: string;
 }
 
 const Projects = () => {
@@ -57,7 +56,7 @@ const Projects = () => {
     return project.status?.toLowerCase() === filter;
   });
 
-  // 3. HELPER TO CONVERT COMMA STRING TO ARRAY (e.g. "Road, Light" -> ["Road", "Light"])
+  // 3. HELPER TO CONVERT COMMA STRING TO ARRAY
   const getFeaturesArray = (featuresString: string) => {
     if (!featuresString) return [];
     return featuresString.split(',').map(f => f.trim());
@@ -67,7 +66,7 @@ const Projects = () => {
     <>
       <Helmet>
         <title>Our Projects | Thamizh Aruvi Real Estate</title>
-        <meta name="description" content="Explore our portfolio of DTCP & RERA approved residential plots in Tiruvannamalai. Find your perfect plot today." />
+        <meta name="description" content="Explore our portfolio of DTCP & RERA approved residential plots in Tiruvannamalai." />
       </Helmet>
 
       <main className="min-h-screen bg-background">
@@ -97,8 +96,7 @@ const Projects = () => {
               transition={{ delay: 0.2 }}
               className="text-muted-foreground max-w-2xl mx-auto text-lg"
             >
-              Discover our range of residential plot developments across Tiruvannamalai, 
-              each designed with your comfort and investment in mind.
+              Discover our range of residential plot developments across Tiruvannamalai.
             </motion.p>
           </div>
         </section>
@@ -142,39 +140,43 @@ const Projects = () => {
                     className="group"
                     >
                     <div className="glass rounded-2xl overflow-hidden shadow-card hover:shadow-glow transition-all duration-300 h-full flex flex-col">
-                        {/* Image */}
-                        <div className="relative h-56 overflow-hidden shrink-0">
-                        <img
-                            src={project.imageUrl} // Changed from .image to .imageUrl (DB field name)
-                            alt={project.title}    // Changed from .name to .title (DB field name)
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                         
-                        {/* Status Badge */}
-                        <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold ${
-                            project.status?.toLowerCase() === 'ongoing' 
-                            ? 'bg-primary text-primary-foreground' 
-                            : 'bg-secondary text-secondary-foreground'
-                        }`}>
-                            {project.status}
-                        </div>
-
-                        {/* Plots Badge (Optional, hardcoded or needs DB field) */}
-                        {project.plots && (
-                            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-background/90 text-foreground text-xs font-semibold">
-                            {project.plots}
+                        {/* --- IMAGE SECTION UPDATED --- */}
+                        {/* Increased height to h-72 for better flyer visibility */}
+                        <div className="relative h-72 shrink-0 bg-white"> 
+                            <img
+                                src={project.imageUrl} 
+                                alt={project.title}    
+                                // UPDATED CLASS: object-contain + padding + white bg
+                                className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                            />
+                            {/* Gradient Overlay for Text Readability */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                            
+                            {/* Status Badge */}
+                            <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold z-10 ${
+                                project.status?.toLowerCase() === 'ongoing' 
+                                ? 'bg-primary text-primary-foreground' 
+                                : 'bg-secondary text-secondary-foreground'
+                            }`}>
+                                {project.status}
                             </div>
-                        )}
 
-                        {/* Title */}
-                        <div className="absolute bottom-4 left-4 right-4">
-                            <h3 className="text-xl font-bold text-background mb-1">{project.title}</h3>
-                            <div className="flex items-center gap-1 text-background/80 text-sm">
-                            <MapPin className="w-4 h-4" />
-                            {project.location}
+                            {/* Plots Badge */}
+                            {project.plots && (
+                                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-background/90 text-foreground text-xs font-semibold z-10">
+                                {project.plots}
+                                </div>
+                            )}
+
+                            {/* Title & Location Overlay */}
+                            <div className="absolute bottom-4 left-4 right-4 z-10">
+                                <h3 className="text-xl font-bold text-white mb-1 drop-shadow-md">{project.title}</h3>
+                                <div className="flex items-center gap-1 text-white/90 text-sm drop-shadow-md">
+                                <MapPin className="w-4 h-4" />
+                                {project.location}
+                                </div>
                             </div>
-                        </div>
                         </div>
 
                         {/* Content */}
@@ -182,7 +184,6 @@ const Projects = () => {
                         <p className="text-primary font-semibold text-lg mb-4">{project.price}</p>
                         
                         <div className="grid grid-cols-2 gap-2 mb-6">
-                            {/* Logic to split the comma-separated string from DB into pills */}
                             {getFeaturesArray(project.features).slice(0, 4).map((feature, idx) => (
                             <div key={idx} className="flex items-center gap-2 text-muted-foreground text-sm">
                                 <CheckCircle className="w-4 h-4 text-secondary flex-shrink-0" />
