@@ -39,7 +39,7 @@ const About = () => {
                   Our Story
                 </span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                  Two Decades of{' '}
+                  Decades of{' '}
                   <span className="gradient-text">Trust & Excellence</span>
                 </h1>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
@@ -200,7 +200,7 @@ const About = () => {
                 { icon: Shield, title: 'Integrity', description: 'Transparent dealings and honest communication' },
                 { icon: Star, title: 'Quality', description: 'Premium plots with best-in-class amenities' },
                 { icon: Heart, title: 'Customer First', description: 'Your satisfaction is our top priority' },
-                { icon: Award, title: 'Excellence', description: '20+ years of trusted service' },
+                { icon: Award, title: 'Excellence', description: '12+ years of trusted service' },
               ].map((value, index) => (
                 <motion.div
                   key={value.title}

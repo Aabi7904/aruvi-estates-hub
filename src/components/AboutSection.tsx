@@ -48,7 +48,7 @@ const AboutSection = () => {
                     <Award className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-foreground">20+</p>
+                    <p className="text-2xl font-bold text-foreground">12+</p>
                     <p className="text-sm text-muted-foreground">Years of Excellence</p>
                   </div>
                 </div>
@@ -80,7 +80,7 @@ const AboutSection = () => {
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
               Our commitment to quality, transparency, and customer satisfaction has made us 
-              the preferred choice for those seeking premium plots and homes. Every project we 
+              the preferred choice for those seeking premium plots. Every project we 
               undertake reflects our dedication to excellence and our deep understanding of 
               what families truly need.
             </p>

@@ -133,7 +133,7 @@ const PrinciplesSection = () => {
             Principles That <span className="gradient-text">Guide Us</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Our core values have been the cornerstone of our success for over two decades, 
+            Our core values have been the cornerstone of our success for over decades, 
             helping us create homes that families cherish for generations.
           </p>
         </motion.div>

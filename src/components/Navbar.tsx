@@ -34,20 +34,35 @@ const Navbar = () => {
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'glass-strong shadow-soft py-3'
-            : 'bg-transparent py-5'
+            ? 'glass-strong shadow-soft py-2' // Compact when scrolled
+            : 'bg-transparent py-4'           // Spacious when at top
         }`}
       >
         <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center group">
+            
+            {/* --- LOGO SECTION START --- */}
+            <Link to="/" className="flex items-center gap-3 group">
+              {/* UPDATED: Increased height to h-16 (approx 64px) */}
               <img 
                 src={logo} 
                 alt="Thamizh Aruvi Real Estate" 
-                className="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
               />
+              
+              {/* Company Name Text */}
+              <div className="flex flex-col">
+                {/* UPDATED: Increased to text-2xl */}
+                <span className="text-2xl font-bold text-primary leading-none tracking-tight font-[Plus Jakarta Sans]">
+                  Thamizh Aruvi
+                </span>
+                {/* UPDATED: Increased to text-xs (approx 12px) */}
+                <span className="text-xs font-bold text-secondary uppercase tracking-[0.2em] mt-1.5 ml-0.5">
+                  Real Estate
+                </span>
+              </div>
             </Link>
+            {/* --- LOGO SECTION END --- */}
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
@@ -55,9 +70,9 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`relative text-sm font-medium transition-colors duration-300 ${
+                  className={`relative text-base font-medium transition-colors duration-300 ${
                     isActive(link.href)
-                      ? 'text-primary'
+                      ? 'text-primary font-semibold'
                       : 'text-foreground/70 hover:text-foreground'
                   }`}
                 >
@@ -78,7 +93,7 @@ const Navbar = () => {
                 <Phone className="w-4 h-4" />
                 <span>+91 94437 29991</span>
               </a>
-              <Button variant="default" size="sm">
+              <Button variant="default" size="sm" className="bg-primary hover:bg-primary-glow text-white shadow-md hover:shadow-glow transition-all px-6">
                 Get Started
               </Button>
             </div>
@@ -89,9 +104,9 @@ const Navbar = () => {
               className="md:hidden p-2 rounded-xl hover:bg-muted transition-colors"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-foreground" />
+                <X className="w-7 h-7 text-foreground" />
               ) : (
-                <Menu className="w-6 h-6 text-foreground" />
+                <Menu className="w-7 h-7 text-foreground" />
               )}
             </button>
           </div>
@@ -105,7 +120,8 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-0 top-[72px] z-40 glass-strong shadow-card mx-4 rounded-2xl p-6 md:hidden"
+            // UPDATED: Adjusted top to 96px to account for the larger navbar height
+            className="fixed inset-x-0 top-[96px] z-40 glass-strong shadow-card mx-4 rounded-2xl p-6 md:hidden border border-white/20"
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -113,7 +129,7 @@ const Navbar = () => {
                   key={link.name}
                   to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-lg font-medium py-2 px-4 rounded-xl transition-colors ${
+                  className={`text-lg font-medium py-3 px-4 rounded-xl transition-colors ${
                     isActive(link.href)
                       ? 'text-primary bg-primary/10'
                       : 'text-foreground/70 hover:text-foreground hover:bg-muted'
@@ -125,12 +141,12 @@ const Navbar = () => {
               <div className="pt-4 border-t border-border">
                 <a
                   href="tel:+919443729991"
-                  className="flex items-center gap-2 text-sm text-muted-foreground mb-4"
+                  className="flex items-center gap-2 text-sm text-muted-foreground mb-4 justify-center"
                 >
                   <Phone className="w-4 h-4" />
                   <span>+91 94437 29991</span>
                 </a>
-                <Button variant="default" className="w-full">
+                <Button variant="default" className="w-full bg-primary text-white shadow-lg">
                   Get Started
                 </Button>
               </div>

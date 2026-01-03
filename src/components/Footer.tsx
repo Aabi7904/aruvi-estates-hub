@@ -25,7 +25,7 @@ const Footer = () => {
             </Link>
             <p className="text-background/70 text-sm leading-relaxed">
               Building your future in Tiruvannamalai with premium plots and homes. 
-              Trusted by 1000+ happy families over 20+ years of excellence.
+              Trusted by 1000+ happy families over 12+ years of excellence.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300">
