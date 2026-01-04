@@ -37,15 +37,15 @@ export const plotPositions: PlotPosition[] = [
     x: 559,     // From your Figma screenshot
     y: 740,    // From your Figma screenshot
     width: 673, // From your Figma screenshot
-    height:132 
-     // From your Figma screenshot
+    height: 132
+    // From your Figma screenshot
   },
   {
     id: "5",
     x: 1431,     // From your Figma screenshot
     y: 735,    // From your Figma screenshot
     width: 197, // From your Figma screenshot
-    height:298// From your Figma screenshot
+    height: 298// From your Figma screenshot
   },
   {
     id: "6",
@@ -72,21 +72,21 @@ export const plotPositions: PlotPosition[] = [
     id: "9",
     x: 2227,     // From your Figma screenshot
     y: 731,    // From your Figma screenshot
-    width:197 , // From your Figma screenshot
+    width: 197, // From your Figma screenshot
     height: 298// From your Figma screenshot
   },
   {
     id: "10",
     x: 2425,     // From your Figma screenshot
     y: 728,    // From your Figma screenshot
-    width:198 , // From your Figma screenshot
+    width: 198, // From your Figma screenshot
     height: 304// From your Figma screenshot
   },
-   {
+  {
     id: "11",
     x: 2625,     // From your Figma screenshot
     y: 725,    // From your Figma screenshot
-    width:129 , // From your Figma screenshot
+    width: 129, // From your Figma screenshot
     height: 307// From your Figma screenshot
   },
 
@@ -94,7 +94,7 @@ export const plotPositions: PlotPosition[] = [
     id: "12",
     x: 2755,     // From your Figma screenshot
     y: 725,    // From your Figma screenshot
-    width:207 , // From your Figma screenshot
+    width: 207, // From your Figma screenshot
     height: 307// From your Figma screenshot
   },
   {
@@ -118,14 +118,14 @@ export const plotPositions: PlotPosition[] = [
     width: 132, // From your Figma screenshot
     height: 330// From your Figma screenshot
   },
-{
+  {
     id: "16",
     x: 2356,     // From your Figma screenshot
     y: 1189,    // From your Figma screenshot
     width: 134, // From your Figma screenshot
     height: 331// From your Figma screenshot
-  },  
-{
+  },
+  {
     id: "17",
     x: 2220,     // From your Figma screenshot
     y: 1189,    // From your Figma screenshot
@@ -180,152 +180,152 @@ export const plotPositions: PlotPosition[] = [
 
 // Ensure your main data array has a matching ID "1"
 export const plotsData: Plot[] = [
-  { 
-    id: "1", 
-    sqft: 2053.50, 
-    status: "Sold", 
-    dimensions: "37' x 55'7\"" 
-  },
-  { 
-    id: "2", 
-    sqft: 2041.00, 
-    status: "Sold", 
+  {
+    id: "1",
+    sqft: 2053.50,
+    status: "Sold",
     dimensions: "37' x 55'7\""
   },
-  { 
-    id: "3", 
-    sqft: 1480.00, 
-    status: "Sold", 
+  {
+    id: "2",
+    sqft: 2041.00,
+    status: "Sold",
     dimensions: "37' x 55'7\""
   },
-  { 
-    id: "4", 
-    sqft: 1987.00, 
-    status: "Sold", 
+  {
+    id: "3",
+    sqft: 1480.00,
+    status: "Sold",
     dimensions: "37' x 55'7\""
   },
-  
-  { 
-    id: "5", 
-    sqft: 1318.75, 
-    status: "Sold", 
-    dimensions: "37' x 55'7\""
-  },
-  
-  { 
-    id: "6", 
-    sqft: 1338.75, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  
-  { 
-    id: "7", 
-    sqft: 1350.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  
-  { 
-    id: "8", 
-    sqft: 1362.25, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  
-  { 
-    id: "9", 
-    sqft: 1368.75, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "10", 
-    sqft: 1376.25, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "11", 
-    sqft: 920.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-    { 
-    id: "12", 
-    sqft: 1304.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "13", 
-    sqft: 1418.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "14", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "15", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "16", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "17", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "18", 
-    sqft: 1000.00, 
-    status: "Available", 
+  {
+    id: "4",
+    sqft: 1987.00,
+    status: "Sold",
     dimensions: "37' x 55'7\""
   },
 
-  { 
-    id: "19", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "20", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "21", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "22", 
-    sqft: 1000.00, 
-    status: "Available", 
-    dimensions: "37' x 55'7\""
-  },
-  { 
-    id: "23", 
-    sqft: 987.50, 
-    status: "Sold", 
+  {
+    id: "5",
+    sqft: 1318.75,
+    status: "Sold",
     dimensions: "37' x 55'7\""
   },
 
-  
+  {
+    id: "6",
+    sqft: 1338.75,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+
+  {
+    id: "7",
+    sqft: 1350.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+
+  {
+    id: "8",
+    sqft: 1362.25,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+
+  {
+    id: "9",
+    sqft: 1368.75,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "10",
+    sqft: 1376.25,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "11",
+    sqft: 920.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "12",
+    sqft: 1304.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "13",
+    sqft: 1418.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "14",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "15",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "16",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "17",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "18",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+
+  {
+    id: "19",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "20",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "21",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "22",
+    sqft: 1000.00,
+    status: "Available",
+    dimensions: "37' x 55'7\""
+  },
+  {
+    id: "23",
+    sqft: 987.50,
+    status: "Sold",
+    dimensions: "37' x 55'7\""
+  },
+
+
 
   // ... other plots
 ];

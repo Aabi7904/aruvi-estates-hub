@@ -43,21 +43,21 @@ const Navbar = () => {
             
             {/* --- LOGO SECTION START --- */}
             <Link to="/" className="flex items-center gap-3 group">
-              {/* UPDATED: Increased height to h-16 (approx 64px) */}
+              {/* UPDATED: h-12 for mobile, md:h-16 for desktop */}
               <img 
                 src={logo} 
                 alt="Thamizh Aruvi Real Estate" 
-                className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                className="h-12 md:h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
               />
               
               {/* Company Name Text */}
               <div className="flex flex-col">
-                {/* UPDATED: Increased to text-2xl */}
-                <span className="text-2xl font-bold text-primary leading-none tracking-tight font-[Plus Jakarta Sans]">
+                {/* UPDATED: text-lg for mobile, md:text-2xl for desktop */}
+                <span className="text-lg md:text-2xl font-bold text-primary leading-none tracking-tight font-[Plus Jakarta Sans]">
                   Thamizh Aruvi
                 </span>
-                {/* UPDATED: Increased to text-xs (approx 12px) */}
-                <span className="text-xs font-bold text-secondary uppercase tracking-[0.2em] mt-1.5 ml-0.5">
+                {/* UPDATED: text-[10px] for mobile, md:text-xs for desktop */}
+                <span className="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-[0.2em] mt-1.5 ml-0.5">
                   Real Estate
                 </span>
               </div>
@@ -120,8 +120,8 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            // UPDATED: Adjusted top to 96px to account for the larger navbar height
-            className="fixed inset-x-0 top-[96px] z-40 glass-strong shadow-card mx-4 rounded-2xl p-6 md:hidden border border-white/20"
+            // UPDATED: Adjusted top to 88px to fit the smaller mobile navbar height
+            className="fixed inset-x-0 top-[88px] z-40 glass-strong shadow-card mx-4 rounded-2xl p-6 md:hidden border border-white/20"
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
