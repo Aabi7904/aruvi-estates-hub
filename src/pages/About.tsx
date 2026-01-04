@@ -44,7 +44,7 @@ const About = () => {
                 </h1>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                   Since 2014, Thamizh Aruvi Real Estate has been the cornerstone of residential 
-                  development in Tiruvannamalai. Under the visionary leadership of Mr. Shabeer, 
+                  development in Tiruvannamalai. Under the visionary leadership of Mr.A.R. Shabeer Ahamed, 
                   we have transformed the real estate landscape, helping over 1000 families 
                   realize their dreams of property ownership.
                 </p>

@@ -39,7 +39,7 @@ export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
 
   return (
     <div className="flex flex-col h-[800px] border border-border rounded-xl overflow-hidden shadow-lg bg-background">
-      {/* Title Bar */}
+      {/* Title Bar 
       <div className="bg-primary/5 p-4 border-b border-border">
         <h2 className="text-xl font-bold text-primary flex items-center gap-2">
           📍 Interactive Master Plan
@@ -47,7 +47,7 @@ export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
         <p className="text-sm text-muted-foreground">
           Click on any plot to view details or check availability.
         </p>
-      </div>
+      </div>*/}
 
       {/* Search & Status Bar */}
       <TopBar selectedPlot={selectedPlot} onSearch={handleSearch} />

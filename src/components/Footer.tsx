@@ -17,11 +17,14 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-6">
             <Link to="/">
+            <div className="bg-white p-3 rounded-xl inline-block mb-4 shadow-lg">
               <img 
                 src={logo} 
                 alt="Thamizh Aruvi Real Estate" 
-                className="h-16 w-auto object-contain brightness-0 invert hover:opacity-80 transition-opacity"
+                className="h-[100px] w-auto object-contain hover:opacity-80 transition-opacity"
+                
               />
+              </div>
             </Link>
             <p className="text-background/70 text-sm leading-relaxed">
               Building your future in Tiruvannamalai with premium plots and homes. 

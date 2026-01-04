@@ -56,8 +56,8 @@ const StatItem = ({ value, suffix, label, icon, delay }: StatItemProps) => {
 
 const StatsSection = () => {
   const stats = [
-    { value: 20, suffix: '+', label: 'Years Experience', icon: <Award className="w-7 h-7 text-primary-foreground" /> },
-    { value: 50, suffix: '+', label: 'Projects Completed', icon: <Building2 className="w-7 h-7 text-primary-foreground" /> },
+    { value: 12, suffix: '+', label: 'Years Experience', icon: <Award className="w-7 h-7 text-primary-foreground" /> },
+    { value: 20, suffix: '+', label: 'Projects Completed', icon: <Building2 className="w-7 h-7 text-primary-foreground" /> },
     { value: 1000, suffix: '+', label: 'Happy Families', icon: <Users className="w-7 h-7 text-primary-foreground" /> },
     { value: 100, suffix: '%', label: 'Customer Satisfaction', icon: <Briefcase className="w-7 h-7 text-primary-foreground" /> },
   ];

@@ -31,12 +31,10 @@ export function TopBar({ selectedPlot, onSearch }: TopBarProps) {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           {/* Logo & Title */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">MP</span>
-            </div>
+           
             <div>
-              <h1 className="text-lg font-semibold text-foreground">Master Plan</h1>
-              <p className="text-xs text-muted-foreground">Interactive Plot Finder</p>
+              <h1 className="text-lg font-semibold text-foreground">Layout Plan</h1>
+              <p className="text-s text-muted-foreground">Click on any plot to view details or check availability.</p>
             </div>
           </div>
 
@@ -76,14 +74,14 @@ export function TopBar({ selectedPlot, onSearch }: TopBarProps) {
                   </span>
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${
-                    selectedPlot.status === "Available"
-                      ? "bg-available-light text-available"
-                      : "bg-sold-light text-sold"
-                  }`}
-                >
-                  {selectedPlot.status}
-                </span>
+  className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide text-white shadow-sm ${
+    selectedPlot.status === "Available"
+      ? "bg-green-600"  // Solid Green for Available
+      : "bg-red-600"    // Solid Red for Sold
+  }`}
+>
+  {selectedPlot.status}
+</span>
               </div>
             ) : (
               <p className="text-sm text-muted-foreground italic">

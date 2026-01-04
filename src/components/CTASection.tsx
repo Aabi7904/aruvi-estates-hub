@@ -48,14 +48,15 @@ const CTASection = () => {
               Schedule a Visit
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button 
-              size="xl" 
-              variant="heroOutline"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              <Phone className="w-5 h-5" />
-              Call Now: +91 94437 29991
-            </Button>
+           <Button 
+  size="xl" 
+  variant="outline"
+  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-300 shadow-sm"
+  onClick={() => window.location.href = "tel:+919443729991"}
+>
+  <Phone className="w-5 h-5 mr-2" />
+  Call Now: +91 94437 29991
+</Button>
           </motion.div>
         </div>
       </div>

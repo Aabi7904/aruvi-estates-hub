@@ -1,125 +1,87 @@
 import { useState, useEffect } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Upload, X, Map as MapIcon } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ImagePlus, Map, X, Loader2 } from 'lucide-react';
 
 export interface ProjectData {
   id?: string;
   title: string;
   location: string;
   price: string;
-  status: 'ongoing' | 'completed';
-  features: string;
-  
-  // Main Project Image
-  imageFile?: File | null;
+  status: string;
+  // features: string; // REMOVED
   imageUrl?: string;
-
-  // Master Plan / Layout Image (NEW)
-  layoutFile?: File | null;
+  imageFile?: File;
   layoutImage?: string;
-  
-  plots?: string; // Optional: If you want to store plot data string directly
+  layoutFile?: File;
+  plots?: string;
 }
 
 interface ProjectFormProps {
-  open: boolean;
+  isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: ProjectData) => void;
   initialData?: ProjectData | null;
-  isLoading?: boolean;
+  isSubmitting?: boolean;
 }
 
-const defaultFormData: ProjectData = {
-  title: '',
-  location: 'Tiruvannamalai',
-  price: '',
-  status: 'ongoing',
-  features: '',
-  imageFile: null,
-  layoutFile: null,
-};
+const ProjectForm = ({ isOpen, onClose, onSubmit, initialData, isSubmitting = false }: ProjectFormProps) => {
+  // Initialize state without 'features'
+  const [formData, setFormData] = useState<ProjectData>({
+    title: '',
+    location: '',
+    price: '',
+    status: 'Ongoing',
+    imageUrl: '',
+    layoutImage: ''
+  });
 
-const ProjectForm = ({ open, onClose, onSubmit, initialData, isLoading = false }: ProjectFormProps) => {
-  const [formData, setFormData] = useState<ProjectData>(defaultFormData);
-  
-  // Previews for both images
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [layoutPreview, setLayoutPreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [layoutPreview, setLayoutPreview] = useState<string>('');
 
   useEffect(() => {
     if (initialData) {
       setFormData(initialData);
-      
-      // Set Main Image Preview
-      if (initialData.imageUrl) {
-        setImagePreview(initialData.imageUrl);
-      }
-      // Set Layout Image Preview
-      if (initialData.layoutImage) {
-        setLayoutPreview(initialData.layoutImage);
-      }
+      setImagePreview(initialData.imageUrl || '');
+      setLayoutPreview(initialData.layoutImage || '');
     } else {
-      setFormData(defaultFormData);
-      setImagePreview(null);
-      setLayoutPreview(null);
+      setFormData({
+        title: '',
+        location: '',
+        price: '',
+        status: 'Ongoing',
+        imageUrl: '',
+        layoutImage: ''
+      });
+      setImagePreview('');
+      setLayoutPreview('');
     }
-  }, [initialData, open]);
+  }, [initialData, isOpen]);
 
-  const handleChange = (field: keyof ProjectData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  // --- MAIN IMAGE HANDLERS ---
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleStatusChange = (value: string) => {
+    setFormData(prev => ({ ...prev, status: value }));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'image' | 'layout') => {
     const file = e.target.files?.[0];
     if (file) {
-      setFormData(prev => ({ ...prev, imageFile: file }));
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      const previewUrl = URL.createObjectURL(file);
+      if (field === 'image') {
+        setFormData(prev => ({ ...prev, imageFile: file }));
+        setImagePreview(previewUrl);
+      } else {
+        setFormData(prev => ({ ...prev, layoutFile: file }));
+        setLayoutPreview(previewUrl);
+      }
     }
-  };
-
-  const removeImage = () => {
-    setFormData(prev => ({ ...prev, imageFile: null, imageUrl: undefined }));
-    setImagePreview(null);
-  };
-
-  // --- LAYOUT IMAGE HANDLERS (NEW) ---
-  const handleLayoutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFormData(prev => ({ ...prev, layoutFile: file }));
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setLayoutPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const removeLayout = () => {
-    setFormData(prev => ({ ...prev, layoutFile: null, layoutImage: undefined }));
-    setLayoutPreview(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -127,161 +89,146 @@ const ProjectForm = ({ open, onClose, onSubmit, initialData, isLoading = false }
     onSubmit(formData);
   };
 
-  const isEditing = !!initialData?.id;
-
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{isEditing ? 'Edit Project' : 'Add New Project'}</DialogTitle>
-          <DialogDescription>
-            {isEditing ? 'Update the project details below.' : 'Fill in the details to add a new project.'}
-          </DialogDescription>
+          <DialogTitle>{initialData ? 'Edit Project' : 'Add New Project'}</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6 mt-4">
+        <form onSubmit={handleSubmit} className="space-y-6 py-4">
           
-          {/* --- BASIC INFO --- */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-                <Label htmlFor="title">Title *</Label>
-                <Input
+              <Label htmlFor="title">Title *</Label>
+              <Input
                 id="title"
                 placeholder="e.g., Sunrise Valley Phase 2"
                 value={formData.title}
-                onChange={(e) => handleChange('title', e.target.value)}
+                onChange={handleChange}
                 required
-                />
+              />
             </div>
-
             <div className="space-y-2">
-                <Label htmlFor="location">Location</Label>
-                <Input
+              <Label htmlFor="location">Location</Label>
+              <Input
                 id="location"
                 placeholder="Tiruvannamalai"
                 value={formData.location}
-                onChange={(e) => handleChange('location', e.target.value)}
-                />
+                onChange={handleChange}
+              />
             </div>
+          </div>
 
+          <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-                <Label htmlFor="price">Price</Label>
-                <Input
+              <Label htmlFor="price">Price</Label>
+              <Input
                 id="price"
                 placeholder="e.g., Starts at 5 Lakhs"
                 value={formData.price}
-                onChange={(e) => handleChange('price', e.target.value)}
-                />
+                onChange={handleChange}
+              />
             </div>
-
             <div className="space-y-2">
-                <Label htmlFor="status">Status *</Label>
-                <Select
-                value={formData.status}
-                onValueChange={(value: 'ongoing' | 'completed') => handleChange('status', value)}
-                >
+              <Label htmlFor="status">Status *</Label>
+              <Select value={formData.status} onValueChange={handleStatusChange}>
                 <SelectTrigger>
-                    <SelectValue placeholder="Select status" />
+                  <SelectValue placeholder="Select status" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="ongoing">Ongoing</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="Ongoing">Ongoing</SelectItem>
+                  <SelectItem value="Completed">Completed</SelectItem>
+                  <SelectItem value="Upcoming">Upcoming</SelectItem>
                 </SelectContent>
-                </Select>
+              </Select>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="features">Features (comma-separated)</Label>
-            <Textarea
-              id="features"
-              placeholder="e.g., DTCP Approved, RERA Registered, 24/7 Security"
-              value={formData.features}
-              onChange={(e) => handleChange('features', e.target.value)}
-              rows={2}
-            />
-          </div>
+          {/* --- REMOVED THE FEATURES INPUT BLOCK HERE --- */}
 
-          {/* --- IMAGE UPLOADS SECTION --- */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-border">
-            
-            {/* 1. Main Project Thumbnail */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Main Image Upload */}
             <div className="space-y-2">
-                <Label>Main Project Image</Label>
+              <Label>Main Project Image</Label>
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition-colors relative h-40 flex items-center justify-center">
                 {imagePreview ? (
-                <div className="relative group">
-                    <img
-                    src={imagePreview}
-                    alt="Preview"
-                    className="w-full h-32 object-cover rounded-lg border border-border"
+                  <div className="relative w-full h-full">
+                    <img 
+                      src={imagePreview} 
+                      alt="Preview" 
+                      className="w-full h-full object-contain rounded-md" 
                     />
-                    <button
-                    type="button"
-                    onClick={removeImage}
-                    className="absolute top-2 right-2 p-1 bg-destructive text-destructive-foreground rounded-full hover:bg-destructive/90 transition-opacity"
+                    <button 
+                      type="button"
+                      onClick={() => { setImagePreview(''); setFormData(prev => ({ ...prev, imageUrl: '', imageFile: undefined })); }}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600"
                     >
-                    <X className="w-3 h-3" />
+                      <X className="w-4 h-4" />
                     </button>
-                </div>
+                  </div>
                 ) : (
-                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary/50 hover:bg-muted/50 transition-colors">
-                    <Upload className="w-6 h-6 text-muted-foreground mb-2" />
-                    <span className="text-xs text-muted-foreground">Main Thumbnail</span>
-                    <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
+                  <label className="cursor-pointer w-full h-full flex flex-col items-center justify-center">
+                    <ImagePlus className="w-8 h-8 text-gray-400 mb-2" />
+                    <span className="text-sm text-gray-500">Main Thumbnail</span>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      className="hidden" 
+                      onChange={(e) => handleImageChange(e, 'image')} 
                     />
-                </label>
+                  </label>
                 )}
+              </div>
             </div>
 
-            {/* 2. Master Plan / Layout Image (NEW) */}
+            {/* Layout Image Upload */}
             <div className="space-y-2">
-                <Label className="flex items-center gap-2">
-                    <MapIcon className="w-4 h-4 text-secondary" />
-                    Master Plan / Layout
-                </Label>
+              <Label className="flex items-center gap-2">
+                <Map className="w-4 h-4 text-orange-500" /> 
+                Master Plan / Layout
+              </Label>
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition-colors relative h-40 flex items-center justify-center">
                 {layoutPreview ? (
-                <div className="relative group">
-                    <img
-                    src={layoutPreview}
-                    alt="Layout Preview"
-                    className="w-full h-32 object-contain bg-gray-50 rounded-lg border border-border"
+                  <div className="relative w-full h-full">
+                    <img 
+                      src={layoutPreview} 
+                      alt="Layout Preview" 
+                      className="w-full h-full object-contain rounded-md" 
                     />
-                    <button
-                    type="button"
-                    onClick={removeLayout}
-                    className="absolute top-2 right-2 p-1 bg-destructive text-destructive-foreground rounded-full hover:bg-destructive/90 transition-opacity"
+                    <button 
+                      type="button"
+                      onClick={() => { setLayoutPreview(''); setFormData(prev => ({ ...prev, layoutImage: '', layoutFile: undefined })); }}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600"
                     >
-                    <X className="w-3 h-3" />
+                      <X className="w-4 h-4" />
                     </button>
-                </div>
+                  </div>
                 ) : (
-                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary/50 hover:bg-muted/50 transition-colors">
-                    <MapIcon className="w-6 h-6 text-muted-foreground mb-2" />
-                    <span className="text-xs text-muted-foreground">Upload Layout Map</span>
-                    <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleLayoutChange}
-                    className="hidden"
+                  <label className="cursor-pointer w-full h-full flex flex-col items-center justify-center">
+                    <Map className="w-8 h-8 text-gray-400 mb-2" />
+                    <span className="text-sm text-gray-500">Upload Layout Map</span>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      className="hidden" 
+                      onChange={(e) => handleImageChange(e, 'layout')} 
                     />
-                </label>
+                  </label>
                 )}
+              </div>
             </div>
-
           </div>
 
-          <div className="flex gap-3 pt-4 border-t border-border">
-            <Button type="button" variant="outline" onClick={onClose} className="flex-1">
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={onClose} disabled={isSubmitting}>
               Cancel
             </Button>
-            <Button type="submit" className="flex-1" disabled={isLoading}>
-              {isLoading ? 'Saving...' : isEditing ? 'Update Project' : 'Add Project'}
+            <Button type="submit" className="bg-primary hover:bg-primary-dark" disabled={isSubmitting}>
+              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {initialData ? 'Update Project' : 'Add Project'}
             </Button>
-          </div>
+          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>

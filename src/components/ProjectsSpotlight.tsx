@@ -6,6 +6,10 @@ import { Button } from '@/components/ui/button';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import as from '@/assets/as.jpg';
+import sem from '@/assets/sem.jpg';
+import aa from '@/assets/aa.jpg';
+
 
 const projects = [
   {
@@ -15,7 +19,7 @@ const projects = [
     status: 'Ongoing',
     priceStart: 'Starts at ₹5 Lakhs',
     features: ['DTCP Approved', 'RERA Registered', '30ft Tar Road', 'Solar Lights'],
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+    image: sem,
     plots: '60+ Plots',
   },
   {
@@ -25,17 +29,17 @@ const projects = [
     status: 'Completed',
     priceStart: 'Starts at ₹7 Lakhs',
     features: ['DTCP Approved', '24ft Roads', 'Water Supply', 'Street Lights'],
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075',
+    image: as,
     plots: '45 Plots',
   },
   {
     id: 3,
-    name: 'Thirumalai Garden',
+    name: 'AA Avenue',
     location: 'Polur Road',
     status: 'Ongoing',
     priceStart: 'Starts at ₹4.5 Lakhs',
     features: ['DTCP Approved', 'Compound Wall', 'Park', 'Wide Roads'],
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053',
+    image: aa,
     plots: '80+ Plots',
   },
 ];
@@ -105,7 +109,7 @@ const ProjectsSpotlight = () => {
                     <img
                       src={project.image}
                       alt={project.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-fit group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent" />
                     

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AdminLogin from '@/components/admin/AdminLogin';
 import AdminDashboard from '@/components/admin/AdminDashboard';
-// Ensure your ProjectForm exports this interface, or update it locally if needed
+// Ensure your ProjectForm exports this interface
 import { ProjectData } from '@/components/admin/ProjectForm';
 import { useToast } from '@/hooks/use-toast';
 
@@ -117,18 +117,18 @@ const Admin = () => {
         imageUrl = await uploadToCloudinary(data.imageFile);
       }
 
-      // 2. Upload Layout / Master Plan Image (NEW)
+      // 2. Upload Layout / Master Plan Image
       let layoutImageUrl = data.layoutImage || "";
       if (data.layoutFile) {
         layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
+      // REMOVED: 'features' field is no longer saved to DB
       const docRef = await addDoc(collection(db, "projects"), {
         title: data.title,
         location: data.location,
         price: data.price,
         status: data.status,
-        features: data.features,
         imageUrl: imageUrl,       // Main Image
         layoutImage: layoutImageUrl, // Master Plan Image
         plots: data.plots || "",
@@ -162,13 +162,13 @@ const Admin = () => {
         layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
+      // REMOVED: 'features' field is no longer updated in DB
       const projectRef = doc(db, "projects", data.id);
       await updateDoc(projectRef, {
         title: data.title,
         location: data.location,
         price: data.price,
         status: data.status,
-        features: data.features,
         imageUrl: imageUrl,
         layoutImage: layoutImageUrl,
         plots: data.plots || ""
@@ -197,7 +197,7 @@ const Admin = () => {
   };
 
   if (isLoading && !isAuthenticated && !loginError) {
-     return <div className="flex h-screen items-center justify-center">Loading...</div>;
+      return <div className="flex h-screen items-center justify-center">Loading...</div>;
   }
 
   return (

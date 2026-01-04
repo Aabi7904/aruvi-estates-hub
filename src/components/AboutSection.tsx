@@ -30,7 +30,7 @@ const AboutSection = () => {
                 
                 {/* Founder Info */}
                 <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="text-2xl font-bold text-background mb-1">Mr. Shabeer</h3>
+                  <h3 className="text-xl font-bold text-background mb-1">Mr.A.R. Shabeer Ahamed</h3>
                   <p className="text-background/80">Founder & Managing Director</p>
                 </div>
               </div>
@@ -74,7 +74,7 @@ const AboutSection = () => {
               <span className="gradient-text">A Vision for Tomorrow</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-              Since 2004, Thamizh Aruvi Real Estate has been at the forefront of creating 
+              Since 2014, Thamizh Aruvi Real Estate has been at the forefront of creating 
               exceptional living spaces in Tiruvannamalai. Under the visionary leadership of 
               Mr. Shabeer, we have transformed dreams into reality for over 1000 families.
             </p>
@@ -91,7 +91,7 @@ const AboutSection = () => {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
                   <Building2 className="w-6 h-6 text-primary" />
                 </div>
-                <p className="text-2xl font-bold text-foreground">50+</p>
+                <p className="text-2xl font-bold text-foreground">20+</p>
                 <p className="text-xs text-muted-foreground">Projects</p>
               </div>
               <div className="text-center">

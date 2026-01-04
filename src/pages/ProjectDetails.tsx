@@ -7,9 +7,11 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { Button } from '@/components/ui/button';
-import { MapPin, CheckCircle, ArrowLeft, Phone, Map as MapIcon } from 'lucide-react';
+import { MapPin, ArrowLeft, Phone, Map as MapIcon } from 'lucide-react';
 // IMPORT THE MASTER PLAN CONTAINER
 import { MasterPlanContainer } from '@/components/MasterPlan/MasterPlanContainer';
+// IMPORT STATIC FEATURES WITH ICONS
+import { staticFeatures } from "@/data/projectFeatures";
 
 interface Project {
   id: string;
@@ -17,10 +19,10 @@ interface Project {
   location: string;
   price: string;
   status: string;
-  features: string;
   imageUrl: string;
   // Added layoutImage field from Admin Panel
   layoutImage?: string; 
+  // We removed 'features' from the interface since we are using static ones now
 }
 
 const ProjectDetails = () => {
@@ -53,9 +55,6 @@ const ProjectDetails = () => {
 
   if (loading) return <div className="flex h-screen items-center justify-center">Loading Details...</div>;
   if (!project) return <div className="flex h-screen items-center justify-center">Project not found.</div>;
-
-  // Convert features string to array
-  const featuresList = project.features ? project.features.split(',').map(f => f.trim()) : [];
 
   return (
     <>
@@ -110,13 +109,24 @@ const ProjectDetails = () => {
                 <div className="text-3xl font-bold text-primary">{project.price}</div>
               </div>
 
+              {/* --- UPDATED: STATIC FEATURES WITH ICONS --- */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Project Highlights</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {featuresList.map((feature, idx) => (
-                    <div key={idx} className="flex items-center p-3 bg-white rounded-lg border border-gray-100 shadow-sm">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0" />
-                      <span className="text-gray-700 font-medium">{feature}</span>
+                  {staticFeatures.map((feature) => (
+                    <div 
+                      key={feature.id} 
+                      className="flex items-center p-3 bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      {/* Icon Container */}
+                      <div className="mr-3 p-2 bg-primary/5 rounded-full">
+                        {feature.icon}
+                      </div>
+                      
+                      {/* Text */}
+                      <span className="text-gray-700 font-medium text-sm">
+                        {feature.text}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -149,7 +159,7 @@ const ProjectDetails = () => {
                   <MapIcon className="w-8 h-8 text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900">Master Plan & Availability</h2>
+                  <h2 className="text-3xl font-bold text-gray-900">Check Plot Availability ?</h2>
                   <p className="text-gray-500">Explore the layout map. Click on plots to see real-time status.</p>
                 </div>
               </div>

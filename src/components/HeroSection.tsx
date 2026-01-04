@@ -101,8 +101,10 @@ const HeroSection = () => {
               transition={{ delay: 1.6 }}
               className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0"
             >
-              Premium plots and homes by Thamizh Aruvi Real Estate. 
-              <span className="text-foreground font-medium"> 20+ Years of Trust</span> with 1000+ happy families.
+              Premium plots by Thamizh Aruvi Real Estate. 
+              <span className="block">
+              <span className="text-foreground font-medium"> 12+ Years of Trust</span> {" "}with 1000+ happy families.
+              </span>
             </motion.p>
 
             <motion.div
