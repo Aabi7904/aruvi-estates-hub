@@ -3,10 +3,8 @@ import { TopBar } from "./TopBar";
 import { InteractiveMap } from "./InteractiveMap";
 import { plotsData } from "./plotData"; 
 import { useToast } from "@/hooks/use-toast";
-// Import the Shared Type ONLY. Do not define it locally again.
 import { Plot } from "@/types/plot";
 
-// Define the props this container accepts
 interface MasterPlanContainerProps {
   imageUrl?: string;
 }
@@ -38,28 +36,21 @@ export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
   }, []);
 
   return (
-    <div className="flex flex-col h-[800px] border border-border rounded-xl overflow-hidden shadow-lg bg-background">
-      {/* Title Bar 
-      <div className="bg-primary/5 p-4 border-b border-border">
-        <h2 className="text-xl font-bold text-primary flex items-center gap-2">
-          📍 Interactive Master Plan
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          Click on any plot to view details or check availability.
-        </p>
-      </div>*/}
-
+    <div className="flex flex-col w-full min-h-[500px] border border-border rounded-xl overflow-hidden shadow-lg bg-background">
+      
       {/* Search & Status Bar */}
       <TopBar selectedPlot={selectedPlot} onSearch={handleSearch} />
       
-      {/* The Map */}
-      <InteractiveMap
-        plots={plotsData}
-        selectedPlot={selectedPlot}
-        onSelectPlot={handleSelectPlot}
-        // Use the prop passed from ProjectDetails, or fallback to a default if missing
-        imageUrl={imageUrl || ""}
-      />
+      {/* Map Wrapper */}
+      <div className="flex-1 relative w-full h-full bg-gray-50 overflow-hidden">
+        <InteractiveMap
+          plots={plotsData}
+          selectedPlot={selectedPlot}
+          onSelectPlot={handleSelectPlot}
+          imageUrl={imageUrl || ""}
+          initialScale={0.5} // <-- Pass initialScale (NOT initialZoom)
+        />
+      </div>
     </div>
   );
 }
