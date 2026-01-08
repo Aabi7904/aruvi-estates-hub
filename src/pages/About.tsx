@@ -14,7 +14,6 @@ const milestones = [
   { year: '2026', title: '1000+ Families', description: 'Celebrating 12 years with over 1000 happy families and 20+ projects.' },
 ];
 
-
 const About = () => {
   return (
     <>
@@ -26,11 +25,14 @@ const About = () => {
       <main className="min-h-screen bg-background">
         <Navbar />
         
-        {/* Hero */}
-        <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Hero / Our Story Section */}
+        {/* UPDATED: Changed pt-32 to pt-24 to move the section up */}
+        <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
           <div className="container-custom mx-auto relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
+              
+              {/* Text Content */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -64,11 +66,13 @@ const About = () => {
                 </div>
               </motion.div>
 
+              {/* Image Content */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="relative"
+                // UPDATED: Added max-w-md and mx-auto to restrict width and center it (making it smaller)
+                className="relative max-w-md mx-auto"
               >
                 <div className="relative rounded-2xl overflow-hidden shadow-card">
                   <img

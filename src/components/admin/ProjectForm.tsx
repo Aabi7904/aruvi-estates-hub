@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ImagePlus, Map, X, Loader2 } from 'lucide-react';
+import { ImagePlus, Map, X, Loader2, Images, Trash2 } from 'lucide-react';
 
 export interface ProjectData {
   id?: string;
@@ -12,12 +12,14 @@ export interface ProjectData {
   location: string;
   price: string;
   status: string;
-  // features: string; // REMOVED
   imageUrl?: string;
   imageFile?: File;
   layoutImage?: string;
   layoutFile?: File;
-  plots?: string;
+  // --- ADDED: Gallery Fields ---
+  galleryImages?: string[]; // Array of URLs (existing images)
+  galleryFiles?: File[];    // Array of Files (new uploads)
+  plots?: string; 
 }
 
 interface ProjectFormProps {
@@ -29,24 +31,34 @@ interface ProjectFormProps {
 }
 
 const ProjectForm = ({ isOpen, onClose, onSubmit, initialData, isSubmitting = false }: ProjectFormProps) => {
-  // Initialize state without 'features'
   const [formData, setFormData] = useState<ProjectData>({
     title: '',
     location: '',
     price: '',
     status: 'Ongoing',
     imageUrl: '',
-    layoutImage: ''
+    layoutImage: '',
+    galleryImages: [], // Initialize empty
+    galleryFiles: [],  // Initialize empty
+    plots: '' 
   });
 
   const [imagePreview, setImagePreview] = useState<string>('');
   const [layoutPreview, setLayoutPreview] = useState<string>('');
+  
+  // --- ADDED: State for new gallery file previews ---
+  const [galleryPreviews, setGalleryPreviews] = useState<string[]>([]);
 
   useEffect(() => {
     if (initialData) {
-      setFormData(initialData);
+      setFormData({
+        ...initialData,
+        galleryImages: initialData.galleryImages || [],
+        galleryFiles: [],
+      });
       setImagePreview(initialData.imageUrl || '');
       setLayoutPreview(initialData.layoutImage || '');
+      setGalleryPreviews([]); // Reset new file previews on edit load
     } else {
       setFormData({
         title: '',
@@ -54,12 +66,23 @@ const ProjectForm = ({ isOpen, onClose, onSubmit, initialData, isSubmitting = fa
         price: '',
         status: 'Ongoing',
         imageUrl: '',
-        layoutImage: ''
+        layoutImage: '',
+        galleryImages: [],
+        galleryFiles: [],
+        plots: ''
       });
       setImagePreview('');
       setLayoutPreview('');
+      setGalleryPreviews([]);
     }
   }, [initialData, isOpen]);
+
+  // Clean up object URLs to avoid memory leaks
+  useEffect(() => {
+    return () => {
+      galleryPreviews.forEach(url => URL.revokeObjectURL(url));
+    };
+  }, [galleryPreviews]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -82,6 +105,43 @@ const ProjectForm = ({ isOpen, onClose, onSubmit, initialData, isSubmitting = fa
         setLayoutPreview(previewUrl);
       }
     }
+  };
+
+  // --- ADDED: Handle Multiple Gallery Uploads ---
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const newFiles = Array.from(e.target.files);
+      const newPreviews = newFiles.map(file => URL.createObjectURL(file));
+
+      setFormData(prev => ({
+        ...prev,
+        galleryFiles: [...(prev.galleryFiles || []), ...newFiles]
+      }));
+
+      setGalleryPreviews(prev => [...prev, ...newPreviews]);
+    }
+  };
+
+  // --- ADDED: Remove Existing Gallery Image (URL) ---
+  const removeExistingGalleryImage = (indexToRemove: number) => {
+    setFormData(prev => ({
+      ...prev,
+      galleryImages: prev.galleryImages?.filter((_, index) => index !== indexToRemove)
+    }));
+  };
+
+  // --- ADDED: Remove New Gallery File (File + Preview) ---
+  const removeNewGalleryImage = (indexToRemove: number) => {
+    setFormData(prev => ({
+      ...prev,
+      galleryFiles: prev.galleryFiles?.filter((_, index) => index !== indexToRemove)
+    }));
+    setGalleryPreviews(prev => {
+      const newPreviews = prev.filter((_, index) => index !== indexToRemove);
+      // Revoke the URL of the removed item to free memory
+      URL.revokeObjectURL(prev[indexToRemove]); 
+      return newPreviews;
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -144,8 +204,6 @@ const ProjectForm = ({ isOpen, onClose, onSubmit, initialData, isSubmitting = fa
               </Select>
             </div>
           </div>
-
-          {/* --- REMOVED THE FEATURES INPUT BLOCK HERE --- */}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Main Image Upload */}
@@ -217,6 +275,57 @@ const ProjectForm = ({ isOpen, onClose, onSubmit, initialData, isSubmitting = fa
                   </label>
                 )}
               </div>
+            </div>
+          </div>
+
+          {/* --- ADDED: Gallery Section --- */}
+          <div className="space-y-3 pt-2 border-t">
+            <Label className="flex items-center gap-2 text-base font-semibold">
+              <Images className="w-5 h-5 text-blue-500" />
+              Project Gallery
+            </Label>
+            
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 mt-2">
+               {/* 1. Show Existing Images (from backend) */}
+               {formData.galleryImages && formData.galleryImages.map((url, index) => (
+                <div key={`existing-${index}`} className="relative group aspect-square rounded-lg border overflow-hidden">
+                  <img src={url} alt={`Gallery ${index}`} className="w-full h-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => removeExistingGalleryImage(index)}
+                    className="absolute top-1 right-1 bg-red-500/90 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </button>
+                </div>
+              ))}
+
+              {/* 2. Show New Upload Previews */}
+              {galleryPreviews.map((url, index) => (
+                <div key={`new-${index}`} className="relative group aspect-square rounded-lg border overflow-hidden">
+                  <img src={url} alt={`New Upload ${index}`} className="w-full h-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => removeNewGalleryImage(index)}
+                    className="absolute top-1 right-1 bg-red-500/90 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </div>
+              ))}
+
+              {/* 3. Add Button */}
+              <label className="cursor-pointer border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center aspect-square hover:bg-gray-50 hover:border-blue-400 transition-colors">
+                <ImagePlus className="w-6 h-6 text-gray-400" />
+                <span className="text-xs text-gray-500 mt-1">Add Photos</span>
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  multiple 
+                  className="hidden" 
+                  onChange={handleGalleryChange}
+                />
+              </label>
             </div>
           </div>
 

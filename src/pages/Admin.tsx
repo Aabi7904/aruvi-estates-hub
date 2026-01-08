@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AdminLogin from '@/components/admin/AdminLogin';
 import AdminDashboard from '@/components/admin/AdminDashboard';
-// Ensure your ProjectForm exports this interface
 import { ProjectData } from '@/components/admin/ProjectForm';
 import { useToast } from '@/hooks/use-toast';
 
@@ -54,6 +53,7 @@ const Admin = () => {
     const formData = new FormData();
     formData.append("file", file);
     
+    // REPLACE THESE IF NEEDED OR KEEP USING ENV VARIABLES
     const uploadPreset = import.meta.env.VITE_CLOUDINARY_PRESET || "real_estate_preset";
     const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
@@ -108,6 +108,7 @@ const Admin = () => {
     }
   };
 
+  // --- UPDATED: HANDLE ADD PROJECT ---
   const handleAddProject = async (data: ProjectData) => {
     setIsLoading(true);
     try {
@@ -123,21 +124,39 @@ const Admin = () => {
         layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
-      // REMOVED: 'features' field is no longer saved to DB
+      // 3. --- NEW: Upload Gallery Images ---
+      let galleryImageUrls: string[] = [];
+      if (data.galleryFiles && data.galleryFiles.length > 0) {
+         // Upload all files in parallel
+         const uploadPromises = data.galleryFiles.map(file => uploadToCloudinary(file));
+         galleryImageUrls = await Promise.all(uploadPromises);
+      }
+      // Combine with any existing ones (usually empty for new project)
+      const finalGalleryImages = [...(data.galleryImages || []), ...galleryImageUrls];
+
+
+      // 4. Save to Firestore
       const docRef = await addDoc(collection(db, "projects"), {
-        title: data.title,
-        location: data.location,
-        price: data.price,
-        status: data.status,
-        imageUrl: imageUrl,       // Main Image
-        layoutImage: layoutImageUrl, // Master Plan Image
+        title: data.title || "Untitled Project",
+        location: data.location || "",
+        price: data.price || "",
+        status: data.status || "Ongoing",
+        imageUrl: imageUrl,       
+        layoutImage: layoutImageUrl, 
+        galleryImages: finalGalleryImages, // <--- Save Gallery Array
         plots: data.plots || "",
         createdAt: new Date().toISOString()
       });
 
-      const newProject = { ...data, id: docRef.id, imageUrl, layoutImage: layoutImageUrl };
+      const newProject = { 
+        ...data, 
+        id: docRef.id, 
+        imageUrl, 
+        layoutImage: layoutImageUrl,
+        galleryImages: finalGalleryImages 
+      };
+      
       setProjects(prev => [...prev, newProject]);
-
       toast({ title: 'Success', description: 'Project added successfully.' });
     } catch (error) {
       console.error("Add error:", error);
@@ -146,6 +165,7 @@ const Admin = () => {
     setIsLoading(false);
   };
 
+  // --- UPDATED: HANDLE EDIT PROJECT ---
   const handleEditProject = async (data: ProjectData) => {
     if (!data.id) return;
     setIsLoading(true);
@@ -162,19 +182,39 @@ const Admin = () => {
         layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
-      // REMOVED: 'features' field is no longer updated in DB
+      // 3. --- NEW: Upload New Gallery Images ---
+      let newGalleryUrls: string[] = [];
+      if (data.galleryFiles && data.galleryFiles.length > 0) {
+         const uploadPromises = data.galleryFiles.map(file => uploadToCloudinary(file));
+         newGalleryUrls = await Promise.all(uploadPromises);
+      }
+      
+      // Combine: (Existing URLs kept) + (New URLs uploaded)
+      const finalGalleryImages = [
+        ...(data.galleryImages || []), 
+        ...newGalleryUrls
+      ];
+
+      // 4. Update Firestore
       const projectRef = doc(db, "projects", data.id);
       await updateDoc(projectRef, {
-        title: data.title,
-        location: data.location,
-        price: data.price,
-        status: data.status,
-        imageUrl: imageUrl,
-        layoutImage: layoutImageUrl,
+        title: data.title || "",
+        location: data.location || "",
+        price: data.price || "",
+        status: data.status || "Ongoing",
+        imageUrl: imageUrl || "",
+        layoutImage: layoutImageUrl || "",
+        galleryImages: finalGalleryImages, // <--- Update Gallery Array
         plots: data.plots || ""
       });
 
-      setProjects(prev => prev.map(p => p.id === data.id ? { ...data, imageUrl, layoutImage: layoutImageUrl } : p));
+      setProjects(prev => prev.map(p => p.id === data.id ? { 
+        ...data, 
+        imageUrl, 
+        layoutImage: layoutImageUrl,
+        galleryImages: finalGalleryImages
+      } : p));
+      
       toast({ title: 'Updated', description: 'Project updated successfully.' });
 
     } catch (error) {

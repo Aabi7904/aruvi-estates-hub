@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { Button } from '@/components/ui/button';
-import { MapPin, ArrowLeft, Phone, Map as MapIcon } from 'lucide-react';
+import { MapPin, ArrowLeft, Phone, Map as MapIcon, Images } from 'lucide-react';
 // IMPORT THE MASTER PLAN CONTAINER
 import { MasterPlanContainer } from '@/components/MasterPlan/MasterPlanContainer';
 // IMPORT STATIC FEATURES WITH ICONS
@@ -20,9 +20,9 @@ interface Project {
   price: string;
   status: string;
   imageUrl: string;
-  // Added layoutImage field from Admin Panel
   layoutImage?: string; 
-  // We removed 'features' from the interface since we are using static ones now
+  // --- ADDED: Gallery Array ---
+  galleryImages?: string[];
 }
 
 const ProjectDetails = () => {
@@ -109,7 +109,7 @@ const ProjectDetails = () => {
                 <div className="text-3xl font-bold text-primary">{project.price}</div>
               </div>
 
-              {/* --- UPDATED: STATIC FEATURES WITH ICONS --- */}
+              {/* --- STATIC FEATURES WITH ICONS --- */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Project Highlights</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -150,8 +150,31 @@ const ProjectDetails = () => {
             </div>
           </div>
 
+          {/* --- ADDED: GALLERY SECTION (Conditional Render) --- */}
+          {project.galleryImages && project.galleryImages.length > 0 && (
+            <div className="mb-16 pt-12 border-t border-gray-200">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-blue-50">
+                  <Images className="w-8 h-8 text-blue-600" />
+                </div>
+                <h2 className="text-3xl font-bold text-gray-900">Project Gallery</h2>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {project.galleryImages.map((img, index) => (
+                  <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all group cursor-pointer bg-white border border-gray-100">
+                    <img 
+                      src={img} 
+                      alt={`Gallery ${index + 1}`} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* --- MASTER PLAN SECTION (Conditional Render) --- */}
-          {/* Only shows if you uploaded a Layout Image in Admin Panel */}
           {project.layoutImage && (
             <div className="mt-16 pt-12 border-t border-gray-200">
               <div className="flex items-center gap-3 mb-6">
@@ -165,8 +188,7 @@ const ProjectDetails = () => {
               </div>
               
               <div className="rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white">
-                 {/* Pass the layout image URL to your container */}
-                 {/* @ts-ignore - Ignore this line if your Container doesn't have props defined yet */}
+                 {/* @ts-ignore */}
                  <MasterPlanContainer imageUrl={project.layoutImage} />
               </div>
             </div>

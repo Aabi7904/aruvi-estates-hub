@@ -18,11 +18,11 @@ const HeroSection = () => {
   const [showLogoIntro, setShowLogoIntro] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // 1. Logo Animation Timer (3.8 seconds)
+  // 1. Logo Animation Timer (UPDATED: Increased to 5800ms for extra 2s delay)
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLogoIntro(false);
-    }, 3800);
+    }, 5800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -171,11 +171,11 @@ const HeroSection = () => {
                         }}
                         className="mb-6 relative"
                       >
-                         <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-150 animate-pulse" />
-                         <img src={logo} alt="Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain relative z-10 drop-shadow-2xl" />
+                          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-150 animate-pulse" />
+                          <img src={logo} alt="Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain relative z-10 drop-shadow-2xl" />
                       </motion.div>
 
-                      <div className="flex flex-col items-center overflow-hidden">
+                      <div className="flex flex-col items-center overflow-hidden text-center">
                         <motion.h2 
                           initial={{ y: 50, opacity: 0 }}
                           animate={{ y: 0, opacity: 1 }}
@@ -200,6 +200,17 @@ const HeroSection = () => {
                         >
                           Real Estate
                         </motion.span>
+
+                        {/* --- ADDED: NEW TAGLINE --- */}
+                        <motion.p
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.8, duration: 0.8 }}
+                          className="text-xs md:text-sm text-foreground mt-3 font-medium tracking-wide"
+                        >
+                          Tiruvannamalai's fastest-growing real estate ventures.
+                        </motion.p>
+
                       </div>
                     </div>
                   </motion.div>

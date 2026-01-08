@@ -25,7 +25,6 @@ import ProjectForm, { ProjectData } from './ProjectForm';
 
 interface AdminDashboardProps {
   onLogout: () => void;
-  // These props will be used when Firebase is connected
   projects?: ProjectData[];
   onAddProject?: (data: ProjectData) => void;
   onEditProject?: (data: ProjectData) => void;
@@ -33,7 +32,7 @@ interface AdminDashboardProps {
   isLoading?: boolean;
 }
 
-// Mock data for UI demonstration
+/* Mock data (NO features field) */
 const mockProjects: ProjectData[] = [
   {
     id: '1',
@@ -41,7 +40,6 @@ const mockProjects: ProjectData[] = [
     location: 'Tiruvannamalai',
     price: 'Starts at 5 Lakhs',
     status: 'completed',
-    features: 'DTCP Approved, RERA Registered, 24/7 Security',
     imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400',
   },
   {
@@ -50,7 +48,6 @@ const mockProjects: ProjectData[] = [
     location: 'Tiruvannamalai',
     price: 'Starts at 8 Lakhs',
     status: 'ongoing',
-    features: 'Gated Community, Temple View, Wide Roads',
     imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400',
   },
   {
@@ -59,7 +56,6 @@ const mockProjects: ProjectData[] = [
     location: 'Tiruvannamalai',
     price: 'Starts at 6.5 Lakhs',
     status: 'ongoing',
-    features: 'Near Highway, Clear Title, Bank Loan Available',
     imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400',
   },
 ];
@@ -123,7 +119,7 @@ const AdminDashboard = ({
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {/* Stats Cards */}
+        {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -136,6 +132,7 @@ const AdminDashboard = ({
               <div className="text-3xl font-bold">{projects.length}</div>
             </CardContent>
           </Card>
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -147,6 +144,7 @@ const AdminDashboard = ({
               <div className="text-3xl font-bold text-primary">{ongoingCount}</div>
             </CardContent>
           </Card>
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -160,7 +158,7 @@ const AdminDashboard = ({
           </Card>
         </div>
 
-        {/* Projects Table */}
+        {/* Table */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
@@ -172,6 +170,7 @@ const AdminDashboard = ({
               Add Project
             </Button>
           </CardHeader>
+
           <CardContent>
             <div className="rounded-lg border border-border overflow-hidden">
               <Table>
@@ -185,67 +184,57 @@ const AdminDashboard = ({
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
+
                 <TableBody>
-                  {projects.length === 0 ? (
-                    <TableRow>
-                      <TableCell colSpan={6} className="text-center py-12 text-muted-foreground">
-                        No projects found. Add your first project!
+                  {projects.map((project) => (
+                    <TableRow key={project.id}>
+                      <TableCell>
+                        {project.imageUrl ? (
+                          <img
+                            src={project.imageUrl}
+                            alt={project.title}
+                            className="w-16 h-12 object-cover rounded-md"
+                          />
+                        ) : (
+                          <div className="w-16 h-12 bg-muted rounded-md flex items-center justify-center">
+                            <Building2 className="w-5 h-5 text-muted-foreground" />
+                          </div>
+                        )}
+                      </TableCell>
+
+                      <TableCell className="font-medium">{project.title}</TableCell>
+                      <TableCell className="text-muted-foreground">{project.location}</TableCell>
+                      <TableCell className="text-muted-foreground">{project.price}</TableCell>
+
+                      <TableCell>
+                        <Badge
+                          variant={project.status === 'completed' ? 'secondary' : 'default'}
+                        >
+                          {project.status === 'completed' ? 'Completed' : 'Ongoing'}
+                        </Badge>
+                      </TableCell>
+
+                      <TableCell className="text-right">
+                        <div className="flex justify-end gap-2">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleEdit(project)}
+                          >
+                            <Pencil className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setDeleteId(project.id!)}
+                            className="text-destructive"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
-                  ) : (
-                    projects.map((project) => (
-                      <TableRow key={project.id}>
-                        <TableCell>
-                          {project.imageUrl ? (
-                            <img
-                              src={project.imageUrl}
-                              alt={project.title}
-                              className="w-16 h-12 object-cover rounded-md"
-                            />
-                          ) : (
-                            <div className="w-16 h-12 bg-muted rounded-md flex items-center justify-center">
-                              <Building2 className="w-5 h-5 text-muted-foreground" />
-                            </div>
-                          )}
-                        </TableCell>
-                        <TableCell className="font-medium">{project.title}</TableCell>
-                        <TableCell className="text-muted-foreground">{project.location}</TableCell>
-                        <TableCell className="text-muted-foreground">{project.price}</TableCell>
-                        <TableCell>
-                          <Badge
-                            variant={project.status === 'completed' ? 'secondary' : 'default'}
-                            className={
-                              project.status === 'completed'
-                                ? 'bg-secondary/20 text-secondary border-secondary/30'
-                                : 'bg-primary/20 text-primary border-primary/30'
-                            }
-                          >
-                            {project.status === 'completed' ? 'Completed' : 'Ongoing'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <div className="flex items-center justify-end gap-2">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => handleEdit(project)}
-                              className="h-8 w-8"
-                            >
-                              <Pencil className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => setDeleteId(project.id!)}
-                              className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  )}
+                  ))}
                 </TableBody>
               </Table>
             </div>
@@ -253,33 +242,30 @@ const AdminDashboard = ({
         </Card>
       </main>
 
-      {/* Add/Edit Project Modal */}
+      {/* Project Form */}
       <ProjectForm
-        open={isFormOpen}
+        isOpen={isFormOpen}
         onClose={() => {
           setIsFormOpen(false);
           setEditingProject(null);
         }}
         onSubmit={handleFormSubmit}
         initialData={editingProject}
-        isLoading={isLoading}
+        isSubmitting={isLoading}
       />
 
-      {/* Delete Confirmation Dialog */}
+      {/* Delete Dialog */}
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Project</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this project? This action cannot be undone.
+              Are you sure you want to delete this project?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
+            <AlertDialogAction onClick={handleDelete}>
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
