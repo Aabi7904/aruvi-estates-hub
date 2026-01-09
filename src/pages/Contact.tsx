@@ -144,7 +144,7 @@ const Contact = () => {
                 {/* Map */}
                 <div className="glass rounded-2xl overflow-hidden shadow-card h-64">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0876987541853!2d79.06892841482259!3d12.231373891324583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad44c4b5555555%3A0x6666666666666666!2sThiruvannamalai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1699999999999!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.4242616554534!2d79.0673805!3d12.219527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bac957b6fffffff%3A0x41ff28cbc33d0a52!2sThamizh%20aruvi%20Real%20estates!5e0!3m2!1sen!2sin!4v1767544495014!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

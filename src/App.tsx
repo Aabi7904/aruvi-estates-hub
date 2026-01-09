@@ -12,6 +12,10 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import ProjectDetails from "./pages/ProjectDetails";
 
+// --- IMPORT SCROLL TO TOP ---
+// Make sure this path matches where you saved the file
+import ScrollToTop from "@/components/ScrollToTop"; 
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -21,14 +25,19 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          {/* --- ADD THIS COMPONENT HERE --- */}
+          {/* This triggers the scroll to top on every route change */}
+          <ScrollToTop />
+          
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="*" element={<NotFound />} />
+            {/* Note: It's usually better to put specific routes (like /project/:id) BEFORE wildcard routes (*) */}
             <Route path="/project/:id" element={<ProjectDetails />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

@@ -23,11 +23,11 @@ const AboutSection = () => {
           >
             <div className="relative">
               {/* Main Image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-card">
+              <div className="relative rounded-2xl overflow-hidden shadow-card max-w-sm mx-auto lg:mx-0">
                 <img
                   src="shabeer.jpeg"
                   alt="Mr. Shabeer - Founder"
-                  className="w-full aspect-[4/5] object-cover"
+                  className="w-full h-[420px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
 

@@ -47,10 +47,16 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              {['Home', 'Projects', 'About Us', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="text-background/70 hover:text-primary transition-colors text-sm">
-                    {item}
+              {/* UPDATED: Explicit paths to fix 404 errors on Home and About Us */}
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'Projects', path: '/projects' },
+                { name: 'About Us', path: '/about' },
+                { name: 'Contact', path: '/contact' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link to={item.path} className="text-background/70 hover:text-primary transition-colors text-sm">
+                    {item.name}
                   </Link>
                 </li>
               ))}
