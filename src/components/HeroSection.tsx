@@ -8,9 +8,13 @@ import logo from '@/assets/logo.png';
 
 // Your slideshow images
 const slideImages = [
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+ "img1.jpg",
+  "img2.jpg",
+  "img3.jpg",
+  "img4.jpg",
+  "img5.jpg",
+  "img6.jpg",
+  "img7.jpg",
   heroBg
 ];
 
