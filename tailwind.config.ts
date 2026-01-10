@@ -13,9 +13,14 @@ export default {
       },
     },
     extend: {
+      // --- FIX IS HERE ---
       fontFamily: {
+        // Keep your main font here
         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        // Create a dedicated utility for Allura (enables class="font-allura")
+        greatvibes: ['"Great Vibes"', 'cursive'], 
       },
+      // -------------------
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

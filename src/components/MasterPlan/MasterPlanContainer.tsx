@@ -36,7 +36,8 @@ export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
   }, []);
 
   return (
-    <div className="flex flex-col w-full min-h-[500px] border border-border rounded-xl overflow-hidden shadow-lg bg-background">
+    // --- UPDATED: Fixed height h-[600px] prevents it from being "too big" ---
+    <div className="flex flex-col w-full h-[600px] border border-border rounded-xl overflow-hidden shadow-lg bg-background">
       
       {/* Search & Status Bar */}
       <TopBar selectedPlot={selectedPlot} onSearch={handleSearch} />
@@ -48,7 +49,7 @@ export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
           selectedPlot={selectedPlot}
           onSelectPlot={handleSelectPlot}
           imageUrl={imageUrl || ""}
-          initialScale={0.5} // <-- Pass initialScale (NOT initialZoom)
+          initialScale={0.3} // Starts zoomed in at 50%
         />
       </div>
     </div>

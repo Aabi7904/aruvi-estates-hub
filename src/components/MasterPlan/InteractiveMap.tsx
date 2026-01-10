@@ -1,21 +1,20 @@
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { Plot } from "@/types/plot"; // Shared Plot type
-import { plotPositions } from "./plotData"; // Make sure path is correct
+import { Plot } from "@/types/plot"; 
+import { plotPositions } from "./plotData"; 
 import { MapControls } from "./MapControls";
 import { PlotShape } from "./PlotShape";
 import { Legend } from "./Legend";
 
-// Map dimensions (adjust to your image's real dimensions)
+// Keep coordinate system for the SVG points
 const MAP_WIDTH = 3628;
 const MAP_HEIGHT = 2628;
 
-// InteractiveMap Props
 interface InteractiveMapProps {
   plots: Plot[];
   selectedPlot: Plot | null;
   onSelectPlot: (plot: Plot) => void;
   imageUrl: string;
-  initialScale?: number; // Optional initial zoom
+  initialScale?: number; 
 }
 
 export function InteractiveMap({
@@ -23,15 +22,16 @@ export function InteractiveMap({
   selectedPlot,
   onSelectPlot,
   imageUrl,
-  initialScale = 0.22, // default zoom
+  initialScale = 0.4, 
 }: InteractiveMapProps) {
   return (
-    <div className="relative flex-1 bg-gray-100 overflow-hidden w-full h-full min-h-[600px]">
+    <div className="relative flex-1 bg-gray-100 overflow-hidden w-full h-full">
       <TransformWrapper
         initialScale={initialScale}
         minScale={0.15}
         maxScale={4}
-        centerOnInit={true}
+        // Keep centerOnInit false so it doesn't force vertical centering (which adds top space)
+        centerOnInit={false} 
         limitToBounds={false}
         wheel={{ step: 0.1 }}
         doubleClick={{ disabled: true }}
@@ -51,17 +51,21 @@ export function InteractiveMap({
             {/* Zoomable/Pannable Content */}
             <TransformComponent
               wrapperClass="!w-full !h-full"
-              contentClass="!w-full !h-full flex items-center justify-center"
+              // justify-center centers the element in the flex container
+              contentClass="!w-full !h-full flex items-start justify-center"
             >
-              <div
-                className="relative shadow-2xl bg-white"
-                style={{ width: MAP_WIDTH, height: MAP_HEIGHT }}
+              <div 
+                className="relative shadow-2xl bg-white w-fit h-fit"
+                // --- UPDATED: transformOrigin center top ensures it shrinks towards the top-center ---
+                style={{ transformOrigin: "center top" }}
               >
+                
                 {/* Master Plan Image */}
                 <img
                   src={imageUrl || "/placeholder.jpg"}
                   alt="Master Plan Layout"
-                  className="w-full h-full object-contain select-none pointer-events-none"
+                  className="block max-w-none select-none pointer-events-none"
+                  style={{ width: MAP_WIDTH, height: 'auto' }} 
                   draggable={false}
                 />
 
@@ -69,7 +73,7 @@ export function InteractiveMap({
                 <svg
                   className="absolute inset-0 w-full h-full"
                   viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
-                  preserveAspectRatio="xMidYMid meet"
+                  preserveAspectRatio="none" 
                 >
                   {plots.map((plot) => {
                     const position = plotPositions.find((p) => p.id === plot.id);

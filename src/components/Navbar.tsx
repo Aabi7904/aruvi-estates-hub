@@ -50,12 +50,27 @@ const Navbar = () => {
                 className="h-12 md:h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
               />
               <div className="flex flex-col">
-                <span className="text-lg md:text-2xl font-bold text-primary leading-none tracking-tight font-[Plus Jakarta Sans]">
-                  Thamizh Aruvi
+                <span className="text-2xl md:text-3xl text-primary leading-none tracking-wide font-greatvibes drop-shadow-[0_2px_8px_rgba(255,165,0,0.4)]">
+                  Thamizharuvi
                 </span>
-                <span className="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-[0.2em] mt-1.5 ml-0.5">
-                  Real Estate
-                </span>
+    <span
+  className="
+    inline-flex items-center justify-center
+    mt-1.5 ml-0.5
+    px-3 py-[2px]
+    text-[10px] md:text-xs
+    font-bold uppercase
+    tracking-widest
+    text-white
+    rounded-full
+    bg-orange-500
+    shadow-[0_4px_14px_rgba(255,140,0,0.6)]
+  "
+>
+  REAL&nbsp;ESTATE
+</span>
+
+
               </div>
             </Link>
 
