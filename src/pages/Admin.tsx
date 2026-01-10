@@ -53,7 +53,7 @@ const Admin = () => {
     const formData = new FormData();
     formData.append("file", file);
     
-    // REPLACE THESE IF NEEDED OR KEEP USING ENV VARIABLES
+    // Ensure this matches your Cloudinary settings exactly
     const uploadPreset = import.meta.env.VITE_CLOUDINARY_PRESET || "real_estate_preset";
     const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
@@ -72,14 +72,15 @@ const Admin = () => {
       
       if (!response.ok) {
         const errData = await response.json();
-        console.error("Cloudinary Error:", errData);
+        console.error("Cloudinary Error Details:", errData);
         throw new Error(`Upload failed: ${errData.error?.message || response.statusText}`);
       }
       
       const data = await response.json();
+      console.log("Image uploaded successfully:", data.secure_url);
       return data.secure_url;
     } catch (error) {
-      console.error("Upload failed:", error);
+      console.error("Upload function error:", error);
       throw error; 
     }
   };
@@ -112,30 +113,35 @@ const Admin = () => {
   const handleAddProject = async (data: ProjectData) => {
     setIsLoading(true);
     try {
+      console.log("Starting Add Project...");
+
       // 1. Upload Main Thumbnail
       let imageUrl = data.imageUrl || ""; 
       if (data.imageFile) {
+        console.log("Uploading Main Image...");
         imageUrl = await uploadToCloudinary(data.imageFile);
       }
 
       // 2. Upload Layout / Master Plan Image
       let layoutImageUrl = data.layoutImage || "";
       if (data.layoutFile) {
+        console.log("Uploading Layout Image...");
         layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
       // 3. --- NEW: Upload Gallery Images ---
       let galleryImageUrls: string[] = [];
       if (data.galleryFiles && data.galleryFiles.length > 0) {
-         // Upload all files in parallel
+         console.log(`Uploading ${data.galleryFiles.length} gallery images...`);
          const uploadPromises = data.galleryFiles.map(file => uploadToCloudinary(file));
          galleryImageUrls = await Promise.all(uploadPromises);
       }
-      // Combine with any existing ones (usually empty for new project)
+      
+      // Combine newly uploaded images
       const finalGalleryImages = [...(data.galleryImages || []), ...galleryImageUrls];
 
-
       // 4. Save to Firestore
+      console.log("Saving to Firestore...", finalGalleryImages);
       const docRef = await addDoc(collection(db, "projects"), {
         title: data.title || "Untitled Project",
         location: data.location || "",
@@ -159,8 +165,8 @@ const Admin = () => {
       setProjects(prev => [...prev, newProject]);
       toast({ title: 'Success', description: 'Project added successfully.' });
     } catch (error) {
-      console.error("Add error:", error);
-      toast({ title: 'Error', description: 'Failed to add project.', variant: 'destructive' });
+      console.error("Add Project Error:", error);
+      toast({ title: 'Error', description: 'Failed to add project. Check console.', variant: 'destructive' });
     }
     setIsLoading(false);
   };
@@ -169,33 +175,42 @@ const Admin = () => {
   const handleEditProject = async (data: ProjectData) => {
     if (!data.id) return;
     setIsLoading(true);
+    
     try {
+      console.log("Starting Edit Project...", data);
+
       // 1. Upload Main Thumbnail (if changed)
       let imageUrl = data.imageUrl;
       if (data.imageFile) {
+        console.log("Uploading new Main Image...");
         imageUrl = await uploadToCloudinary(data.imageFile);
       }
 
       // 2. Upload Layout Image (if changed)
       let layoutImageUrl = data.layoutImage;
       if (data.layoutFile) {
+        console.log("Uploading new Layout Image...");
         layoutImageUrl = await uploadToCloudinary(data.layoutFile);
       }
 
       // 3. --- NEW: Upload New Gallery Images ---
       let newGalleryUrls: string[] = [];
       if (data.galleryFiles && data.galleryFiles.length > 0) {
+         console.log(`Uploading ${data.galleryFiles.length} new gallery files...`);
          const uploadPromises = data.galleryFiles.map(file => uploadToCloudinary(file));
+         // Using Promise.all ensures we get all URLs before proceeding
          newGalleryUrls = await Promise.all(uploadPromises);
+         console.log("New Gallery URLs uploaded:", newGalleryUrls);
       }
       
-      // Combine: (Existing URLs kept) + (New URLs uploaded)
-      const finalGalleryImages = [
-        ...(data.galleryImages || []), 
-        ...newGalleryUrls
-      ];
+      // 4. --- MERGE: Combine old retained URLs + New uploaded URLs ---
+      // IMPORTANT: Explicitly use empty array fallback to prevent crashes
+      const oldGalleryImages = data.galleryImages || []; 
+      const finalGalleryImages = [...oldGalleryImages, ...newGalleryUrls];
 
-      // 4. Update Firestore
+      console.log("Final Gallery Array to Save:", finalGalleryImages);
+
+      // 5. Update Firestore
       const projectRef = doc(db, "projects", data.id);
       await updateDoc(projectRef, {
         title: data.title || "",
@@ -204,10 +219,11 @@ const Admin = () => {
         status: data.status || "Ongoing",
         imageUrl: imageUrl || "",
         layoutImage: layoutImageUrl || "",
-        galleryImages: finalGalleryImages, // <--- Update Gallery Array
+        galleryImages: finalGalleryImages, // <--- Correctly saves the merged array
         plots: data.plots || ""
       });
 
+      // 6. Update Local State (Immediate UI Refresh)
       setProjects(prev => prev.map(p => p.id === data.id ? { 
         ...data, 
         imageUrl, 
@@ -218,8 +234,13 @@ const Admin = () => {
       toast({ title: 'Updated', description: 'Project updated successfully.' });
 
     } catch (error) {
-      console.error("Edit error:", error);
-      toast({ title: 'Error', description: 'Failed to update project.', variant: 'destructive' });
+      console.error("Edit Project Error:", error);
+      // More descriptive error toast
+      toast({ 
+        title: 'Error', 
+        description: 'Failed to update project. Check console for details.', 
+        variant: 'destructive' 
+      });
     }
     setIsLoading(false);
   };
