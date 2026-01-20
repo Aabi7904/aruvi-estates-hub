@@ -7,6 +7,14 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // List of contact numbers for easy management
+  const contactNumbers = [
+    { display: "+91 94437 29991", link: "+919443729991" },
+    { display: "+91 96774 44198", link: "+919677444198" },
+    { display: "+91 94878 29991", link: "+919487829991" },
+    { display: "+91 99528 28701", link: "+919952828701" },
+  ];
+
   return (
     <footer className="relative bg-foreground text-background">
       {/* Gradient Top Border */}
@@ -22,7 +30,6 @@ const Footer = () => {
                 src={logo} 
                 alt="Thamizh Aruvi Real Estate" 
                 className="h-[100px] w-auto object-contain hover:opacity-80 transition-opacity"
-                
               />
               </div>
             </Link>
@@ -47,7 +54,6 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              {/* UPDATED: Explicit paths to fix 404 errors on Home and About Us */}
               {[
                 { name: 'Home', path: '/' },
                 { name: 'Projects', path: '/projects' },
@@ -87,16 +93,27 @@ const Footer = () => {
                   No.27, Manaloor Pettai Main Road, Thiruvannamalai - 606601
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <a href="tel:+919443729991" className="text-background/70 hover:text-primary transition-colors text-sm">
-                  +91 94437 29991
-                </a>
+              
+              {/* UPDATED: Multiple Phone Numbers */}
+              <li className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                <div className="flex flex-col gap-1">
+                  {contactNumbers.map((num, index) => (
+                    <a 
+                      key={index}
+                      href={`tel:${num.link}`} 
+                      className="text-background/70 hover:text-primary transition-colors text-sm"
+                    >
+                      {num.display}
+                    </a>
+                  ))}
+                </div>
               </li>
+
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <a href="mailto:info@thamizharvui.com" className="text-background/70 hover:text-primary transition-colors text-sm">
-                  info@thamizharvui.com
+                <a href="mailto:thamizharuvirealestate@gmail.com" className="text-background/70 hover:text-primary transition-colors text-sm break-all">
+                  thamizharuvirealestate@gmail.com
                 </a>
               </li>
             </ul>

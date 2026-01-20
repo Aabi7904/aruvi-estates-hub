@@ -49,7 +49,7 @@ export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
           selectedPlot={selectedPlot}
           onSelectPlot={handleSelectPlot}
           imageUrl={imageUrl || ""}
-          initialScale={0.3} // Starts zoomed in at 50%
+          initialScale={0.2} // Starts zoomed in at 50%
         />
       </div>
     </div>

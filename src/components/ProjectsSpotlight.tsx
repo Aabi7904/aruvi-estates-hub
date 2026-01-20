@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectCoverflow, Navigation } from 'swiper/modules';
@@ -32,32 +32,47 @@ const galleryImages = [
 ];
 
 const ProjectsSpotlight = () => {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const openLightbox = (index: number) => setLightboxIndex(index);
+  const openLightbox = (index) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
 
+  // Helper Functions for Buttons
   const nextImage = () => {
-    if (lightboxIndex !== null) {
-      setLightboxIndex((prev) => (prev! + 1) % galleryImages.length);
-    }
+    setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
   };
 
   const prevImage = () => {
-    if (lightboxIndex !== null) {
-      setLightboxIndex((prev) => (prev! - 1 + galleryImages.length) % galleryImages.length);
-    }
+    setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   };
 
-  // Handle keyboard navigation
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft') prevImage();
-    if (e.key === 'Escape') closeLightbox();
-  };
+  // --- FIXED KEYBOARD NAVIGATION ---
+  useEffect(() => {
+    // If the lightbox is closed (null), do not attach any listener
+    if (lightboxIndex === null) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault(); // Stop page scroll
+        nextImage();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault(); // Stop page scroll
+        prevImage();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      }
+    };
+
+    // Attach listener
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup listener when index changes or component unmounts
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex]); // <--- This dependency ensures the listener always knows the current index
 
   return (
-    <section className="section-padding bg-foreground relative overflow-hidden" onKeyDown={handleKeyDown}>
+    <section className="section-padding bg-foreground relative overflow-hidden">
       {/* Background Subtle Texture */}
       <div className="absolute inset-0 bg-[url('/pattern-bg.png')] opacity-5 pointer-events-none" />
       
@@ -94,26 +109,25 @@ const ProjectsSpotlight = () => {
             grabCursor={true}
             centeredSlides={true}
             loop={true}
-            slidesPerView="auto" // Allows slides to find their natural width
+            slidesPerView="auto"
             initialSlide={2}
-            speed={800} // Smooth transition speed
+            speed={800}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
             coverflowEffect={{
-              rotate: 0,        // No rotation keeps it modern/flat
+              rotate: 0,
               stretch: 0,
-              depth: 300,       // Deep depth for 3D feel
+              depth: 300,
               modifier: 1,
-              slideShadows: false, // Custom shadows look better
+              slideShadows: false,
             }}
             pagination={{ 
               clickable: true,
               dynamicBullets: true,
             }}
-            // Responsive Breakpoints
             breakpoints={{
               320: { slidesPerView: 1.2, spaceBetween: 20 },
               640: { slidesPerView: 1.5, spaceBetween: 30 },
@@ -139,15 +153,15 @@ const ProjectsSpotlight = () => {
                     />
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 transition-opacity duration-300" />
-
-                    {/* Content Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                       <h3 className="text-white text-xl font-bold drop-shadow-md">{img.alt}</h3>
-                       <div className="flex items-center gap-2 text-primary text-sm font-medium mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                         <Maximize2 className="w-4 h-4" /> Expand View
-                       </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 transition-opacity duration-300" />
+                    
+                    {/* ICON OVERLAY ONLY (No text captions) */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                         <div className="bg-black/30 p-3 rounded-full backdrop-blur-sm text-white">
+                           <Maximize2 className="w-5 h-5" />
+                         </div>
                     </div>
+
                   </motion.div>
                 )}
               </SwiperSlide>
@@ -195,29 +209,29 @@ const ProjectsSpotlight = () => {
                 className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
               />
               
-              <div className="absolute bottom-6 left-0 right-0 text-center pointer-events-none">
-                 <span className="bg-black/50 text-white/90 text-lg font-medium px-6 py-2 rounded-full backdrop-blur-md">
-                   {galleryImages[lightboxIndex].alt}
-                 </span>
-              </div>
+              {/* No Text Captions */}
+              
             </motion.div>
 
             {/* Controls */}
             <button
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-primary text-white p-4 rounded-full transition-all group backdrop-blur-sm"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-primary text-white p-4 rounded-full transition-all group backdrop-blur-sm z-50"
+              title="Previous (Left Arrow)"
             >
               <ChevronLeft className="w-8 h-8 group-hover:-translate-x-1 transition-transform" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-primary text-white p-4 rounded-full transition-all group backdrop-blur-sm"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-primary text-white p-4 rounded-full transition-all group backdrop-blur-sm z-50"
+              title="Next (Right Arrow)"
             >
               <ChevronRight className="w-8 h-8 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 bg-white/10 hover:bg-red-500 text-white p-3 rounded-full transition-all backdrop-blur-sm"
+              className="absolute top-6 right-6 bg-white/10 hover:bg-red-500 text-white p-3 rounded-full transition-all backdrop-blur-sm z-50"
+              title="Close (Esc)"
             >
               <X className="w-6 h-6" />
             </button>
@@ -228,7 +242,6 @@ const ProjectsSpotlight = () => {
         )}
       </AnimatePresence>
 
-      {/* Custom Styles for Swiper Pagination */}
       <style>{`
         .gallery-swiper .swiper-pagination-bullet {
           background: #fff;

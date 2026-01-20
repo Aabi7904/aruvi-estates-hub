@@ -6,7 +6,7 @@ import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Building2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -35,6 +35,14 @@ const Contact = () => {
     setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
     setIsSubmitting(false);
   };
+
+  // List of phone numbers
+  const contactNumbers = [
+    { display: "+91 94437 29991", link: "+919443729991" },
+    { display: "+91 96774 44198", link: "+919677444198" },
+    { display: "+91 94878 29991", link: "+919487829991" },
+    { display: "+91 99528 28701", link: "+919952828701" },
+  ];
 
   return (
     <>
@@ -103,26 +111,36 @@ const Contact = () => {
                     </div>
                   </div>
 
+                  {/* Phone Numbers */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0">
                       <Phone className="w-6 h-6 text-secondary-foreground" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground mb-1">Phone Number</h4>
-                      <a href="tel:+919443729991" className="text-muted-foreground hover:text-primary transition-colors">
-                        +91 94437 29991
-                      </a>
+                      <h4 className="font-semibold text-foreground mb-1">Phone Numbers</h4>
+                      <div className="flex flex-col gap-1">
+                        {contactNumbers.map((item, index) => (
+                          <a 
+                            key={index}
+                            href={`tel:${item.link}`} 
+                            className="text-muted-foreground hover:text-primary transition-colors block"
+                          >
+                            {item.display}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
+                  {/* UPDATED EMAIL SECTION */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <Mail className="w-6 h-6 text-primary" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">Email Address</h4>
-                      <a href="mailto:info@thamizharvui.com" className="text-muted-foreground hover:text-primary transition-colors">
-                        info@thamizharvui.com
+                      <a href="mailto:thamizharuvirealestate@gmail.com" className="text-muted-foreground hover:text-primary transition-colors break-all">
+                        thamizharuvirealestate@gmail.com
                       </a>
                     </div>
                   </div>

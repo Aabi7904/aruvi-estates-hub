@@ -8,6 +8,7 @@ import logo from '@/assets/logo.png';
 
 // Your slideshow images
 const slideImages = [
+  "tvmhill.jpg",
  "img1.jpg",
   "img2.jpg",
   "img3.jpg",

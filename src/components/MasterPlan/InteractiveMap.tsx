@@ -5,7 +5,6 @@ import { MapControls } from "./MapControls";
 import { PlotShape } from "./PlotShape";
 import { Legend } from "./Legend";
 
-// Keep coordinate system for the SVG points
 const MAP_WIDTH = 3628;
 const MAP_HEIGHT = 2628;
 
@@ -26,80 +25,78 @@ export function InteractiveMap({
 }: InteractiveMapProps) {
   return (
     <div className="relative flex-1 bg-gray-100 overflow-hidden w-full h-full">
-      <TransformWrapper
-        initialScale={initialScale}
-        minScale={0.15}
-        maxScale={4}
-        // Keep centerOnInit false so it doesn't force vertical centering (which adds top space)
-        centerOnInit={false} 
-        limitToBounds={false}
-        wheel={{ step: 0.1 }}
-        doubleClick={{ disabled: true }}
-      >
+    <TransformWrapper
+  initialScale={initialScale}
+  minScale={0.15}
+  maxScale={4}
+  centerOnInit={true}
+  centerZoomedOut={false}
+  limitToBounds={false}
+  wheel={{ step: 0.1 }}
+  doubleClick={{ disabled: true }}
+>
+
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
-            {/* Zoom & Reset Controls */}
             <MapControls
               onZoomIn={zoomIn}
               onZoomOut={zoomOut}
               onReset={resetTransform}
             />
 
-            {/* Legend */}
             <Legend />
 
-            {/* Zoomable/Pannable Content */}
             <TransformComponent
               wrapperClass="!w-full !h-full"
-              // justify-center centers the element in the flex container
-              contentClass="!w-full !h-full flex items-start justify-center"
+              contentClass="!w-full !h-full"
             >
-              <div 
-                className="relative shadow-2xl bg-white w-fit h-fit"
-                // --- UPDATED: transformOrigin center top ensures it shrinks towards the top-center ---
-                style={{ transformOrigin: "center top" }}
-              >
-                
-                {/* Master Plan Image */}
-                <img
-                  src={imageUrl || "/placeholder.jpg"}
-                  alt="Master Plan Layout"
-                  className="block max-w-none select-none pointer-events-none"
-                  style={{ width: MAP_WIDTH, height: 'auto' }} 
-                  draggable={false}
-                />
-
-                {/* Plots Overlay */}
-                <svg
-                  className="absolute inset-0 w-full h-full"
-                  viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
-                  preserveAspectRatio="none" 
+              {/* 🔑 NEW: horizontal centering wrapper */}
+              <div className="w-full flex justify-center items-start">
+                <div
+                  className="relative shadow-2xl bg-white w-fit h-fit"
+                  style={{ transformOrigin: "center top" }}
                 >
-                  {plots.map((plot) => {
-                    const position = plotPositions.find((p) => p.id === plot.id);
-                    if (!position) return null;
+                  <img
+                    src={imageUrl || "/placeholder.jpg"}
+                    alt="Master Plan Layout"
+                    className="block max-w-none select-none pointer-events-none"
+                    style={{ width: MAP_WIDTH, height: "auto" }}
+                    draggable={false}
+                  />
 
-                    return (
-                      <PlotShape
-                        key={plot.id}
-                        plot={plot}
-                        position={position}
-                        isSelected={selectedPlot?.id === plot.id}
-                        onSelect={onSelectPlot}
-                      />
-                    );
-                  })}
-                </svg>
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+                    preserveAspectRatio="none"
+                  >
+                    {plots.map((plot) => {
+                      const position = plotPositions.find(
+                        (p) => p.id === plot.id
+                      );
+                      if (!position) return null;
+
+                      return (
+                        <PlotShape
+                          key={plot.id}
+                          plot={plot}
+                          position={position}
+                          isSelected={selectedPlot?.id === plot.id}
+                          onSelect={onSelectPlot}
+                        />
+                      );
+                    })}
+                  </svg>
+                </div>
               </div>
             </TransformComponent>
           </>
         )}
       </TransformWrapper>
 
-      {/* Tip Box */}
       <div className="absolute bottom-4 right-4 z-10 bg-white/90 backdrop-blur-sm rounded-lg shadow-md border border-gray-200 px-4 py-2 pointer-events-none">
         <p className="text-xs text-gray-600">
-          <span className="font-medium text-gray-900">Tip:</span> Scroll to zoom, drag to pan
+          <span className="font-medium text-gray-900">Tip:</span> Scroll to zoom,
+          drag to pan
         </p>
       </div>
     </div>

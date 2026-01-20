@@ -4,7 +4,7 @@ import { ArrowRight, Award, Users, Building2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const AboutSection = () => {
-  const navigate = useNavigate(); // ✅ added
+  const navigate = useNavigate();
 
   return (
     <section className="section-padding relative overflow-hidden">
@@ -22,12 +22,14 @@ const AboutSection = () => {
             className="relative"
           >
             <div className="relative">
-              {/* Main Image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-card max-w-sm mx-auto lg:mx-0">
+              {/* Main Image - SIZE INCREASED HERE */}
+              {/* Changed max-w-sm to max-w-md for wider width */}
+              <div className="relative rounded-2xl overflow-hidden shadow-card max-w-md mx-auto lg:mx-0">
                 <img
                   src="shabeer.jpeg"
                   alt="Mr. Shabeer - Founder"
-                  className="w-full h-[420px] object-cover"
+                  // Changed h-[420px] to h-[500px] for taller height
+                  className="w-full h-[500px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
 
@@ -124,7 +126,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* ✅ Navigation Button */}
+            {/* Navigation Button */}
             <Button
               variant="default"
               size="lg"
