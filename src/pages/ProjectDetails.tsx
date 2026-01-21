@@ -1,25 +1,45 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { db } from '../lib/firebase'; 
 import { Helmet } from 'react-helmet-async';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import WhatsAppFAB from '@/components/WhatsAppFAB';
-import { Button } from '@/components/ui/button';
-import {
-  MapPin,
-  ArrowLeft,
-  Phone,
-  Map as MapIcon,
-  Camera,
-  ScanLine 
-} from 'lucide-react';
-import { MasterPlanContainer } from '@/components/MasterPlan/MasterPlanContainer';
-import { staticFeatures } from '@/data/projectFeatures';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import WhatsAppFAB from '../components/WhatsAppFAB';
+import { Button } from '../components/ui/button';
+import { MapPin, ArrowLeft, Phone, Camera, ScanLine } from 'lucide-react';
 
-// --- IMPORT YOUR QR CODE HERE ---
-import locationQr from '@/assets/location-qr.jpeg'; 
+// --- DATA IMPORTS ---
+import { 
+  commonHighlights, 
+  semmozhiHighlights, 
+  aaAvenueHighlights,
+  sivanmalaiHighlights,
+  thulasiHighlights,
+  highwayCityHighlights,
+  raghavendraHighlights,
+  amuthaSurabiHighlights,
+  tamilAruviHighlights,
+  tamilThendralHighlights,
+  deepaMalaiHighlights
+} from '../data/highlights';
+
+// --- ASSET IMPORTS ---
+import locationQr from '../assets/location-qr.jpeg'; 
+import semmozhiQr from '../assets/semlocation.png'; 
+import comingSoonImg from '../assets/coming-soon.jpg';
+import tamilAruviImg from '../assets/tamil-aruvi.png'; 
+import sivanmalaiSamuLogo from '../assets/sivanmalai_samu.png'; 
+import thulasiLogo from '../assets/Thulasi_Nagar.png';
+import tamilThendralLogo from '../assets/Tamil_Thendral_Nagar.png';
+
+import g1 from '../assets/g1.jpg';
+import g2 from '../assets/g2.jpg';
+import g3 from '../assets/g3.jpg';
+import g4 from '../assets/g4.jpg';
+import g5 from '../assets/g5.jpg';
+import g6 from '../assets/g6.jpg';
+import g7 from '../assets/g7.jpg';
 
 // --- SWIPER ---
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -29,15 +49,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 
+const SHARED_GALLERY = [g1, g2, g3, g4, g5, g6, g7];
+
 interface Project {
   id: string;
   title: string;
   location: string;
-  price: string;
   status: string;
   imageUrl: string;
-  layoutImage?: string;
-  galleryImages?: string[];
   mapLink?: string;
 }
 
@@ -46,7 +65,6 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -54,7 +72,6 @@ const ProjectDetails = () => {
       try {
         const docRef = doc(db, 'projects', id);
         const docSnap = await getDoc(docRef);
-
         if (docSnap.exists()) {
           setProject({ id: docSnap.id, ...docSnap.data() } as Project);
         }
@@ -64,220 +81,115 @@ const ProjectDetails = () => {
         setLoading(false);
       }
     };
-
     fetchProject();
   }, [id]);
 
-  const closeLightbox = () => setLightboxIndex(null);
+  if (loading) return <div className="flex h-screen items-center justify-center font-bold text-[#108e66]">Loading...</div>;
+  if (!project) return <div className="flex h-screen items-center justify-center">Project not found.</div>;
 
-  if (loading)
-    return (
-      <div className="flex h-screen items-center justify-center">
-        Loading Details...
-      </div>
-    );
+  const titleLower = project.title.toLowerCase();
+  const locLower = project.location?.toLowerCase() || "";
 
-  if (!project)
-    return (
-      <div className="flex h-screen items-center justify-center">
-        Project not found.
-      </div>
-    );
+  // HIGHLIGHTS SELECTION LOGIC
+  let activeHighlights = commonHighlights;
+  if (titleLower.includes('semmozhi')) activeHighlights = semmozhiHighlights;
+  else if (titleLower.includes('aa avenue')) activeHighlights = aaAvenueHighlights;
+  else if (titleLower.includes('sivan')) activeHighlights = sivanmalaiHighlights;
+  else if (titleLower.includes('thulasi') || titleLower.includes('tulasi')) activeHighlights = thulasiHighlights;
+  else if (titleLower.includes('highway city')) activeHighlights = highwayCityHighlights;
+  else if (titleLower.includes('raghavendra')) activeHighlights = raghavendraHighlights;
+  else if (titleLower.includes('amutha surabi')) activeHighlights = amuthaSurabiHighlights;
+  else if (titleLower.includes('thendral')) activeHighlights = tamilThendralHighlights;
+  else if (titleLower.includes('deepa malai')) activeHighlights = deepaMalaiHighlights;
+  else if (titleLower.includes('tamil aruvi') || titleLower.includes('tamizh aruvi')) activeHighlights = tamilAruviHighlights;
 
-  // --- LOGIC: Only show QR code for "AA Avenue" ---
-  const showQrCode = project.title.toLowerCase().includes("aa avenue");
+  // IMAGE OVERRIDE LOGIC
+  let displayImage = project.imageUrl || comingSoonImg;
+  if (titleLower.includes('thendral')) displayImage = tamilThendralLogo;
+  else if (titleLower.includes('tamil aruvi') || titleLower.includes('tamizh aruvi')) displayImage = tamilAruviImg;
+  else if (titleLower.includes('sivan') && (titleLower.includes('samuthiram') || locLower.includes('samuthiram'))) displayImage = sivanmalaiSamuLogo;
+  else if (titleLower.includes('thulasi') || titleLower.includes('tulasi')) displayImage = thulasiLogo;
 
-  // --- LOGIC FOR MAP REDIRECT ---
-  const googleMapsUrl = project.mapLink 
-    ? project.mapLink 
-    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(project.title + ' ' + project.location)}`;
+  const isSemmozhi = titleLower.includes("semmozhi");
+  const activeQr = isSemmozhi ? semmozhiQr : locationQr;
+  const googleMapsUrl = project.mapLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(project.title + ' ' + project.location)}`;
 
   return (
     <>
-      <Helmet>
-        <title>{project.title} | Thamizh Aruvi</title>
-      </Helmet>
-
+      <Helmet><title>{project.title} | Thamizh Aruvi</title></Helmet>
       <Navbar />
-
-      <main className="pt-24 pb-16 min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4">
-          {/* Back Button */}
-          <Button
-            variant="ghost"
-            className="mb-6 hover:bg-primary/10 hover:text-primary"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Projects
+      <main className="pt-20 md:pt-28 pb-12 min-h-screen bg-gray-50">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <Button variant="ghost" className="mb-6 hover:bg-emerald-50 font-semibold" onClick={() => navigate(-1)}>
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back
           </Button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            {/* LEFT COLUMN: Main Image & Gallery */}
-            <div className="space-y-6">
-              <div className="rounded-3xl overflow-hidden shadow-xl bg-white relative h-[320px] flex items-center justify-center p-10">
-                <img
-                  src={project.imageUrl}
-                  alt={project.title}
-                  className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
-                />
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+            {/* LEFT SIDE: LOGO AND SLIDESHOW */}
+            <div className="w-full lg:w-1/2 space-y-6">
+              <div className="rounded-3xl bg-white h-[280px] md:h-[350px] flex items-center justify-center p-8 border border-gray-100 shadow-sm relative">
+                <img src={displayImage} className="max-h-full object-contain" alt="Project Logo" />
                 <div className="absolute top-4 left-4">
-                  <span
-                    className={`px-4 py-1.5 rounded-full text-sm font-bold ${
-                      project.status.toLowerCase() === 'ongoing'
-                        ? 'bg-green-500 text-white'
-                        : project.status.toLowerCase() === 'upcoming'
-                        ? 'bg-yellow-500 text-white'
-                        : 'bg-blue-500 text-white'
-                    }`}
-                  >
+                  <span className="px-4 py-1.5 rounded-full text-[10px] font-bold text-white bg-[#108e66] uppercase tracking-widest">
                     {project.status}
                   </span>
                 </div>
               </div>
 
-              {/* Gallery Swiper */}
-              {project.galleryImages?.length > 0 && (
-                <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-900 h-[360px] relative">
-                  <div className="absolute top-4 left-4 z-20 bg-black/60 text-white text-xs px-3 py-1.5 rounded-full flex gap-2 items-center">
-                    <Camera className="w-3 h-3 text-primary" />
-                    {project.galleryImages.length} Photos
-                  </div>
-
-                  <Swiper
-                    modules={[Autoplay, Pagination, Navigation, EffectFade]}
-                    autoplay={{ delay: 3500 }}
-                    pagination={{ clickable: true }}
-                    effect="fade"
-                    loop
-                    className="h-full"
-                  >
-                    {project.galleryImages.map((img, index) => (
-                      <SwiperSlide
-                        key={index}
-                        onClick={() => setLightboxIndex(index)}
-                      >
-                        <img
-                          src={img}
-                          alt=""
-                          className="w-full h-full object-cover cursor-pointer"
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+              <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-900 h-[300px] md:h-[400px] relative">
+                <div className="absolute top-4 left-4 z-20 bg-black/60 text-white text-[10px] px-3 py-1.5 rounded-full flex gap-2 items-center">
+                  <Camera className="w-3 h-3 text-emerald-400" /> SITE VIEW
                 </div>
-              )}
+                <Swiper modules={[Autoplay, Pagination, Navigation, EffectFade]} autoplay={{ delay: 3000 }} pagination={{ clickable: true }} loop className="h-full">
+                  {SHARED_GALLERY.map((img, i) => (
+                    <SwiperSlide key={i}><img src={img} className="w-full h-full object-cover" /></SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
 
-            {/* RIGHT COLUMN: Info, QR Code, Features */}
-            <div className="space-y-8">
-              
-              {/* --- PROJECT INFO CARD --- */}
-              <div className="p-8 bg-white rounded-3xl shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-                
-                {/* Text Content */}
-                <div>
-                  <h1 className="text-4xl font-bold text-primary mb-3">
-                    {project.title}
-                  </h1>
-                  <div className="flex items-center text-gray-600 text-lg">
-                    <MapPin className="w-5 h-5 mr-2 text-primary" />
-                    {project.location}
-                  </div>
+            {/* RIGHT SIDE: DETAILS AND ACTIONS */}
+            <div className="w-full lg:w-1/2 space-y-8">
+              <div className="p-6 md:p-8 bg-white rounded-3xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="text-center md:text-left">
+                  <h1 className="text-2xl md:text-4xl font-extrabold text-[#108e66] leading-tight">{project.title}</h1>
+                  <p className="flex items-center justify-center md:justify-start mt-2 text-slate-500 font-medium">
+                    <MapPin className="w-4 h-4 mr-2 text-[#108e66]" /> {project.location}
+                  </p>
                 </div>
-
-                {/* --- QR CODE SECTION (CONDITIONAL RENDER) --- */}
-                {/* Only shows if project title includes "AA Avenue" */}
-                {showQrCode && (
-                  <a 
-                    href={googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center flex-shrink-0 cursor-pointer group"
-                    title="Click to open exact location in Google Maps"
-                  >
-                    <div className="w-32 h-32 bg-white p-2 rounded-xl shadow-md border border-gray-200 group-hover:scale-105 group-hover:shadow-lg transition-all duration-300">
-                      <img 
-                        src={locationQr} 
-                        alt="Location QR Code" 
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    
-                    <div className="flex items-center gap-1 mt-2 text-xs font-bold text-primary group-hover:underline">
-                      <ScanLine className="w-3 h-3" />
-                      Click Or Scan To Reach Our Site !
-                    </div>
+                <div className="flex flex-col items-center shrink-0">
+                  <a href={googleMapsUrl} target="_blank" rel="noreferrer" className="w-20 h-20 md:w-24 md:h-24 p-2 bg-white rounded-xl shadow-md border hover:scale-105 transition-transform">
+                    <img src={activeQr} className="w-full h-full object-contain" alt="Location QR" />
                   </a>
-                )}
-
+                  <span className="text-[9px] font-bold text-[#108e66] mt-3 tracking-tighter flex items-center gap-1">
+                    <ScanLine className="w-3 h-3" /> CLICK TO REACH SITE!
+                  </span>
+                </div>
               </div>
 
-              {/* Features Grid */}
               <div>
-                <h3 className="text-2xl font-bold mb-6">
-                  Project Highlights
+                <h3 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2">
+                  <span className="w-8 h-1 bg-[#108e66] rounded-full" /> Project Highlights
                 </h3>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {staticFeatures.map((f) => (
-                    <div
-                      key={f.id}
-                      className="flex items-center p-4 bg-white rounded-2xl border"
-                    >
-                      <div className="mr-4">{f.icon}</div>
-                      <span className="text-sm font-medium">{f.text}</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {activeHighlights.map((f, i) => (
+                    <div key={i} className="flex items-center p-3 md:p-4 bg-white rounded-2xl border border-gray-100 hover:border-emerald-100 transition-colors">
+                      <div className="mr-3 p-2 bg-slate-50 rounded-lg">{f.icon}</div>
+                      <span className="text-[11px] md:text-xs font-semibold text-slate-700 leading-tight">{f.text}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="pt-6 border-t">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button
-                    className="flex-1 bg-[#25D366] text-white h-14 text-lg hover:bg-[#20bd5a]"
-                    onClick={() =>
-                      window.open(
-                        `https://wa.me/919443729991?text=Hi, I am interested in ${project.title}`
-                      )
-                    }
-                  >
-                    Chat on WhatsApp
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="flex-1 h-14 text-lg border-2"
-                    onClick={() =>
-                      (window.location.href = 'tel:+919443729991')
-                    }
-                  >
-                    <Phone className="w-5 h-5 mr-2" />
-                    Call Now
-                  </Button>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button className="flex-1 bg-[#108e66] h-14 text-lg font-bold rounded-2xl" onClick={() => window.open(`https://wa.me/919443729991?text=Hi, I am interested in ${project.title}`)}>WhatsApp</Button>
+                <Button variant="outline" className="flex-1 h-14 text-lg font-bold border-2 rounded-2xl border-[#108e66] text-[#108e66]" onClick={() => window.location.href = 'tel:+919443729991'}><Phone className="w-5 h-5 mr-2" /> Call Now</Button>
               </div>
             </div>
           </div>
-
-          {/* MASTER PLAN SECTION */}
-          {project.layoutImage && (
-            <div className="mt-20 border-t pt-16">
-              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                <MapIcon className="w-8 h-8 text-primary" />
-                Check Plot Availability
-              </h2>
-              <div className="rounded-3xl overflow-hidden shadow-xl bg-white">
-                {/* @ts-ignore */}
-                <MasterPlanContainer imageUrl={project.layoutImage} />
-              </div>
-            </div>
-          )}
         </div>
       </main>
-
-      <Footer />
-      <WhatsAppFAB />
+      <Footer /><WhatsAppFAB />
     </>
   );
 };
