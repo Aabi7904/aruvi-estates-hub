@@ -5,6 +5,7 @@ import { MapControls } from "./MapControls";
 import { PlotShape } from "./PlotShape";
 import { Legend } from "./Legend";
 
+// Keep coordinate system for the SVG points
 const MAP_WIDTH = 3628;
 const MAP_HEIGHT = 2628;
 
@@ -25,17 +26,15 @@ export function InteractiveMap({
 }: InteractiveMapProps) {
   return (
     <div className="relative flex-1 bg-gray-100 overflow-hidden w-full h-full">
-    <TransformWrapper
-  initialScale={initialScale}
-  minScale={0.15}
-  maxScale={4}
-  centerOnInit={true}
-  centerZoomedOut={false}
-  limitToBounds={false}
-  wheel={{ step: 0.1 }}
-  doubleClick={{ disabled: true }}
->
-
+      <TransformWrapper
+        initialScale={initialScale}
+        minScale={0.15}
+        maxScale={4}
+        centerOnInit={false} // Prevent auto-centering (fixes top white space)
+        limitToBounds={false}
+        wheel={{ step: 0.1 }}
+        doubleClick={{ disabled: true }}
+      >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <MapControls
@@ -50,11 +49,11 @@ export function InteractiveMap({
               wrapperClass="!w-full !h-full"
               contentClass="!w-full !h-full"
             >
-              {/* 🔑 NEW: horizontal centering wrapper */}
-              <div className="w-full flex justify-center items-start">
+              {/* Layout: Horizontal Center, Vertical Top */}
+              <div className="w-full h-full flex justify-center items-start">
                 <div
                   className="relative shadow-2xl bg-white w-fit h-fit"
-                  style={{ transformOrigin: "center top" }}
+                  style={{ transformOrigin: "center top" }} // Shrinks upwards
                 >
                   <img
                     src={imageUrl || "/placeholder.jpg"}
@@ -70,9 +69,7 @@ export function InteractiveMap({
                     preserveAspectRatio="none"
                   >
                     {plots.map((plot) => {
-                      const position = plotPositions.find(
-                        (p) => p.id === plot.id
-                      );
+                      const position = plotPositions.find((p) => p.id === plot.id);
                       if (!position) return null;
 
                       return (
@@ -95,8 +92,7 @@ export function InteractiveMap({
 
       <div className="absolute bottom-4 right-4 z-10 bg-white/90 backdrop-blur-sm rounded-lg shadow-md border border-gray-200 px-4 py-2 pointer-events-none">
         <p className="text-xs text-gray-600">
-          <span className="font-medium text-gray-900">Tip:</span> Scroll to zoom,
-          drag to pan
+          <span className="font-medium text-gray-900">Tip:</span> Scroll to zoom, drag to pan
         </p>
       </div>
     </div>

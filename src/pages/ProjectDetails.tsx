@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFAB from '../components/WhatsAppFAB';
 import { Button } from '../components/ui/button';
-import { MapPin, ArrowLeft, Phone, Camera, ScanLine } from 'lucide-react';
+import { MapPin, ArrowLeft, Phone, Camera, ScanLine, Map as MapIcon } from 'lucide-react';
 
 // --- DATA IMPORTS ---
 import { 
@@ -41,6 +41,9 @@ import g5 from '../assets/g5.jpg';
 import g6 from '../assets/g6.jpg';
 import g7 from '../assets/g7.jpg';
 
+// --- COMPONENT IMPORTS ---
+import { MasterPlanContainer } from '../components/MasterPlan/MasterPlanContainer'; // Ensure path is correct
+
 // --- SWIPER ---
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
@@ -58,6 +61,7 @@ interface Project {
   status: string;
   imageUrl: string;
   mapLink?: string;
+  layoutImage?: string; // Added this field
 }
 
 const ProjectDetails = () => {
@@ -124,7 +128,7 @@ const ProjectDetails = () => {
             <ArrowLeft className="w-4 h-4 mr-2" /> Back
           </Button>
 
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-16">
             {/* LEFT SIDE: LOGO AND SLIDESHOW */}
             <div className="w-full lg:w-1/2 space-y-6">
               <div className="rounded-3xl bg-white h-[280px] md:h-[350px] flex items-center justify-center p-8 border border-gray-100 shadow-sm relative">
@@ -187,6 +191,26 @@ const ProjectDetails = () => {
               </div>
             </div>
           </div>
+
+          {/* --- MASTER PLAN SECTION --- */}
+          {project.layoutImage && (
+            <div className="mt-16 pt-12 border-t border-gray-200">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-[#108e66]/10">
+                  <MapIcon className="w-8 h-8 text-[#108e66]" />
+                </div>
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Check Plot Availability</h2>
+                  <p className="text-gray-500">Explore the layout map. Click on plots to see real-time status.</p>
+                </div>
+              </div>
+              
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white">
+                 <MasterPlanContainer imageUrl={project.layoutImage} />
+              </div>
+            </div>
+          )}
+
         </div>
       </main>
       <Footer /><WhatsAppFAB />
