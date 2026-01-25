@@ -24,6 +24,9 @@ import {
   deepaMalaiHighlights
 } from '../data/highlights';
 
+// --- MAP REGISTRY IMPORT ---
+import { getMapData } from '../data/maps/mapRegistry';
+
 // --- ASSET IMPORTS ---
 import locationQr from '../assets/location-qr.jpeg'; 
 import semmozhiQr from '../assets/semlocation.png'; 
@@ -42,7 +45,7 @@ import g6 from '../assets/g6.jpg';
 import g7 from '../assets/g7.jpg';
 
 // --- COMPONENT IMPORTS ---
-import { MasterPlanContainer } from '../components/MasterPlan/MasterPlanContainer'; // Ensure path is correct
+import { MasterPlanContainer } from '../components/MasterPlan/MasterPlanContainer'; 
 
 // --- SWIPER ---
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -61,7 +64,7 @@ interface Project {
   status: string;
   imageUrl: string;
   mapLink?: string;
-  layoutImage?: string; // Added this field
+  layoutImage?: string; 
 }
 
 const ProjectDetails = () => {
@@ -93,6 +96,14 @@ const ProjectDetails = () => {
 
   const titleLower = project.title.toLowerCase();
   const locLower = project.location?.toLowerCase() || "";
+
+  // --- FETCH MAP DATA ---
+  const currentMapData = getMapData(project.id);
+
+  // --- DETERMINE IMAGE SOURCE ---
+  // If the registry has a hardcoded local image (imageSrc), use that.
+  // Otherwise, fallback to the one uploaded in the Admin Panel.
+  const mapImageToUse = currentMapData?.imageSrc || project.layoutImage;
 
   // HIGHLIGHTS SELECTION LOGIC
   let activeHighlights = commonHighlights;
@@ -192,8 +203,9 @@ const ProjectDetails = () => {
             </div>
           </div>
 
-          {/* --- MASTER PLAN SECTION --- */}
-          {project.layoutImage && (
+          {/* --- UPDATED MASTER PLAN SECTION --- */}
+          {/* Shows if we have valid map data AND an image (either local or from DB) */}
+          {currentMapData && mapImageToUse && (
             <div className="mt-16 pt-12 border-t border-gray-200">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 rounded-lg bg-[#108e66]/10">
@@ -206,7 +218,10 @@ const ProjectDetails = () => {
               </div>
               
               <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white">
-                 <MasterPlanContainer imageUrl={project.layoutImage} />
+                 <MasterPlanContainer 
+                    imageUrl={mapImageToUse} 
+                    mapData={currentMapData} 
+                 />
               </div>
             </div>
           )}

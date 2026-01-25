@@ -1,20 +1,21 @@
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { Plot } from "@/types/plot"; 
-import { plotPositions } from "./plotData"; 
 import { MapControls } from "./MapControls";
 import { PlotShape } from "./PlotShape";
 import { Legend } from "./Legend";
-
-// Keep coordinate system for the SVG points
-const MAP_WIDTH = 3628;
-const MAP_HEIGHT = 2628;
+// Import the type for Positions
+import { PlotPosition } from "@/data/maps/mapRegistry";
 
 interface InteractiveMapProps {
   plots: Plot[];
   selectedPlot: Plot | null;
   onSelectPlot: (plot: Plot) => void;
   imageUrl: string;
-  initialScale?: number; 
+  initialScale?: number;
+  
+  // 🆕 NEW PROPS: Dynamic Data
+  plotPositions: PlotPosition[];
+  mapDimensions: { width: number; height: number };
 }
 
 export function InteractiveMap({
@@ -22,53 +23,57 @@ export function InteractiveMap({
   selectedPlot,
   onSelectPlot,
   imageUrl,
-  initialScale = 0.4, 
+  initialScale = 0.4,
+  plotPositions,   // <--- Now dynamic
+  mapDimensions,   // <--- Now dynamic
 }: InteractiveMapProps) {
+  
+  // Destructure dynamic dimensions
+  const { width, height } = mapDimensions;
+
   return (
     <div className="relative flex-1 bg-gray-100 overflow-hidden w-full h-full">
       <TransformWrapper
         initialScale={initialScale}
         minScale={0.15}
         maxScale={4}
-        centerOnInit={false} // Prevent auto-centering (fixes top white space)
+        centerOnInit={true}
+        centerZoomedOut={false}
         limitToBounds={false}
         wheel={{ step: 0.1 }}
         doubleClick={{ disabled: true }}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
-            <MapControls
-              onZoomIn={zoomIn}
-              onZoomOut={zoomOut}
-              onReset={resetTransform}
-            />
-
+            <MapControls onZoomIn={zoomIn} onZoomOut={zoomOut} onReset={resetTransform} />
             <Legend />
 
             <TransformComponent
               wrapperClass="!w-full !h-full"
               contentClass="!w-full !h-full"
             >
-              {/* Layout: Horizontal Center, Vertical Top */}
-              <div className="w-full h-full flex justify-center items-start">
+              <div className="w-full flex justify-center items-start">
                 <div
                   className="relative shadow-2xl bg-white w-fit h-fit"
-                  style={{ transformOrigin: "center top" }} // Shrinks upwards
+                  style={{ transformOrigin: "center top" }}
                 >
                   <img
                     src={imageUrl || "/placeholder.jpg"}
                     alt="Master Plan Layout"
                     className="block max-w-none select-none pointer-events-none"
-                    style={{ width: MAP_WIDTH, height: "auto" }}
+                    // 🆕 Use dynamic dimensions
+                    style={{ width: width, height: "auto" }}
                     draggable={false}
                   />
 
                   <svg
                     className="absolute inset-0 w-full h-full"
-                    viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+                    // 🆕 Use dynamic viewBox
+                    viewBox={`0 0 ${width} ${height}`}
                     preserveAspectRatio="none"
                   >
                     {plots.map((plot) => {
+                      // 🆕 Find position in the passed PROP array
                       const position = plotPositions.find((p) => p.id === plot.id);
                       if (!position) return null;
 

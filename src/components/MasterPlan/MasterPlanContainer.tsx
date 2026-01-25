@@ -1,20 +1,23 @@
 import { useState, useCallback } from "react";
 import { TopBar } from "./TopBar";
 import { InteractiveMap } from "./InteractiveMap";
-import { plotsData } from "./plotData"; 
 import { useToast } from "@/hooks/use-toast";
 import { Plot } from "@/types/plot";
+// 🆕 Import the type
+import { ProjectMapData } from "@/data/maps/mapRegistry";
 
 interface MasterPlanContainerProps {
   imageUrl?: string;
+  mapData: ProjectMapData; // 🆕 Accept the full data object
 }
 
-export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
+export function MasterPlanContainer({ imageUrl, mapData }: MasterPlanContainerProps) {
   const [selectedPlot, setSelectedPlot] = useState<Plot | null>(null);
   const { toast } = useToast();
 
+  // 🆕 Search logic now uses the passed mapData, not the hardcoded file
   const handleSearch = useCallback((plotId: string) => {
-    const plot = plotsData.find((p) => p.id === plotId);
+    const plot = mapData.plots.find((p) => p.id === plotId);
     
     if (plot) {
       setSelectedPlot(plot);
@@ -29,27 +32,28 @@ export function MasterPlanContainer({ imageUrl }: MasterPlanContainerProps) {
         variant: "destructive",
       });
     }
-  }, [toast]);
+  }, [toast, mapData.plots]); // Depend on dynamic plots
 
   const handleSelectPlot = useCallback((plot: Plot) => {
     setSelectedPlot(plot);
   }, []);
 
   return (
-    // --- UPDATED: Fixed height h-[600px] prevents it from being "too big" ---
     <div className="flex flex-col w-full h-[600px] border border-border rounded-xl overflow-hidden shadow-lg bg-background">
       
-      {/* Search & Status Bar */}
       <TopBar selectedPlot={selectedPlot} onSearch={handleSearch} />
       
-      {/* Map Wrapper */}
       <div className="flex-1 relative w-full h-full bg-gray-50 overflow-hidden">
         <InteractiveMap
-          plots={plotsData}
+          // 🆕 Pass dynamic data down
+          plots={mapData.plots}
+          plotPositions={mapData.positions}
+          mapDimensions={mapData.dimensions}
+          
           selectedPlot={selectedPlot}
           onSelectPlot={handleSelectPlot}
           imageUrl={imageUrl || ""}
-          initialScale={0.2} // Starts zoomed in at 50%
+          initialScale={0.2} 
         />
       </div>
     </div>
