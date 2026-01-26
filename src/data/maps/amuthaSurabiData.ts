@@ -378,321 +378,321 @@ export const amuthaPositions: PlotPosition[] = [
 export const amuthaPlots: Plot[] = [
      {
     id: "1",
-    sqft: 2400, // Update this with real sqft
+    sqft: 2071, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   
    {
     id: "2",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1233, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "29",
-    sqft: 2400, // Update this with real sqft
+    sqft: 2534, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   
   {
     id: "3",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1170, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
    {
     id: "4",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1107, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "5",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1047, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "6",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1032, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "7",
-    sqft: 2400, // Update this with real sqft
+    sqft: 964, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "8",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1157, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "9",
-    sqft: 2400, // Update this with real sqft
+    sqft: 945, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "10",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1339, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "11",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1295.5, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "12",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1194, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "13",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1187, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "14",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1176, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "15",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1171, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "16",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1209, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "17",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1668, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "18",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1620, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "19",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1320, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "20",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1320, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "21",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1620, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "22",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1668, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "23",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1668, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "24",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1620, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "25",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1320, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "26",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1320, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "27",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1620, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "28",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1668, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "30",
-    sqft: 2400, // Update this with real sqft
+    sqft: 2534, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "31",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1320, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "33",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1320, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "34",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1620, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "35",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1637.5, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "36",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1511, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "37",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1524, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "38",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1693, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "39",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1568, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "40",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1082, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "41",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1071, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "42",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1063, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "43",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1055, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "44",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1045, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "45",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1478, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "46",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1075, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "47",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1067, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "48",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1056, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "49",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1048, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "50",
-    sqft: 2400, // Update this with real sqft
+    sqft: 997.5, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "51",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1125, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "52",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1076, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "53",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1053, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
   {
     id: "32",
-    sqft: 2400, // Update this with real sqft
+    sqft: 1320, // Update this with real sqft
     status: "Available",
     dimensions: "Irregular"
   },
