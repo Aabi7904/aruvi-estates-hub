@@ -3,66 +3,69 @@ import { PlotPosition } from "./mapRegistry";
 
 // 1. PLOT POSITIONS (Figma Data)
 export const amuthaPositions: PlotPosition[] = [
-  
+  {
+    id: "1",
+    path:"M415 247.5H0.5V229L237.5 0.5H290.5L415 145V247.5Z",
+    x: 1825.5, 
+    y: 1008.5
+  },
+   {
+    id: "29",
+    path:"M220.5 0.5H0.5V377.5H111.5L321.5 170V116L220.5 0.5Z",
+    x: 1617, 
+    y: 686.5
+  },
   {
     id: "2",
     // ⬇️ This is the "d" attribute from your SVG code
-width:393,
-height:115,
+    path:"M415.5 0.5H0.5V119H391L415.5 0.5Z",
     
     // ⬇️ These are the X and Y coordinates from your Figma screenshot
     // (I adjusted them slightly to align with the SVG offset, usually top-left)
-    x: 1827, 
-    y: 1258
+    x: 1824, 
+    y: 1258.5
   },
     {
     id: "3",
-    width:377,
-    height:130,
-    x: 1820, 
-    y: 1375
+    path:"M392 0.5H0.5V126.5H369L392 0.5Z",
+    x: 1826.5, 
+    y: 1379.5
   },
      {
     id: "4",
-    width:338,
-    height:130,
+    path:"M371.5 0.5H0.5V129H344.5L371.5 0.5Z",
     x: 1824, 
     y: 1513
   },
    {
     id: "5",
-    width:314,
-    height:130,
+    path:"M342 0.5H0.5V130H318.5L342 0.5Z",
     x: 1824, 
-    y: 1644
+    y: 1646.5
   },
    {
     id: "6",
-    width:288,
-    height:130,
-    x: 1824, 
-    y: 1777
+    path:"M317.5 0.5H0.5V125.5H290.5L317.5 0.5Z",
+    x: 1826.5, 
+    y: 1782
   },
    {
     id: "7",
-    width:263,
-    height:130,
-    x: 1824, 
-    y: 1915
+    path:"M290.5 0.5H0.5V134H263.5L290.5 0.5Z",
+    x: 1826.5, 
+    y: 1915.5
   },
    {
     id: "8",
-    width:211,
-    height:177,
-    x: 1826, 
-    y: 2173
+    path:"M236.5 0.5H0.5V181.5H203.5L236.5 0.5Z",
+    x: 1826.5, 
+    y: 2174
   },
    {
     id: "9",
-    width:144,
-    height:187,
-    x: 1850, 
-    y: 2356
+    path:"M181.5 0.5H0.5V183H143.5L181.5 0.5Z",
+    x: 1853.5, 
+    y: 2361
   },
    {
     id: "10",
@@ -373,6 +376,12 @@ height:115,
 
 // 2. PLOT DETAILS (Status, Size, etc.)
 export const amuthaPlots: Plot[] = [
+     {
+    id: "1",
+    sqft: 2400, // Update this with real sqft
+    status: "Available",
+    dimensions: "Irregular"
+  },
   
    {
     id: "2",
@@ -380,6 +389,13 @@ export const amuthaPlots: Plot[] = [
     status: "Available",
     dimensions: "Irregular"
   },
+  {
+    id: "29",
+    sqft: 2400, // Update this with real sqft
+    status: "Available",
+    dimensions: "Irregular"
+  },
+  
   {
     id: "3",
     sqft: 2400, // Update this with real sqft
