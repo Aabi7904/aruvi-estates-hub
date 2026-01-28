@@ -3,6 +3,8 @@ import { Plot } from "@/types/plot";
 import { plotsData as semmozhiPlots, plotPositions as semmozhiPositions } from "./plotData"; 
 import { amuthaPlots, amuthaPositions } from "./amuthaSurabiData";
 import amuthaMapImage from "../../assets/Amutha Surabi Nagar-images-1.jpg";
+import { highwayPlots, highwayPositions } from "./sivanmalai3";
+import highwayMapImage from "../../assets/sivanmalai3layout.png";
 // 1. Define the Types
 export interface PlotPosition {
   id: string;
@@ -48,6 +50,13 @@ const mapRegistry: Record<string, ProjectMapData> = {
     plots: amuthaPlots,
     positions: amuthaPositions,
     imageSrc: amuthaMapImage
+  },
+  "wzgKhBjkiOGW2gXmSvQX": { 
+    id: "wzgKhBjkiOGW2gXmSvQX",
+    dimensions: { width: 2183, height: 1541 }, // Match Figma Frame size
+    plots: highwayPlots,
+    positions: highwayPositions,
+    imageSrc: highwayMapImage // Use the local image for perfect alignment
   }
 };
 
