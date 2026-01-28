@@ -177,7 +177,7 @@ const ProjectDetails = () => {
                     <img src={activeQr} className="w-full h-full object-contain" alt="Location QR" />
                   </a>
                   <span className="text-[9px] font-bold text-[#108e66] mt-3 tracking-tighter flex items-center gap-1">
-                    <ScanLine className="w-3 h-3" /> CLICK TO REACH SITE!
+                    <ScanLine className="w-3 h-3" /> SCAN  OR  CLICK  TO  REACH  SITE 
                   </span>
                 </div>
               </div>
