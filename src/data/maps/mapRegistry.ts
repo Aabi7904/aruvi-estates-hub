@@ -5,6 +5,8 @@ import { amuthaPlots, amuthaPositions } from "./amuthaSurabiData";
 import amuthaMapImage from "../../assets/Amutha Surabi Nagar-images-1.jpg";
 import { highwayPlots, highwayPositions } from "./sivanmalai3";
 import highwayMapImage from "../../assets/sivanmalai3layout.png";
+import { raghavendraPlots, raghavendraPositions } from "./raghavendra";
+import raghavendraMapImage from "../../assets/raghavendralayout.png";
 // 1. Define the Types
 export interface PlotPosition {
   id: string;
@@ -34,7 +36,7 @@ export interface ProjectMapData {
 
 // 2. Create the Registry
 const mapRegistry: Record<string, ProjectMapData> = {
-  // Semmozhi Nagar
+  // AA Avenue
   "wXW9gKJ5p8dmEmWiv8wu": { 
     id: "wXW9gKJ5p8dmEmWiv8wu",
     dimensions: { width: 3628, height: 2628 }, 
@@ -57,6 +59,13 @@ const mapRegistry: Record<string, ProjectMapData> = {
     plots: highwayPlots,
     positions: highwayPositions,
     imageSrc: highwayMapImage // Use the local image for perfect alignment
+  },
+  "R4pHJ7IbBMchIfz8ZyIh": { 
+    id: "R4pHJ7IbBMchIfz8ZyIh",
+    dimensions: { width: 2091, height: 1402 }, // Match Figma Frame size
+    plots: raghavendraPlots,
+    positions: raghavendraPositions,
+    imageSrc: raghavendraMapImage // Use the local image for perfect alignment
   }
 };
 
