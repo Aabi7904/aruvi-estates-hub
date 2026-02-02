@@ -7,6 +7,8 @@ import { highwayPlots, highwayPositions } from "./sivanmalai3";
 import highwayMapImage from "../../assets/sivanmalai3layout.png";
 import { raghavendraPlots, raghavendraPositions } from "./raghavendra";
 import raghavendraMapImage from "../../assets/raghavendralayout.png";
+import { semozhinagarPlots, semozhinagarPositions } from "./semozhinagar";
+import semozhinagarMapImage from "../../assets/semozhilayout.jpg";
 // 1. Define the Types
 export interface PlotPosition {
   id: string;
@@ -66,6 +68,13 @@ const mapRegistry: Record<string, ProjectMapData> = {
     plots: raghavendraPlots,
     positions: raghavendraPositions,
     imageSrc: raghavendraMapImage // Use the local image for perfect alignment
+  },
+  "1BVA8zOITcXt5Mzv6l5H": { 
+    id: "1BVA8zOITcXt5Mzv6l5H",
+    dimensions: { width: 4962, height: 3508 }, // Match Figma Frame size
+    plots: semozhinagarPlots,
+    positions: semozhinagarPositions,
+    imageSrc: semozhinagarMapImage // Use the local image for perfect alignment
   }
 };
 
