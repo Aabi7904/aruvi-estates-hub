@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../lib/firebase'; 
+import { db } from '../lib/firebase';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFAB from '../components/WhatsAppFAB';
 import { Button } from '../components/ui/button';
-import { MapPin, ArrowLeft, Phone, Camera, ScanLine, Map as MapIcon } from 'lucide-react';
+import {
+  MapPin,
+  ArrowLeft,
+  Phone,
+  Camera,
+  ScanLine,
+  Map as MapIcon
+} from 'lucide-react';
 
-// --- DATA IMPORTS ---
-import { 
-  commonHighlights, 
-  semmozhiHighlights, 
+/* HIGHLIGHTS */
+import {
+  commonHighlights,
+  semmozhiHighlights,
   aaAvenueHighlights,
   sivanmalaiHighlights,
   thulasiHighlights,
@@ -20,22 +27,22 @@ import {
   raghavendraHighlights,
   amuthaSurabiHighlights,
   tamilAruviHighlights,
-  tamilThendralHighlights,
-  deepaMalaiHighlights
+  tamilThendralHighlights
 } from '../data/highlights';
 
-// --- MAP REGISTRY IMPORT ---
+/* MAP REGISTRY */
 import { getMapData } from '../data/maps/mapRegistry';
 
-// --- ASSET IMPORTS ---
-import locationQr from '../assets/location-qr.jpeg'; 
-import semmozhiQr from '../assets/semlocation.png'; 
+/* ASSETS */
+import locationQr from '../assets/location-qr.jpeg';
+import semmozhiQr from '../assets/semlocation.png';
 import comingSoonImg from '../assets/coming-soon.jpg';
-import tamilAruviImg from '../assets/tamil-aruvi.png'; 
-import sivanmalaiSamuLogo from '../assets/sivanmalai_samu.png'; 
+import tamilAruviImg from '../assets/tamil-aruvi.png';
+import sivanmalaiSamuLogo from '../assets/sivanmalai_samu.png';
 import thulasiLogo from '../assets/Thulasi_Nagar.png';
 import tamilThendralLogo from '../assets/Tamil_Thendral_Nagar.png';
 
+/* DEFAULT GALLERY */
 import g1 from '../assets/g1.jpg';
 import g2 from '../assets/g2.jpg';
 import g3 from '../assets/g3.jpg';
@@ -44,27 +51,38 @@ import g5 from '../assets/g5.jpg';
 import g6 from '../assets/g6.jpg';
 import g7 from '../assets/g7.jpg';
 
-// --- COMPONENT IMPORTS ---
-import { MasterPlanContainer } from '../components/MasterPlan/MasterPlanContainer'; 
+/* AMUTHA SURABI */
+import asn1 from '../assets/asn1.jpeg';
+import asn2 from '../assets/asn2.jpeg';
+import asn3 from '../assets/asn3.jpeg';
+import asn4 from '../assets/asn4.jpeg';
+import asn5 from '../assets/asn5.jpeg';
+import asn6 from '../assets/asn6.jpeg';
+import asn7 from '../assets/asn7.jpeg';
+import asn8 from '../assets/asn8.jpeg';
+import asn9 from '../assets/asn9.jpeg';
 
-// --- SWIPER ---
+/* MASTER PLAN */
+import { MasterPlanContainer } from '../components/MasterPlan/MasterPlanContainer';
+
+/* SWIPER */
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
 
 const SHARED_GALLERY = [g1, g2, g3, g4, g5, g6, g7];
+const AMUTHA_SURABI_GALLERY = [asn1, asn2, asn3, asn4, asn5, asn6, asn7, asn8, asn9];
 
 interface Project {
   id: string;
   title: string;
   location: string;
   status: string;
-  imageUrl: string;
+  imageUrl?: string;
   mapLink?: string;
-  layoutImage?: string; 
+  layoutImage?: string;
 }
 
 const ProjectDetails = () => {
@@ -74,161 +92,187 @@ const ProjectDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProject = async () => {
-      if (!id) return;
-      try {
-        const docRef = doc(db, 'projects', id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setProject({ id: docSnap.id, ...docSnap.data() } as Project);
-        }
-      } catch (error) {
-        console.error('Error fetching project:', error);
-      } finally {
-        setLoading(false);
+    if (!id) return;
+    getDoc(doc(db, 'projects', id)).then((snap) => {
+      if (snap.exists()) {
+        setProject({ id: snap.id, ...snap.data() } as Project);
       }
-    };
-    fetchProject();
+      setLoading(false);
+    });
   }, [id]);
 
-  if (loading) return <div className="flex h-screen items-center justify-center font-bold text-[#108e66]">Loading...</div>;
-  if (!project) return <div className="flex h-screen items-center justify-center">Project not found.</div>;
+  if (loading || !project) return null;
 
   const titleLower = project.title.toLowerCase();
-  const locLower = project.location?.toLowerCase() || "";
+  const locLower = project.location?.toLowerCase() || '';
 
-  // --- FETCH MAP DATA ---
-  const currentMapData = getMapData(project.id);
+  const isAmuthaSurabi = titleLower.includes('amutha surabi');
+  const isTamilAruvi = titleLower.includes('tamil aruvi');
+  const isTamilThendral = titleLower.includes('tamil thendral');
+  const isRaghavendra = titleLower.includes('raghavendra');
 
-  // --- DETERMINE IMAGE SOURCE ---
-  // If the registry has a hardcoded local image (imageSrc), use that.
-  // Otherwise, fallback to the one uploaded in the Admin Panel.
-  const mapImageToUse = currentMapData?.imageSrc || project.layoutImage;
-
-  // HIGHLIGHTS SELECTION LOGIC
+  /* HIGHLIGHTS */
   let activeHighlights = commonHighlights;
-  if (titleLower.includes('semmozhi')) activeHighlights = semmozhiHighlights;
-  else if (titleLower.includes('aa avenue')) activeHighlights = aaAvenueHighlights;
+  if (isAmuthaSurabi) activeHighlights = amuthaSurabiHighlights;
+  else if (isTamilAruvi) activeHighlights = tamilAruviHighlights;
+  else if (isTamilThendral) activeHighlights = tamilThendralHighlights;
+  else if (isRaghavendra) activeHighlights = raghavendraHighlights;
   else if (titleLower.includes('sivan')) activeHighlights = sivanmalaiHighlights;
-  else if (titleLower.includes('thulasi') || titleLower.includes('tulasi')) activeHighlights = thulasiHighlights;
+  else if (titleLower.includes('thulasi')) activeHighlights = thulasiHighlights;
+  else if (titleLower.includes('semmozhi')) activeHighlights = semmozhiHighlights;
+  else if (titleLower.includes('aa avenue')) activeHighlights = aaAvenueHighlights;
   else if (titleLower.includes('highway city')) activeHighlights = highwayCityHighlights;
-  else if (titleLower.includes('raghavendra')) activeHighlights = raghavendraHighlights;
-  else if (titleLower.includes('amutha surabi')) activeHighlights = amuthaSurabiHighlights;
-  else if (titleLower.includes('thendral')) activeHighlights = tamilThendralHighlights;
-  else if (titleLower.includes('deepa malai')) activeHighlights = deepaMalaiHighlights;
-  else if (titleLower.includes('tamil aruvi') || titleLower.includes('tamizh aruvi')) activeHighlights = tamilAruviHighlights;
 
-  // IMAGE OVERRIDE LOGIC
+  /* LOGO ABOVE SITE VIEW */
   let displayImage = project.imageUrl || comingSoonImg;
-  if (titleLower.includes('thendral')) displayImage = tamilThendralLogo;
-  else if (titleLower.includes('tamil aruvi') || titleLower.includes('tamizh aruvi')) displayImage = tamilAruviImg;
-  else if (titleLower.includes('sivan') && (titleLower.includes('samuthiram') || locLower.includes('samuthiram'))) displayImage = sivanmalaiSamuLogo;
-  else if (titleLower.includes('thulasi') || titleLower.includes('tulasi')) displayImage = thulasiLogo;
+  if (isTamilAruvi) displayImage = tamilAruviImg;
+  else if (isTamilThendral) displayImage = tamilThendralLogo;
+  else if (titleLower.includes('sivan') && locLower.includes('samuthiram')) displayImage = sivanmalaiSamuLogo;
+  else if (titleLower.includes('thulasi')) displayImage = thulasiLogo;
 
-  const isSemmozhi = titleLower.includes("semmozhi");
-  const activeQr = isSemmozhi ? semmozhiQr : locationQr;
-  const googleMapsUrl = project.mapLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(project.title + ' ' + project.location)}`;
+  /* SITE PHOTOS */
+  const gallery = isAmuthaSurabi ? AMUTHA_SURABI_GALLERY : SHARED_GALLERY;
+
+  /* QR */
+  const activeQr = titleLower.includes('semmozhi') ? semmozhiQr : locationQr;
+
+  const googleMapsUrl =
+    project.mapLink ||
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      project.title + ' ' + project.location
+    )}`;
+
+  /* MASTER PLAN DATA */
+  const currentMapData = getMapData(project.id);
+  const masterPlanImage = project.layoutImage || currentMapData?.imageSrc;
 
   return (
     <>
-      <Helmet><title>{project.title} | Thamizh Aruvi</title></Helmet>
+      <Helmet>
+        <title>{project.title} | Thamizh Aruvi</title>
+      </Helmet>
+
       <Navbar />
-      <main className="pt-20 md:pt-28 pb-12 min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <Button variant="ghost" className="mb-6 hover:bg-emerald-50 font-semibold" onClick={() => navigate(-1)}>
+
+      <main className="pt-24 pb-12 bg-gray-50">
+        <div className="container mx-auto max-w-7xl px-4">
+
+          <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" /> Back
           </Button>
 
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-16">
-            {/* LEFT SIDE: LOGO AND SLIDESHOW */}
+          <div className="flex flex-col lg:flex-row gap-12 mb-16">
+
+            {/* LEFT */}
             <div className="w-full lg:w-1/2 space-y-6">
-              <div className="rounded-3xl bg-white h-[280px] md:h-[350px] flex items-center justify-center p-8 border border-gray-100 shadow-sm relative">
-                <img src={displayImage} className="max-h-full object-contain" alt="Project Logo" />
-                <div className="absolute top-4 left-4">
-                  <span className="px-4 py-1.5 rounded-full text-[10px] font-bold text-white bg-[#108e66] uppercase tracking-widest">
-                    {project.status}
-                  </span>
-                </div>
+              <div className="bg-white rounded-3xl h-[320px] flex items-center justify-center p-8 relative">
+                <img src={displayImage} className="max-h-full object-contain" />
+                <span className="absolute top-4 left-4 bg-[#108e66] text-white text-xs px-3 py-1 rounded-full">
+                  {project.status}
+                </span>
               </div>
 
-              <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-900 h-[300px] md:h-[400px] relative">
-                <div className="absolute top-4 left-4 z-20 bg-black/60 text-white text-[10px] px-3 py-1.5 rounded-full flex gap-2 items-center">
-                  <Camera className="w-3 h-3 text-emerald-400" /> SITE VIEW
+              <div className="rounded-3xl overflow-hidden h-[400px] bg-black relative">
+                <div className="absolute top-4 left-4 z-20 bg-black/60 text-white text-xs px-3 py-1 rounded-full flex gap-2">
+                  <Camera className="w-4 h-4 text-emerald-400" /> SITE VIEW
                 </div>
-                <Swiper modules={[Autoplay, Pagination, Navigation, EffectFade]} autoplay={{ delay: 3000 }} pagination={{ clickable: true }} loop className="h-full">
-                  {SHARED_GALLERY.map((img, i) => (
-                    <SwiperSlide key={i}><img src={img} className="w-full h-full object-cover" /></SwiperSlide>
+
+                <Swiper
+                  modules={[Autoplay, Pagination, Navigation]}
+                  autoplay={{ delay: 3000 }}
+                  pagination={{ clickable: true }}
+                  loop
+                  className="h-full"
+                >
+                  {gallery.map((img, i) => (
+                    <SwiperSlide key={i}>
+                      <img src={img} className="w-full h-full object-cover" />
+                    </SwiperSlide>
                   ))}
                 </Swiper>
               </div>
             </div>
 
-            {/* RIGHT SIDE: DETAILS AND ACTIONS */}
+            {/* RIGHT */}
             <div className="w-full lg:w-1/2 space-y-8">
-              <div className="p-6 md:p-8 bg-white rounded-3xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
-                <div className="text-center md:text-left">
-                  <h1 className="text-2xl md:text-4xl font-extrabold text-[#108e66] leading-tight">{project.title}</h1>
-                  <p className="flex items-center justify-center md:justify-start mt-2 text-slate-500 font-medium">
-                    <MapPin className="w-4 h-4 mr-2 text-[#108e66]" /> {project.location}
+
+              <div className="p-6 bg-white rounded-3xl flex justify-between items-center gap-6">
+                <div>
+                  <h1 className="text-3xl font-extrabold text-[#108e66]">{project.title}</h1>
+                  <p className="flex items-center mt-2 text-gray-500">
+                    <MapPin className="w-4 h-4 mr-2 text-[#108e66]" />
+                    {project.location}
                   </p>
                 </div>
-                <div className="flex flex-col items-center shrink-0">
-                  <a href={googleMapsUrl} target="_blank" rel="noreferrer" className="w-20 h-20 md:w-24 md:h-24 p-2 bg-white rounded-xl shadow-md border hover:scale-105 transition-transform">
-                    <img src={activeQr} className="w-full h-full object-contain" alt="Location QR" />
+
+                <div className="flex flex-col items-center">
+                  <a
+                    href={googleMapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-24 h-24 p-2 bg-white rounded-xl shadow border hover:scale-105 transition"
+                  >
+                    <img src={activeQr} className="w-full h-full object-contain" />
                   </a>
-                  <span className="text-[9px] font-bold text-[#108e66] mt-3 tracking-tighter flex items-center gap-1">
-                    <ScanLine className="w-3 h-3" /> SCAN  OR  CLICK  TO  REACH  SITE 
+
+                  <span className="text-[10px] mt-2 font-bold text-[#108e66] flex items-center gap-1">
+                    <ScanLine className="w-3 h-3" />
+                    SCAN OR CLICK TO REACH SITE
                   </span>
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2">
-                  <span className="w-8 h-1 bg-[#108e66] rounded-full" /> Project Highlights
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {activeHighlights.map((f, i) => (
-                    <div key={i} className="flex items-center p-3 md:p-4 bg-white rounded-2xl border border-gray-100 hover:border-emerald-100 transition-colors">
-                      <div className="mr-3 p-2 bg-slate-50 rounded-lg">{f.icon}</div>
-                      <span className="text-[11px] md:text-xs font-semibold text-slate-700 leading-tight">{f.text}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {activeHighlights.map((h, i) => (
+                  <div key={i} className="bg-white p-3 rounded-xl flex items-center gap-3">
+                    {h.icon}
+                    <span className="text-xs font-semibold">{h.text}</span>
+                  </div>
+                ))}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="flex-1 bg-[#108e66] h-14 text-lg font-bold rounded-2xl" onClick={() => window.open(`https://wa.me/919443729991?text=Hi, I am interested in ${project.title}`)}>WhatsApp</Button>
-                <Button variant="outline" className="flex-1 h-14 text-lg font-bold border-2 rounded-2xl border-[#108e66] text-[#108e66]" onClick={() => window.location.href = 'tel:+919443729991'}><Phone className="w-5 h-5 mr-2" /> Call Now</Button>
+              <div className="flex gap-4">
+                <Button
+                  className="flex-1 bg-[#108e66] h-14 text-lg"
+                  onClick={() =>
+                    window.open(`https://wa.me/919443729991?text=Hi, I am interested in ${project.title}`)
+                  }
+                >
+                  WhatsApp
+                </Button>
+
+                <Button
+                  variant="outline"
+                  className="flex-1 h-14 border-2 border-[#108e66] text-[#108e66] text-lg"
+                  onClick={() => (window.location.href = 'tel:+919443729991')}
+                >
+                  <Phone className="w-5 h-5 mr-2" />
+                  Call Now
+                </Button>
               </div>
             </div>
           </div>
 
-          {/* --- UPDATED MASTER PLAN SECTION --- */}
-          {/* Shows if we have valid map data AND an image (either local or from DB) */}
-          {currentMapData && mapImageToUse && (
-            <div className="mt-16 pt-12 border-t border-gray-200">
+          {/* ✅ MASTER PLAN — FIXED */}
+          {(currentMapData || project.layoutImage) && masterPlanImage && (
+            <div className="mt-16">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-lg bg-[#108e66]/10">
-                  <MapIcon className="w-8 h-8 text-[#108e66]" />
-                </div>
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Check Plot Availability</h2>
-                  <p className="text-gray-500">Explore the layout map. Click on plots to see real-time status.</p>
-                </div>
+                <MapIcon className="w-6 h-6 text-[#108e66]" />
+                <h2 className="text-2xl font-bold">Check Plot Availability</h2>
               </div>
-              
-              <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white">
-                 <MasterPlanContainer 
-                    imageUrl={mapImageToUse} 
-                    mapData={currentMapData} 
-                 />
-              </div>
+
+              <MasterPlanContainer
+                imageUrl={masterPlanImage}
+                mapData={currentMapData}
+              />
             </div>
           )}
 
         </div>
       </main>
-      <Footer /><WhatsAppFAB />
+
+      <Footer />
+      <WhatsAppFAB />
     </>
   );
 };
