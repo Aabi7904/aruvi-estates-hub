@@ -30,7 +30,7 @@ import {
   tamilThendralHighlights
 } from '../data/highlights';
 
-/* MAP REGISTRY */
+/* MAP */
 import { getMapData } from '../data/maps/mapRegistry';
 
 /* ASSETS */
@@ -42,7 +42,7 @@ import sivanmalaiSamuLogo from '../assets/sivanmalai_samu.png';
 import thulasiLogo from '../assets/Thulasi_Nagar.png';
 import tamilThendralLogo from '../assets/Tamil_Thendral_Nagar.png';
 
-/* DEFAULT GALLERY */
+/* DEFAULT */
 import g1 from '../assets/g1.jpg';
 import g2 from '../assets/g2.jpg';
 import g3 from '../assets/g3.jpg';
@@ -62,6 +62,35 @@ import asn7 from '../assets/asn7.jpeg';
 import asn8 from '../assets/asn8.jpeg';
 import asn9 from '../assets/asn9.jpeg';
 
+/* RAGHAVENDRA */
+import rg1 from '../assets/rg1.jpeg';
+import rg2 from '../assets/rg2.jpeg';
+import rg3 from '../assets/rg3.jpeg';
+import rg4 from '../assets/rg4.jpeg';
+import rg6 from '../assets/rg6.jpeg';
+import rg8 from '../assets/rg8.jpeg';
+import rg9 from '../assets/rg9.jpeg';
+
+/* TAMIL THENDRAL */
+import ttn1 from '../assets/ttn1.jpeg';
+import ttn2 from '../assets/ttn2.jpeg';
+import ttn3 from '../assets/ttn3.jpeg';
+import ttn4 from '../assets/ttn4.jpeg';
+import ttn5 from '../assets/ttn5.jpeg';
+import ttn6 from '../assets/ttn6.jpeg';
+import ttn7 from '../assets/ttn7.jpeg';
+
+/* TAMIL ARUVI */
+import tan1 from '../assets/tan1.jpeg';
+import tan2 from '../assets/tan2.jpeg';
+import tan3 from '../assets/tan3.jpeg';
+import tan4 from '../assets/tan4.jpeg';
+import tan5 from '../assets/tan5.jpeg';
+import tan6 from '../assets/tan6.jpeg';
+import tan7 from '../assets/tan7.jpeg';
+import tan8 from '../assets/tan8.jpeg';
+import tan9 from '../assets/tan9.jpeg';
+
 /* MASTER PLAN */
 import { MasterPlanContainer } from '../components/MasterPlan/MasterPlanContainer';
 
@@ -74,13 +103,16 @@ import 'swiper/css/navigation';
 
 const SHARED_GALLERY = [g1, g2, g3, g4, g5, g6, g7];
 const AMUTHA_SURABI_GALLERY = [asn1, asn2, asn3, asn4, asn5, asn6, asn7, asn8, asn9];
+const RAGHAVENDRA_GALLERY = [rg1, rg2, rg3, rg4, rg6, rg8, rg9];
+const TAMIL_THENDRAL_GALLERY = [ttn1, ttn2, ttn3, ttn4, ttn5, ttn6, ttn7];
+const TAMIL_ARUVI_GALLERY = [tan1, tan2, tan3, tan4, tan5, tan6, tan7, tan8, tan9];
 
 interface Project {
   id: string;
   title: string;
   location: string;
   status: string;
-  imageUrl?: string;
+  imageUrl: string;
   mapLink?: string;
   layoutImage?: string;
 }
@@ -89,7 +121,6 @@ const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [project, setProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!id) return;
@@ -97,43 +128,38 @@ const ProjectDetails = () => {
       if (snap.exists()) {
         setProject({ id: snap.id, ...snap.data() } as Project);
       }
-      setLoading(false);
     });
   }, [id]);
 
-  if (loading || !project) return null;
+  if (!project) return null;
 
   const titleLower = project.title.toLowerCase();
   const locLower = project.location?.toLowerCase() || '';
 
-  const isAmuthaSurabi = titleLower.includes('amutha surabi');
-  const isTamilAruvi = titleLower.includes('tamil aruvi');
-  const isTamilThendral = titleLower.includes('tamil thendral');
-  const isRaghavendra = titleLower.includes('raghavendra');
+  const gallery =
+    titleLower.includes('amutha') ? AMUTHA_SURABI_GALLERY :
+    titleLower.includes('raghavendra') ? RAGHAVENDRA_GALLERY :
+    titleLower.includes('tamil thendral') ? TAMIL_THENDRAL_GALLERY :
+    titleLower.includes('tamil aruvi') ? TAMIL_ARUVI_GALLERY :
+    SHARED_GALLERY;
 
-  /* HIGHLIGHTS */
   let activeHighlights = commonHighlights;
-  if (isAmuthaSurabi) activeHighlights = amuthaSurabiHighlights;
-  else if (isTamilAruvi) activeHighlights = tamilAruviHighlights;
-  else if (isTamilThendral) activeHighlights = tamilThendralHighlights;
-  else if (isRaghavendra) activeHighlights = raghavendraHighlights;
+  if (titleLower.includes('amutha')) activeHighlights = amuthaSurabiHighlights;
+  else if (titleLower.includes('raghavendra')) activeHighlights = raghavendraHighlights;
+  else if (titleLower.includes('tamil aruvi')) activeHighlights = tamilAruviHighlights;
+  else if (titleLower.includes('tamil thendral')) activeHighlights = tamilThendralHighlights;
   else if (titleLower.includes('sivan')) activeHighlights = sivanmalaiHighlights;
   else if (titleLower.includes('thulasi')) activeHighlights = thulasiHighlights;
   else if (titleLower.includes('semmozhi')) activeHighlights = semmozhiHighlights;
   else if (titleLower.includes('aa avenue')) activeHighlights = aaAvenueHighlights;
   else if (titleLower.includes('highway city')) activeHighlights = highwayCityHighlights;
 
-  /* LOGO ABOVE SITE VIEW */
   let displayImage = project.imageUrl || comingSoonImg;
-  if (isTamilAruvi) displayImage = tamilAruviImg;
-  else if (isTamilThendral) displayImage = tamilThendralLogo;
+  if (titleLower.includes('tamil aruvi')) displayImage = tamilAruviImg;
+  else if (titleLower.includes('tamil thendral')) displayImage = tamilThendralLogo;
   else if (titleLower.includes('sivan') && locLower.includes('samuthiram')) displayImage = sivanmalaiSamuLogo;
   else if (titleLower.includes('thulasi')) displayImage = thulasiLogo;
 
-  /* SITE PHOTOS */
-  const gallery = isAmuthaSurabi ? AMUTHA_SURABI_GALLERY : SHARED_GALLERY;
-
-  /* QR */
   const activeQr = titleLower.includes('semmozhi') ? semmozhiQr : locationQr;
 
   const googleMapsUrl =
@@ -142,14 +168,12 @@ const ProjectDetails = () => {
       project.title + ' ' + project.location
     )}`;
 
-  /* MASTER PLAN DATA */
   const currentMapData = getMapData(project.id);
-  const masterPlanImage = project.layoutImage || currentMapData?.imageSrc;
 
   return (
     <>
       <Helmet>
-        <title>{project.title} | Thamizh Aruvi</title>
+        <title>{project.title}</title>
       </Helmet>
 
       <Navbar />
@@ -193,7 +217,7 @@ const ProjectDetails = () => {
               </div>
             </div>
 
-            {/* RIGHT */}
+            {/* RIGHT (UNCHANGED) */}
             <div className="w-full lg:w-1/2 space-y-8">
 
               <div className="p-6 bg-white rounded-3xl flex justify-between items-center gap-6">
@@ -206,15 +230,10 @@ const ProjectDetails = () => {
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <a
-                    href={googleMapsUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-24 h-24 p-2 bg-white rounded-xl shadow border hover:scale-105 transition"
-                  >
+                  <a href={googleMapsUrl} target="_blank" rel="noreferrer"
+                     className="w-24 h-24 p-2 bg-white rounded-xl shadow border">
                     <img src={activeQr} className="w-full h-full object-contain" />
                   </a>
-
                   <span className="text-[10px] mt-2 font-bold text-[#108e66] flex items-center gap-1">
                     <ScanLine className="w-3 h-3" />
                     SCAN OR CLICK TO REACH SITE
@@ -232,41 +251,33 @@ const ProjectDetails = () => {
               </div>
 
               <div className="flex gap-4">
-                <Button
-                  className="flex-1 bg-[#108e66] h-14 text-lg"
-                  onClick={() =>
-                    window.open(`https://wa.me/919443729991?text=Hi, I am interested in ${project.title}`)
-                  }
-                >
+                <Button className="flex-1 bg-[#108e66] h-14 text-lg">
                   WhatsApp
                 </Button>
-
-                <Button
-                  variant="outline"
-                  className="flex-1 h-14 border-2 border-[#108e66] text-[#108e66] text-lg"
-                  onClick={() => (window.location.href = 'tel:+919443729991')}
-                >
+                <Button variant="outline"
+                        className="flex-1 h-14 border-2 border-[#108e66] text-[#108e66] text-lg">
                   <Phone className="w-5 h-5 mr-2" />
                   Call Now
                 </Button>
               </div>
+
             </div>
           </div>
 
-          {/* ✅ MASTER PLAN — FIXED */}
-          {(currentMapData || project.layoutImage) && masterPlanImage && (
-            <div className="mt-16">
-              <div className="flex items-center gap-3 mb-6">
-                <MapIcon className="w-6 h-6 text-[#108e66]" />
-                <h2 className="text-2xl font-bold">Check Plot Availability</h2>
-              </div>
+          {(currentMapData || project.layoutImage) && (
+  <div className="mt-16">
+    <div className="flex items-center gap-3 mb-6">
+      <MapIcon className="w-6 h-6 text-[#108e66]" />
+      <h2 className="text-2xl font-bold">Check Plot Availability</h2>
+    </div>
 
-              <MasterPlanContainer
-                imageUrl={masterPlanImage}
-                mapData={currentMapData}
-              />
-            </div>
-          )}
+    <MasterPlanContainer
+      imageUrl={ project.layoutImage || currentMapData?.imageSrc }
+      mapData={currentMapData}
+    />
+  </div>
+)}
+
 
         </div>
       </main>
