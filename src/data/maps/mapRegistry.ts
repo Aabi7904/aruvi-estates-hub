@@ -9,6 +9,8 @@ import { raghavendraPlots, raghavendraPositions } from "./raghavendra";
 import raghavendraMapImage from "../../assets/raghavendralayout.png";
 import { semozhinagarPlots, semozhinagarPositions } from "./semozhinagar";
 import semozhinagarMapImage from "../../assets/semozhilayout.jpg";
+import { sivanmalai2plotPlots, sivanmalai2plotPositions } from "./sivanmalai2plot";
+import sivanmalai2plotMapImage from "../../assets/sivanmalai2layout.png";
 // 1. Define the Types
 export interface PlotPosition {
   id: string;
@@ -59,7 +61,7 @@ const mapRegistry: Record<string, ProjectMapData> = {
     id: "wzgKhBjkiOGW2gXmSvQX",
     dimensions: { width: 2183, height: 1541 }, // Match Figma Frame size
     plots: highwayPlots,
-    positions: highwayPositions,
+    positions: highwayPositions,// sivanmalai 3 tha highwaycity nu potrukommm da 
     imageSrc: highwayMapImage // Use the local image for perfect alignment
   },
   "R4pHJ7IbBMchIfz8ZyIh": { 
@@ -75,6 +77,13 @@ const mapRegistry: Record<string, ProjectMapData> = {
     plots: semozhinagarPlots,
     positions: semozhinagarPositions,
     imageSrc: semozhinagarMapImage // Use the local image for perfect alignment
+  },
+  "bzs0bscfPMPEg6qjhOZq": { 
+    id: "bzs0bscfPMPEg6qjhOZq",
+    dimensions: { width: 2180, height: 1524 }, // Match Figma Frame size
+    plots: sivanmalai2plotPlots,
+    positions: sivanmalai2plotPositions,
+    imageSrc: sivanmalai2plotMapImage // Use the local image for perfect alignment
   }
 };
 
