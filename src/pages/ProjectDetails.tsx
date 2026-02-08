@@ -272,9 +272,9 @@ const ProjectDetails = () => {
     </div>
 
     <MasterPlanContainer
-      imageUrl={ project.layoutImage || currentMapData?.imageSrc }
-      mapData={currentMapData}
-    />
+                imageUrl={currentMapData?.imageSrc || project.layoutImage || ""}
+                mapData={currentMapData}
+              />
   </div>
 )}
 

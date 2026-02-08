@@ -1,6 +1,6 @@
 import { Plot } from "@/types/plot";
 // Adjust these import paths if your files are in different folders
-import { plotsData as semmozhiPlots, plotPositions as semmozhiPositions } from "./plotData"; 
+import { plotsData, plotPositions } from "./plotData"; 
 import { amuthaPlots, amuthaPositions } from "./amuthaSurabiData";
 import amuthaMapImage from "../../assets/Amutha Surabi Nagar-images-1.jpg";
 import { highwayPlots, highwayPositions } from "./sivanmalai3";
@@ -8,9 +8,10 @@ import highwayMapImage from "../../assets/sivanmalai3layout.png";
 import { raghavendraPlots, raghavendraPositions } from "./raghavendra";
 import raghavendraMapImage from "../../assets/raghavendralayout.png";
 import { semozhinagarPlots, semozhinagarPositions } from "./semozhinagar";
-import semozhinagarMapImage from "../../assets/semozhilayout.jpg";
+import semozhi from "../../assets/semozhilayout.jpg"
 import { sivanmalai2plotPlots, sivanmalai2plotPositions } from "./sivanmalai2plot";
 import sivanmalai2plotMapImage from "../../assets/sivanmalai2layout.png";
+import aaavenue from "../../assets/aa-avenue-masterplan.jpg"
 // 1. Define the Types
 export interface PlotPosition {
   id: string;
@@ -44,8 +45,9 @@ const mapRegistry: Record<string, ProjectMapData> = {
   "wXW9gKJ5p8dmEmWiv8wu": { 
     id: "wXW9gKJ5p8dmEmWiv8wu",
     dimensions: { width: 3628, height: 2628 }, 
-    plots: semmozhiPlots,
-    positions: semmozhiPositions
+    plots: plotsData,
+    positions: plotPositions,
+    imageSrc:aaavenue
   },
 
   // Amutha Surabi Nagar
@@ -76,7 +78,7 @@ const mapRegistry: Record<string, ProjectMapData> = {
     dimensions: { width: 4962, height: 3508 }, // Match Figma Frame size
     plots: semozhinagarPlots,
     positions: semozhinagarPositions,
-    imageSrc: semozhinagarMapImage // Use the local image for perfect alignment
+    imageSrc: semozhi // Use the local image for perfect alignment
   },
   "bzs0bscfPMPEg6qjhOZq": { 
     id: "bzs0bscfPMPEg6qjhOZq",
