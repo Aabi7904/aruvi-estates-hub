@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ImagePlus, Map, X, Loader2, Images, Trash2 } from 'lucide-react';
+import { PlotStatus } from './PlotManager';
 
 export interface ProjectData {
   id?: string;
@@ -19,6 +20,7 @@ export interface ProjectData {
   // --- ADDED: Gallery Fields ---
   galleryImages?: string[]; // Array of URLs (existing images)
   galleryFiles?: File[];    // Array of Files (new uploads)
+  plotStatuses?: PlotStatus[];
   plots?: string; 
 }
 

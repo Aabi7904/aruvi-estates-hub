@@ -20,8 +20,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Pencil, Trash2, LogOut, Building2, CheckCircle, Clock } from 'lucide-react';
+import { Plus, Pencil, Trash2, LogOut, Building2, CheckCircle, Clock, Grid } from 'lucide-react';
 import ProjectForm, { ProjectData } from './ProjectForm';
+import PlotManager, { PlotStatus } from './PlotManager';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -30,6 +31,7 @@ interface AdminDashboardProps {
   onEditProject?: (data: ProjectData) => void;
   onDeleteProject?: (id: string) => void;
   isLoading?: boolean;
+  onUpdatePlots?: (projectId: string, plots: PlotStatus[]) => void;
 }
 
 /* Mock data (NO features field) */
@@ -66,11 +68,16 @@ const AdminDashboard = ({
   onAddProject,
   onEditProject,
   onDeleteProject,
+  onUpdatePlots,
   isLoading = false,
 }: AdminDashboardProps) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<ProjectData | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  // --- NEW STATE FOR PLOT MANAGER ---
+  const [isPlotManagerOpen, setIsPlotManagerOpen] = useState(false);
+  const [selectedProjectForPlots, setSelectedProjectForPlots] = useState<ProjectData | null>(null);
 
   const handleAdd = () => {
     setEditingProject(null);
@@ -97,6 +104,17 @@ const AdminDashboard = ({
       onDeleteProject?.(deleteId);
       setDeleteId(null);
     }
+  };
+
+  // --- NEW HANDLERS FOR PLOT MANAGER ---
+  const handleOpenPlotManager = (project: ProjectData) => {
+    setSelectedProjectForPlots(project);
+    setIsPlotManagerOpen(true);
+  };
+
+  const handleSavePlots = (projectId: string, plots: PlotStatus[]) => {
+    onUpdatePlots?.(projectId, plots);
+    setIsPlotManagerOpen(false);
   };
 
   const ongoingCount = projects.filter(p => p.status === 'ongoing').length;
@@ -216,6 +234,18 @@ const AdminDashboard = ({
 
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
+                          
+                          {/* 🆕 NEW: MANAGE PLOTS BUTTON */}
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleOpenPlotManager(project)}
+                            title="Manage Plots"
+                            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                          >
+                            <Grid className="w-4 h-4" />
+                          </Button>
+
                           <Button
                             variant="ghost"
                             size="icon"
@@ -252,6 +282,15 @@ const AdminDashboard = ({
         onSubmit={handleFormSubmit}
         initialData={editingProject}
         isSubmitting={isLoading}
+      />
+
+      {/* 🆕 NEW: PLOT MANAGER DIALOG */}
+      <PlotManager 
+        isOpen={isPlotManagerOpen}
+        onClose={() => setIsPlotManagerOpen(false)}
+        project={selectedProjectForPlots}
+        onSave={handleSavePlots}
+        isSaving={isLoading}
       />
 
       {/* Delete Dialog */}

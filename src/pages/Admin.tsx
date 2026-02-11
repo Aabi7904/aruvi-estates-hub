@@ -4,6 +4,7 @@ import AdminLogin from '@/components/admin/AdminLogin';
 import AdminDashboard from '@/components/admin/AdminDashboard';
 import { ProjectData } from '@/components/admin/ProjectForm';
 import { useToast } from '@/hooks/use-toast';
+import { PlotStatus } from '@/components/admin/PlotManager'; // 🆕 IMPORT THIS
 
 // --- FIREBASE IMPORTS ---
 import { auth, db } from '@/lib/firebase'; 
@@ -257,6 +258,30 @@ const Admin = () => {
     }
   };
 
+  // 🆕 NEW HANDLER: UPDATE PLOT STATUSES
+  const handleUpdatePlots = async (projectId: string, plots: PlotStatus[]) => {
+    setIsLoading(true);
+    try {
+      const projectRef = doc(db, "projects", projectId);
+      
+      // Update only the plotStatuses field in Firestore
+      await updateDoc(projectRef, {
+        plotStatuses: plots
+      });
+
+      // Update local state to reflect changes instantly
+      setProjects(prev => prev.map(p => 
+        p.id === projectId ? { ...p, plotStatuses: plots } : p
+      ));
+
+      toast({ title: 'Success', description: 'Plot statuses updated.' });
+    } catch (error) {
+      console.error("Error updating plots:", error);
+      toast({ title: 'Error', description: 'Failed to update plots.', variant: 'destructive' });
+    }
+    setIsLoading(false);
+  };
+
   if (isLoading && !isAuthenticated && !loginError) {
       return <div className="flex h-screen items-center justify-center">Loading...</div>;
   }
@@ -275,6 +300,8 @@ const Admin = () => {
           onAddProject={handleAddProject}
           onEditProject={handleEditProject}
           onDeleteProject={handleDeleteProject}
+          // 🆕 PASS THE NEW HANDLER HERE
+          onUpdatePlots={handleUpdatePlots} 
         />
       ) : (
         <AdminLogin

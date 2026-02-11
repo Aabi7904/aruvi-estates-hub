@@ -1,23 +1,45 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { TopBar } from "./TopBar";
 import { InteractiveMap } from "./InteractiveMap";
 import { useToast } from "@/hooks/use-toast";
 import { Plot } from "@/types/plot";
-// 🆕 Import the type
 import { ProjectMapData } from "@/data/maps/mapRegistry";
+// 🆕 Import Project type correctly (it is now exported)
+import { Project } from "@/pages/ProjectDetails"; 
 
 interface MasterPlanContainerProps {
   imageUrl?: string;
-  mapData: ProjectMapData; // 🆕 Accept the full data object
+  mapData: ProjectMapData; 
+  project?: Project; 
 }
 
-export function MasterPlanContainer({ imageUrl, mapData }: MasterPlanContainerProps) {
+export function MasterPlanContainer({ imageUrl, mapData, project }: MasterPlanContainerProps) {
   const [selectedPlot, setSelectedPlot] = useState<Plot | null>(null);
   const { toast } = useToast();
 
-  // 🆕 Search logic now uses the passed mapData, not the hardcoded file
+  // 🆕 MERGE LOGIC: Combine static data with live Firebase statuses
+  const dynamicPlots = useMemo(() => {
+    // If no live data, return static data
+    if (!project?.plotStatuses) return mapData.plots;
+
+    // ⚠️ FIXED: Explicitly typed Map to avoid 'unknown' errors
+    const statusMap = new Map<string, string>();
+    project.plotStatuses.forEach(p => statusMap.set(p.id, p.status));
+
+    return mapData.plots.map(plot => {
+      const liveStatus = statusMap.get(plot.id);
+      
+      // If live status exists, override the static one.
+      // ⚠️ FIXED: Added 'as Plot' casting to satisfy TypeScript if "Reserved" status is used
+      if (liveStatus) {
+        return { ...plot, status: liveStatus } as Plot;
+      }
+      return plot;
+    });
+  }, [mapData.plots, project?.plotStatuses]);
+
   const handleSearch = useCallback((plotId: string) => {
-    const plot = mapData.plots.find((p) => p.id === plotId);
+    const plot = dynamicPlots.find((p) => p.id === plotId);
     
     if (plot) {
       setSelectedPlot(plot);
@@ -32,7 +54,7 @@ export function MasterPlanContainer({ imageUrl, mapData }: MasterPlanContainerPr
         variant: "destructive",
       });
     }
-  }, [toast, mapData.plots]); // Depend on dynamic plots
+  }, [toast, dynamicPlots]); 
 
   const handleSelectPlot = useCallback((plot: Plot) => {
     setSelectedPlot(plot);
@@ -45,8 +67,8 @@ export function MasterPlanContainer({ imageUrl, mapData }: MasterPlanContainerPr
       
       <div className="flex-1 relative w-full h-full bg-gray-50 overflow-hidden">
         <InteractiveMap
-          // 🆕 Pass dynamic data down
-          plots={mapData.plots}
+          // Pass the merged DYNAMIC plots instead of static mapData.plots
+          plots={dynamicPlots}
           plotPositions={mapData.positions}
           mapDimensions={mapData.dimensions}
           

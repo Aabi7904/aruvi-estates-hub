@@ -107,7 +107,8 @@ const RAGHAVENDRA_GALLERY = [rg1, rg2, rg3, rg4, rg6, rg8, rg9];
 const TAMIL_THENDRAL_GALLERY = [ttn1, ttn2, ttn3, ttn4, ttn5, ttn6, ttn7];
 const TAMIL_ARUVI_GALLERY = [tan1, tan2, tan3, tan4, tan5, tan6, tan7, tan8, tan9];
 
-interface Project {
+// ⚠️ FIXED: Added 'export' keyword so other files can import this
+export interface Project {
   id: string;
   title: string;
   location: string;
@@ -115,6 +116,7 @@ interface Project {
   imageUrl: string;
   mapLink?: string;
   layoutImage?: string;
+  plotStatuses?: { id: string; status: 'Available' | 'Sold' | 'Reserved' }[];
 }
 
 const ProjectDetails = () => {
@@ -169,25 +171,21 @@ const ProjectDetails = () => {
     )}`;
 
   const currentMapData = getMapData(project.id);
+  const mapImageToUse = currentMapData?.imageSrc || project.layoutImage || "";
 
   return (
     <>
       <Helmet>
         <title>{project.title}</title>
       </Helmet>
-
       <Navbar />
-
       <main className="pt-24 pb-12 bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4">
-
           <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" /> Back
           </Button>
 
           <div className="flex flex-col lg:flex-row gap-12 mb-16">
-
-            {/* LEFT */}
             <div className="w-full lg:w-1/2 space-y-6">
               <div className="bg-white rounded-3xl h-[320px] flex items-center justify-center p-8 relative">
                 <img src={displayImage} className="max-h-full object-contain" />
@@ -195,12 +193,10 @@ const ProjectDetails = () => {
                   {project.status}
                 </span>
               </div>
-
               <div className="rounded-3xl overflow-hidden h-[400px] bg-black relative">
                 <div className="absolute top-4 left-4 z-20 bg-black/60 text-white text-xs px-3 py-1 rounded-full flex gap-2">
                   <Camera className="w-4 h-4 text-emerald-400" /> SITE VIEW
                 </div>
-
                 <Swiper
                   modules={[Autoplay, Pagination, Navigation]}
                   autoplay={{ delay: 3000 }}
@@ -217,9 +213,7 @@ const ProjectDetails = () => {
               </div>
             </div>
 
-            {/* RIGHT (UNCHANGED) */}
             <div className="w-full lg:w-1/2 space-y-8">
-
               <div className="p-6 bg-white rounded-3xl flex justify-between items-center gap-6">
                 <div>
                   <h1 className="text-3xl font-extrabold text-[#108e66]">{project.title}</h1>
@@ -228,7 +222,6 @@ const ProjectDetails = () => {
                     {project.location}
                   </p>
                 </div>
-
                 <div className="flex flex-col items-center">
                   <a href={googleMapsUrl} target="_blank" rel="noreferrer"
                      className="w-24 h-24 p-2 bg-white rounded-xl shadow border">
@@ -260,28 +253,24 @@ const ProjectDetails = () => {
                   Call Now
                 </Button>
               </div>
-
             </div>
           </div>
 
           {(currentMapData || project.layoutImage) && (
-  <div className="mt-16">
-    <div className="flex items-center gap-3 mb-6">
-      <MapIcon className="w-6 h-6 text-[#108e66]" />
-      <h2 className="text-2xl font-bold">Check Plot Availability</h2>
-    </div>
-
-    <MasterPlanContainer
-                imageUrl={currentMapData?.imageSrc || project.layoutImage || ""}
+            <div className="mt-16">
+              <div className="flex items-center gap-3 mb-6">
+                <MapIcon className="w-6 h-6 text-[#108e66]" />
+                <h2 className="text-2xl font-bold">Check Plot Availability</h2>
+              </div>
+              <MasterPlanContainer
+                imageUrl={mapImageToUse}
                 mapData={currentMapData}
+                project={project}
               />
-  </div>
-)}
-
-
+            </div>
+          )}
         </div>
       </main>
-
       <Footer />
       <WhatsAppFAB />
     </>
