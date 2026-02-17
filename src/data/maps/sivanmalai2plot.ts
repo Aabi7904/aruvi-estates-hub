@@ -287,187 +287,187 @@ export const sivanmalai2plotPositions: PlotPosition[] = [
 export const sivanmalai2plotPlots: Plot[] = [
   {
     id: "1",
-    sqft: 1200,
+    sqft: 1089,
     status: "Available",
     dimensions: "40' x 30'"
   },
    {
     id: "12",
-    sqft: 1200,
+    sqft: 940,
     status: "Available",
     dimensions: "40' x 30'"
   },
    {
     id: "11",
-    sqft: 1200,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "2",
-    sqft: 1200,
+    sqft: 953,
     status: "Available",
     dimensions: "40' x 30'"
   },
    {
     id: "10",
-    sqft: 1200,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
    {
     id: "3",
-    sqft: 1200,
+    sqft: 918,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "9",
-    sqft: 1200,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "4",
-    sqft: 1200,
+    sqft: 880,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "8",
-    sqft: 1200,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "5",
-    sqft: 1200,
+    sqft: 835,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "7",
-    sqft: 1200,
+    sqft: 393,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "6",
-    sqft: 1200,
+    sqft: 770,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "20",
-    sqft: 1200,
+    sqft: 1106,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "13",
-    sqft: 1200,
+    sqft: 1456,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "19",
-    sqft: 1200,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "14",
-    sqft: 1200,
+    sqft: 1068,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "15",
-    sqft: 1200,
+    sqft: 1040,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "16",
-    sqft: 1200,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "17",
-    sqft: 1200,
+    sqft: 830,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "18",
-    sqft: 1200,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "21",
-    sqft: 1200,
+    sqft: 1478,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "22",
-    sqft: 1200,
+    sqft: 1478,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "23",
-    sqft: 1200,
+    sqft: 1938,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "24",
-    sqft: 1200,
+    sqft: 995,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "25",
-    sqft: 1200,
+    sqft: 957,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "26",
-    sqft: 1200,
+    sqft: 1240,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "27",
-    sqft: 1200,
+    sqft: 1130,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "29",
-    sqft: 1200,
+    sqft: 1845,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "30",
-    sqft: 1200,
+    sqft: 914,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "31",
-    sqft: 1200,
+    sqft: 1133,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "32",
-    sqft: 1200,
+    sqft: 1278,
     status: "Available",
     dimensions: "40' x 30'"
   },
@@ -479,85 +479,85 @@ export const sivanmalai2plotPlots: Plot[] = [
   },
   {
     id: "34",
-    sqft: 1200,
+    sqft: 2423,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "35",
-    sqft: 1200,
+    sqft: 1370,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "36",
-    sqft: 1200,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "37",
-    sqft: 1200,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "38",
-    sqft: 1200,
+    sqft: 1180,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "39",
-    sqft: 1200,
+    sqft: 1020,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "40",
-    sqft: 1200,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "41",
-    sqft: 1200,
+    sqft: 2250,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "42",
-    sqft: 1200,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "43",
-    sqft: 1200,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "44",
-    sqft: 1200,
+    sqft: 765,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "45",
-    sqft: 1200,
+    sqft: 879,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "28A",
-    sqft: 1200,
+    sqft: 1511,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "28B",
-    sqft: 1200,
+    sqft: 1163,
     status: "Available",
     dimensions: "40' x 30'"
   },
