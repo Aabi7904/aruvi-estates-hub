@@ -159,6 +159,126 @@ export const sivanmalai2plotPositions: PlotPosition[] = [
     x:419, // Paste Positive X here
     y: 751.5// Paste Positive Y here
   },
+  {
+    id: "27",
+    path: "M80.0841 0.509521L0.584106 2.00952L14.5841 90.0095L80.0841 71.5095V0.509521Z", // Paste 'd' here
+    x:620.5, // Paste Positive X here
+    y:517.5 // Paste Positive Y here
+  },
+  {
+    id: "29",
+    path: "M111.505 0.596924L0.505371 25.0969L1.50537 99.5969L131.505 95.0969L111.505 0.596924Z", // Paste 'd' here
+    x:413.5, // Paste Positive X here
+    y:404.5 // Paste Positive Y here
+  },
+  {
+    id: "30",
+    path: "M131.019 0.515808L0.518799 5.51581L2.0188 44.5158L139.519 41.5158L131.019 0.515808Z", // Paste 'd' here
+    x:414, // Paste Positive X here
+    y:498.5 // Paste Positive Y here
+  },
+  {
+    id: "31",
+    path: "M138.516 0.507324L0.516113 3.00732L2.01611 49.5073L149.016 48.0073L138.516 0.507324Z", // Paste 'd' here
+    x:415, // Paste Positive X here
+    y:540 // Paste Positive Y here
+  },
+  {
+    id: "32",
+    path: "M78.5083 0.505371L0.508301 1.50537L2.0083 92.0054L95.0083 90.5054L78.5083 0.505371Z", // Paste 'd' here
+    x:485.5, // Paste Positive X here
+    y:587.5 // Paste Positive Y here
+  },
+  {
+    id: "33",
+    path: "M70.0094 0.5H0.509399L2.0094 81L12.5094 91H71.5094L70.0094 0.5Z", // Paste 'd' here
+    x:416, // Paste Positive X here
+    y:589 // Paste Positive Y here
+  },
+  {
+    id: "34",
+    path: "M156.011 0.61853L2.01086 34.1185L0.510864 104.619L157.511 103.119L156.011 0.61853Z", // Paste 'd' here
+    x:199, // Paste Positive X here
+    y:442.5 // Paste Positive Y here
+  },
+  {
+    id: "35",
+    path: "M159.516 0.506378L2.01636 2.50638L0.516357 50.5064L159.516 46.0064V0.506378Z", // Paste 'd' here
+    x:197, // Paste Positive X here
+    y:544.5 // Paste Positive Y here
+  },
+  {
+    id: "36",
+    path: "M49.0142 0.510803L3.01416 1.5108L0.51416 92.5108L50.5142 91.5108L49.0142 0.510803Z", // Paste 'd' here
+    x:194, // Paste Positive X here
+    y:593 // Paste Positive Y here
+  },
+  {
+    id: "37",
+    path: "M47.5054 0.510529L0.505371 1.51053L1.50537 92.5105H49.5054L47.5054 0.510529Z", // Paste 'd' here
+    x:243, // Paste Positive X here
+    y:591.5 // Paste Positive Y here
+  },
+  {
+    id: "38",
+    path: "M67.0079 0.5112L0.507935 2.0112L2.00793 94.5112L57.5079 93.5112L68.5079 82.0112L67.0079 0.5112Z", // Paste 'd' here
+    x:290.5, // Paste Positive X here
+    y:589.5 // Paste Positive Y here
+  },
+  {
+    id: "39",
+    path: "M46.0055 0.5H0.505493L1.50549 92L58.5055 91L57.5055 10.5L46.0055 0.5Z", // Paste 'd' here
+    x:303.5, // Paste Positive X here
+    y:755 // Paste Positive Y here
+  },
+  {
+    id: "40",
+    path: "M59.0081 0.508606L0.508057 1.50861L2.00806 93.5086L59.0081 92.5086V0.508606Z", // Paste 'd' here
+    x:245.5, // Paste Positive X here
+    y:755 // Paste Positive Y here
+  },
+  {
+    id: "41",
+    path: "M92.5 0.5H38L35.5 92.5C32.5 92.6667 26.5 92.9 26.5 92.5C26.5 92.1 9.16667 127.333 0.5 145V192.5L95 187.5L92.5 0.5Z", // Paste 'd' here
+    x:154, // Paste Positive X here
+    y:756 // Paste Positive Y here
+  },
+  {
+    id: "42",
+    path: "M114.5 0.508575L0.5 2.50858V50.0086L116 47.5086L114.5 0.508575Z", // Paste 'd' here
+    x:247.5, // Paste Positive X here
+    y:845.5 // Paste Positive Y here
+  },
+  {
+    id: "43",
+    path: "M115.516 0.508774L0.515747 2.50877L2.01575 50.0088L115.516 45.5088V0.508774Z", // Paste 'd' here
+    x:247.5, // Paste Positive X here
+    y:892.5 // Paste Positive Y here
+  },
+  {
+    id: "44",
+    path: "M56.0067 0.51844L1.50671 2.51844L0.506714 79.5184L57.0067 78.0184L56.0067 0.51844Z", // Paste 'd' here
+    x:307.5, // Paste Positive X here
+    y:937.5 // Paste Positive Y here
+  },
+  {
+    id: "45",
+    path: "M58.5062 0.513168L1.50623 2.01317L0.506226 84.0132L59.5062 83.0132L58.5062 0.513168Z", // Paste 'd' here
+    x:306.5, // Paste Positive X here
+    y:1015 // Paste Positive Y here
+  },
+  {
+    id: "28A",
+    path: "M97.0349 0.625793L0.534912 22.1258L7.03491 99.1258L95.5349 98.1258L97.0349 0.625793Z", // Paste 'd' here
+    x:608, // Paste Positive X here
+    y:364 // Paste Positive Y here
+  },
+  {
+    id: "28B",
+    path: "M78.6014 0.611877L0.60144 17.6119L22.6014 112.612L86.1014 110.612L78.6014 0.611877Z", // Paste 'd' here
+    x:530.5, // Paste Positive X here
+    y:386 // Paste Positive Y here
+  },
 
   // Add more plots...
 ];
@@ -317,6 +437,126 @@ export const sivanmalai2plotPlots: Plot[] = [
   },
   {
     id: "26",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "27",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "29",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "30",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "31",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "32",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "33",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "34",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "35",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "36",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "37",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "38",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "39",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "40",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "41",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "42",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "43",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "44",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "45",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "28A",
+    sqft: 1200,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "28B",
     sqft: 1200,
     status: "Available",
     dimensions: "40' x 30'"
