@@ -14,6 +14,9 @@ import sivanmalai2plotMapImage from "../../assets/sivanmalai2layout.png";
 import aaavenue from "../../assets/aa-avenue-masterplan.jpg"
 import sivan1img from "../../assets/sivan1.png"
 import { sivanmalai1plotPlots, sivanmalai1plotPositions } from "./sivanmalai1";
+
+import {deepamalaiplotPlots, deepamalaiplotPositions} from "./deepamali";
+import deepamaliMapImage from "../../assets/deepamali.png"
 // 1. Define the Types
 export interface PlotPosition {
   id: string;
@@ -95,6 +98,13 @@ const mapRegistry: Record<string, ProjectMapData> = {
     plots: sivanmalai1plotPlots,
     positions: sivanmalai1plotPositions,
     imageSrc: sivan1img // Use the local image for perfect alignment
+  },
+  "lkClq9zkqzp8n5F74ogn": { 
+    id: "lkClq9zkqzp8n5F74ogn",
+    dimensions: { width: 2099, height: 716 }, // Match Figma Frame size
+    plots: deepamalaiplotPlots,
+    positions: deepamalaiplotPositions,
+    imageSrc: deepamaliMapImage // Use the local image for perfect alignment
   }
 };
 
