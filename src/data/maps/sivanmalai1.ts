@@ -646,6 +646,83 @@ export const sivanmalai1plotPositions: PlotPosition[] = [
     width:73,
     height:36,  // Paste Positive Y here
   },
+  {
+    id: "147", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1341,
+    width:62,
+    height:27,  // Paste Positive Y here
+  },
+  {
+    id: "148", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1311,
+    width:62,
+    height:29,  // Paste Positive Y here
+  },
+  {
+    id: "149", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1281,
+    width:62,
+    height:29,  // Paste Positive Y here
+  },
+  {
+    id: "150", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1250,
+    width:62,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "151", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1221,
+    width:62,
+    height:29,  // Paste Positive Y here
+  },
+  {
+    id: "152", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1190,
+    width:62,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "155", // Paste 'd' here
+    x: 1446, // Paste Positive X here
+    y: 1190,
+    width:62,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "156", // Paste 'd' here
+    x: 1446, // Paste Positive X here
+    y: 1220,
+    width:62,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "157", // Paste 'd' here
+    x: 1446, // Paste Positive X here
+    y: 1250,
+    width:62,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "158", // Paste 'd' here
+    x: 1446, // Paste Positive X here
+    y: 1281,
+    width:62,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "159", // Paste 'd' here
+    x: 1446, // Paste Positive X here
+    y: 1311,
+    width:62,
+    height:29,  // Paste Positive Y here
+  },
 ];
 
 export const sivanmalai1plotPlots: Plot[] = [
@@ -1201,4 +1278,65 @@ export const sivanmalai1plotPlots: Plot[] = [
     status: "Available",
     dimensions: "40' x 30'"
   },
+  {
+    id: "148",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "149",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "150",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "151",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "152",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "155",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "156",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "157",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "158",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "159",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+
 ];
