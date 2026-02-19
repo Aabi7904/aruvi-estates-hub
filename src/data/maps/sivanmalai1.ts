@@ -723,6 +723,209 @@ export const sivanmalai1plotPositions: PlotPosition[] = [
     width:62,
     height:29,  // Paste Positive Y here
   },
+  {
+    id: "162", // Paste 'd' here
+    x: 1555, // Paste Positive X here
+    y: 1281,
+    width:55,
+    height:29,  // Paste Positive Y here
+  },
+  {
+    id: "163", // Paste 'd' here
+    x: 1555, // Paste Positive X here
+    y: 1250,
+    width:55,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "164", // Paste 'd' here
+    x: 1555, // Paste Positive X here
+    y: 1220,
+    width:55,
+    height:29,  // Paste Positive Y here
+  },
+  {
+    id: "165", // Paste 'd' here
+    x: 1555, // Paste Positive X here
+    y: 1190,
+    width:55,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "168", // Paste 'd' here
+    x: 1611, // Paste Positive X here
+    y: 1190,
+    width:55,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "169", // Paste 'd' here
+    x: 1611, // Paste Positive X here
+    y: 1221,
+    width:55,
+    height:29,  // Paste Positive Y here
+  },
+  {
+    id: "170", // Paste 'd' here
+    x: 1611, // Paste Positive X here
+    y: 1250,
+    width:55,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "171", // Paste 'd' here
+    x: 1611, // Paste Positive X here
+    y: 1280,
+    width:55,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "173", // Paste 'd' here
+    x: 1712, // Paste Positive X here
+    y: 1301,
+    width:73,
+    height:45,  // Paste Positive Y here
+  },
+  {
+    id: "174", // Paste 'd' here
+    x: 1712, // Paste Positive X here
+    y: 1264,
+    width:73,
+    height:36,  // Paste Positive Y here
+  },
+  {
+    id: "175", // Paste 'd' here
+    x: 1712, // Paste Positive X here
+    y: 1227,
+    width:73,
+    height:36,  // Paste Positive Y here
+  },
+  {
+    id: "176", // Paste 'd' here
+    x: 1712, // Paste Positive X here
+    y: 1190,
+    width:73,
+    height:36,  // Paste Positive Y here
+  },
+  {
+    id: "179", // Paste 'd' here
+    x: 1786, // Paste Positive X here
+    y: 1190,
+    width:61,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "180", // Paste 'd' here
+    x: 1786, // Paste Positive X here
+    y: 1220,
+    width:61,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "181", // Paste 'd' here
+    x: 1786, // Paste Positive X here
+    y: 1250,
+    width:61,
+    height:29,  // Paste Positive Y here
+  },
+  {
+    id: "182", // Paste 'd' here
+    x: 1786, // Paste Positive X here
+    y: 1280,
+    width:61,
+    height:30,  // Paste Positive Y here
+  },
+  {
+    id: "183", // Paste 'd' here
+    x: 1786, // Paste Positive X here
+    y: 1311,
+    width:61,
+    height:32,  // "M85.5434 0.5H7.0434L0.543396 78.5H85.5434V0.5Z"
+  },
+  {
+    id: "7", // Paste 'd' here
+    x: 692, // Paste Positive X here
+    y: 256.5,
+    path:"M85.5434 0.5H7.0434L0.543396 78.5H85.5434V0.5Z",  // Paste Positive Y here
+  },
+  {
+    id: "8", // Paste 'd' here
+    x: 417.5, // Paste Positive X here
+    y: 434.5,
+    path:"M48.0099 0.588135L2.0099 8.08813L0.509903 84.5881H48.0099V0.588135Z",  // Paste Positive Y here
+  },
+  {
+    id: "9", // Paste 'd' here
+    x: 465, // Paste Positive X here
+    y: 427.5,
+    path:"M37.5 0.603455L0.5 7.60345V91.1035H37.5V0.603455Z",  // Paste Positive Y here
+  },
+  {
+    id: "10", // Paste 'd' here
+    x: 502, // Paste Positive X here
+    y: 412.5,
+    path:"M8.5 14.809L0.5 16.309V105.809H36.5V0.809021L8.5 14.809Z",  // Paste Positive Y here
+  },
+  {
+    id: "11", // Paste 'd' here
+    x: 538, // Paste Positive X here
+    y: 393,
+    path:"M37 0.834015L0.5 20.334V125.834H37V0.834015Z",  // Paste Positive Y here
+  },
+  {
+    id: "12", // Paste 'd' here
+    x: 574.5, // Paste Positive X here
+    y: 391,
+    path:"M6.0013 0.5L0.501297 3L1.0013 127.5H37.5013V0.5H6.0013Z",  // Paste Positive Y here
+  },
+  {
+    id: "15", // Paste 'd' here
+    x: 685, // Paste Positive X here
+    y: 391.5,
+    path:"M27.5 0.5H0.5V64H36.5V9L27.5 0.5Z",  // Paste Positive Y here
+  },
+  {
+    id: "16", // Paste 'd' here
+    x: 778, // Paste Positive X here
+    y: 392,
+    path:"M8.5 0.5L0.5 8.5V62.5H36V0.5H8.5Z",  // Paste Positive Y here
+  },
+  {
+    id: "31", // Paste 'd' here
+    x: 778.5, // Paste Positive X here
+    y: 455,
+    path:"M35.5 0.5H0.5V56.5L9 63.5H35.5V0.5Z",  // Paste Positive Y here
+  },
+  {
+    id: "32", // Paste 'd' here
+    x: 685, // Paste Positive X here
+    y: 455,
+    path:"M36.5 0.5H0.5V63.5H28.5L36.5 55.5V0.5Z",  // Paste Positive Y here
+  },
+  {
+    id: "35", // Paste 'd' here
+    x: 315.5, // Paste Positive X here
+    y: 563.5,
+    path:"M102.039 58L0.539329 76.5L4.53933 120.5H150.039V0.5H102.039V58Z",  // Paste Positive Y here
+  },
+  {
+    id: "43", // Paste 'd' here
+    x: 648.5, // Paste Positive X here
+    y: 563.5,
+    path:"M64 0.5H0.5V47.5H73.5V10L64 0.5Z",  // Paste Positive Y here
+  },
+  {
+    id: "44", // Paste 'd' here
+    x: 777.5, // Paste Positive X here
+    y: 638.5,
+    path:"M42 0.5H0.5V62L10 69.5H42V0.5Z",  // Paste Positive Y here
+  },
+  {
+    id: "45", // Paste 'd' here
+    x: 777.5, // Paste Positive X here
+    y: 565,
+    path:"M42 75H0.5V9L9.5 0.5H42V75Z",  // Paste Positive Y here
+  },
 ];
 
 export const sivanmalai1plotPlots: Plot[] = [
@@ -1334,6 +1537,192 @@ export const sivanmalai1plotPlots: Plot[] = [
   },
   {
     id: "159",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "162",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "163",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "164",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "165",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "168",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "169",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "170",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "171",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "173",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "174",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "175",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "176",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "179",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "180",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "181",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "182",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "183",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "7",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "8",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "9",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "10",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "11",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "12",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "15",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "16",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "31",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "32",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "35",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "43",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "44",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "45",
     sqft: 1089,
     status: "Available",
     dimensions: "40' x 30'"
