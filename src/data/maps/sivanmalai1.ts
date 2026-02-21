@@ -1015,6 +1015,261 @@ export const sivanmalai1plotPositions: PlotPosition[] = [
     y: 756.5,
     path:"M37 3.54278L0.5 0.542782V88.0428H37V3.54278Z"  // Paste Positive Y here
   },
+  {
+    id: "68", // Paste 'd' here
+    x: 757, // Paste Positive X here
+    y: 1028.5,
+    path:"M96.5057 0.5H1.00568L0.505676 44.5L87.5057 45.5L96.5057 36.5V0.5Z"  // Paste Positive Y here
+  },
+  {
+    id: "71", // Paste 'd' here
+    x: 756.5, // Paste Positive X here
+    y: 906,
+    path:"M88.5 0.5H0.5V39H97.5V9L88.5 0.5Z"  // Paste Positive Y here
+  },
+  {
+    id: "72", // Paste 'd' here
+    x: 915, // Paste Positive X here
+    y: 906,
+    path:"M50 0.5H9.5L0.5 10V77.5H50V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "91", // Paste 'd' here
+    x: 916, // Paste Positive X here
+    y: 983,
+    path:"M49.5 0.5H0.5V82.5L9.5 91.5H49.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "82", // Paste 'd' here
+    x: 1260, // Paste Positive X here
+    y: 1000,
+    width:35,
+    height:74, // Paste Positive Y here
+  },
+  {
+    id: "83", // Paste 'd' here
+    x: 1223, // Paste Positive X here
+    y: 983,
+    width:19,
+    height:91, // Paste Positive Y here
+  },
+  {
+    id: "93", // Paste 'd' here
+    x: 1629.5, // Paste Positive X here
+    y: 1001,
+    path:"M38 0.5H0.5V73.5H28L38 64V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "96", // Paste 'd' here
+    x: 1595.5, // Paste Positive X here
+    y: 888.5,
+    path:"M71.0262 2.51407L2.52625 0.514069L0.526245 39.5141H71.0262V2.51407Z" // Paste Positive Y here
+  },
+  {
+    id: "95", // Paste 'd' here
+    x: 1593.5, // Paste Positive X here
+    y: 927,
+    path:"M73.0349 0.5H3.03491L0.534912 37.5H73.0349V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "100", // Paste 'd' here
+    x: 1712, // Paste Positive X here
+    y: 1001,
+    path:"M36 0.5H0.5V64L10 74H36V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "102", // Paste 'd' here
+    x: 1784.5, // Paste Positive X here
+    y: 1019.5,
+    path:"M63.5 0.5H0.5V55H55L63.5 46V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "107", // Paste 'd' here
+    x: 1894, // Paste Positive X here
+    y: 894.5,
+    path:"M82 2.51242L0.5 0.512421V34.0124H79.5L82 2.51242Z" // Paste Positive Y here
+  },
+  {
+    id: "108", // Paste 'd' here
+    x: 1894, // Paste Positive X here
+    y: 928,
+    path:"M79.5 0.5H0.5V37H76.5L79.5 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "109", // Paste 'd' here
+    x: 1894, // Paste Positive X here
+    y: 964.5,
+    path:"M77 0.5H0.5V36.5H73.5L77 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "110", // Paste 'd' here
+    x: 1929.5, // Paste Positive X here
+    y: 1001,
+    path:"M38 0.5H0.5V74H31.5L38 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "111", // Paste 'd' here
+    x: 1894.5, // Paste Positive X here
+    y: 1000.5,
+    path:"M35.5 0.5H0.5V66.5L9 74.5H35.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "114", // Paste 'd' here
+    x: 791.5, // Paste Positive X here
+    y: 1136,
+    path:"M54 0.5H0.5V73H62V8L54 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "118", // Paste 'd' here
+    x: 741, // Paste Positive X here
+    y: 1318,
+    path:"M113 0.5H0.5V47.5L113 53.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "119", // Paste 'd' here
+    x: 915.5, // Paste Positive X here
+    y: 1318.5,
+    path:"M91.5 0.5H0.5V58L91.5 62.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "123", // Paste 'd' here
+    x: 915, // Paste Positive X here
+    y: 1136,
+    path:"M36.5 0.5H8.5L0.5 9V72.5H36.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "127", // Paste 'd' here
+    x: 1061.5, // Paste Positive X here
+    y: 1136,
+    path:"M28 0.5H0.5V71.5H36V9L28 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "132", // Paste 'd' here
+    x: 1007, // Paste Positive X here
+    y: 1355.5,
+    path:"M91 0.5H0.5V25.5L91 35.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "138", // Paste 'd' here
+    x: 1143, // Paste Positive X here
+    y: 1136,
+    path:"M36.5 0.5H8.5L0.5 9.5V72.5H36.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "133", // Paste 'd' here
+    x: 1143.5, // Paste Positive X here
+    y: 1355.5,
+    path:"M92 0.5H0.5V40.5L92 50V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "142", // Paste 'd' here
+    x: 1290, // Paste Positive X here
+    y: 1135.5,
+    path:"M26 0.5H0.5V73H35V8.5L26 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "146", // Paste 'd' here
+    x: 1252, // Paste Positive X here
+    y: 1319,
+    path:"M74 0.5H0.5V87.5L52.5 92.5L57.5 52H74V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "147", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1341,
+    path:"M63 0.5H0.5V28.5L63 27V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "153", // Paste 'd' here
+    x: 1382, // Paste Positive X here
+    y: 1136,
+    path:"M63 0.5H8L0.5 9.5V54H63V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "154", // Paste 'd' here
+    x: 1444.5, // Paste Positive X here
+    y: 1136.5,
+    path:"M57.5 0.5H0.5V54H64.5V8.5L57.5 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "160", // Paste 'd' here
+    x: 1445, // Paste Positive X here
+    y: 1340,
+    path:"M64 0.5H0.5V26.5H25L64 16.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "161", // Paste 'd' here
+    x: 1555.5, // Paste Positive X here
+    y: 1310.5,
+    path:"M55.5 0.5H0.5V42.5L55.5 40.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "166", // Paste 'd' here
+    x: 1555, // Paste Positive X here
+    y: 1136,
+    path:"M55 0.5H8.5L0.5 9.5V54.5H55V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "167", // Paste 'd' here
+    x: 1611, // Paste Positive X here
+    y: 1136,
+    path:"M46.5 0.5H0.5V54H56V9L46.5 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "172", // Paste 'd' here
+    x: 1610.5, // Paste Positive X here
+    y: 1310.5,
+    path:"M56.5 0.5H0.5V41L56.5 39V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "177", // Paste 'd' here
+    x: 1712, // Paste Positive X here
+    y: 1136,
+    path:"M73.5 0.5H8L0.5 8.5V54H73.5V0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "178", // Paste 'd' here
+    x: 1785, // Paste Positive X here
+    y: 1136,
+    path:"M54.0095 0.5H0.509521L1.50952 54L62.5095 53V9L54.0095 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "184", // Paste 'd' here
+    x: 1894, // Paste Positive X here
+    y: 1136,
+    path:"M61.5 0.5H9L0.5 8V54.5H58L61.5 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "185", // Paste 'd' here
+    x: 1894, // Paste Positive X here
+    y: 1190,
+    path:"M57.5 0.5H0.5V30H55.5L57.5 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "186", // Paste 'd' here
+    x: 1894, // Paste Positive X here
+    y: 1220,
+    path:"M55 0.5H0.5V31H53L55 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "187", // Paste 'd' here
+    x: 1894.5, // Paste Positive X here
+    y: 1250.5,
+    path:"M52.5 0.5H0.5V30.5H50L52.5 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "188", // Paste 'd' here
+    x: 1894, // Paste Positive X here
+    y: 1280.5,
+    path:"M50 0.5H0.5V30H48L50 0.5Z" // Paste Positive Y here
+  },
+  {
+    id: "189", // Paste 'd' here
+    x: 1893.5, // Paste Positive X here
+    y: 1311,
+    path:"M49 0.5H0.5V30H46L49 0.5Z" // Paste Positive Y here
+  },
+
 ];
 
 export const sivanmalai1plotPlots: Plot[] = [
@@ -1896,6 +2151,258 @@ export const sivanmalai1plotPlots: Plot[] = [
   },
   {
     id: "58",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "68",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "71",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "72",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "91",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "82",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "83",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "93",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "95",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "96",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "100",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "102",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "107",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "108",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "109",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "110",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "111",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "114",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "118",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "119",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "127",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "123",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "132",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "133",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "138",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "142",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "146",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "147",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "153",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "154",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "160",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "161",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "166",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "167",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "172",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "177",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "178",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "184",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "185",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "186",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "187",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "188",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "189",
     sqft: 1089,
     status: "Available",
     dimensions: "40' x 30'"
