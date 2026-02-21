@@ -926,6 +926,95 @@ export const sivanmalai1plotPositions: PlotPosition[] = [
     y: 565,
     path:"M42 75H0.5V9L9.5 0.5H42V75Z",  // Paste Positive Y here
   },
+  {
+    id: "59", // Paste 'd' here
+    x: 1039, // Paste Positive X here
+    y: 756,
+    width:36,
+    height:88  // Paste Positive Y here
+  },
+  {
+    id: "60", // Paste 'd' here
+    x: 1002, // Paste Positive X here
+    y: 756,
+    width:37,
+    height:88  // Paste Positive Y here
+  },
+  {
+    id: "61", // Paste 'd' here
+    x: 965, // Paste Positive X here
+    y: 755,
+    width:36,
+    height:89  // Paste Positive Y here
+  },
+  {
+    id: "62", // Paste 'd' here
+    x: 914, // Paste Positive X here
+    y: 754,
+    width:50,
+    height:90  // Paste Positive Y here
+  },
+  {
+    id: "63", // Paste 'd' here
+    x: 868, // Paste Positive X here
+    y: 754,
+    width:45,
+    height:90  // Paste Positive Y here
+  },
+  {
+    id: "64", // Paste 'd' here
+    x: 777, // Paste Positive X here
+    y: 753.5,
+    path:"M92 0.5H10L0.5 9.5V38H92V0.5Z"  // Paste Positive Y here
+  },
+  {
+    id: "65", // Paste 'd' here
+    x: 777, // Paste Positive X here
+    y: 790.5,
+    path:"M91 0.5H0.5V46L9.5 54H91V0.5Z"  // Paste Positive Y here
+  },
+  {
+    id: "52", // Paste 'd' here
+    x: 1296.5, // Paste Positive X here
+    y: 779,
+    path:"M54.5 6.05351L0.5 0.553513V65.5535H51L54.5 6.05351Z"  // Paste Positive Y here
+  },
+  {
+    id: "53", // Paste 'd' here
+    x: 1260.5, // Paste Positive X here
+    y: 775,
+    path:"M35.5 4.05249L0.5 0.552494V69.0525H35.5V4.05249Z"  // Paste Positive Y here
+  },
+  {
+    id: "54", // Paste 'd' here
+    x: 1222.5, // Paste Positive X here
+    y: 772,
+    path:"M38 3.5416L0.5 0.541597V73.0416H38V3.5416Z"  // Paste Positive Y here
+  },
+  {
+    id: "55", // Paste 'd' here
+    x: 1185.5, // Paste Positive X here
+    y: 767.5,
+    path:"M38 3.5416L0.5 0.541597V76.5416H38V3.5416Z"  // Paste Positive Y here
+  },
+  {
+    id: "56", // Paste 'd' here
+    x: 1149, // Paste Positive X here
+    y: 764,
+    path:"M37 4.05024L0.5 0.550239V81.0502H37V4.05024Z"  // Paste Positive Y here
+  },
+  {
+    id: "57", // Paste 'd' here
+    x: 1112, // Paste Positive X here
+    y: 760,
+    path:"M38 4.55617L0.5 0.55617V85.0562H38V4.55617Z"  // Paste Positive Y here
+  },
+  {
+    id: "58", // Paste 'd' here
+    x: 1075.5, // Paste Positive X here
+    y: 756.5,
+    path:"M37 3.54278L0.5 0.542782V88.0428H37V3.54278Z"  // Paste Positive Y here
+  },
 ];
 
 export const sivanmalai1plotPlots: Plot[] = [
@@ -1723,6 +1812,90 @@ export const sivanmalai1plotPlots: Plot[] = [
   },
   {
     id: "45",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "59",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "60",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "61",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "62",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "63",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "64",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "65",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "52",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "53",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "54",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "55",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "56",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "57",
+    sqft: 1089,
+    status: "Available",
+    dimensions: "40' x 30'"
+  },
+  {
+    id: "58",
     sqft: 1089,
     status: "Available",
     dimensions: "40' x 30'"
