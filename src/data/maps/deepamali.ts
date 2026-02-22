@@ -156,145 +156,145 @@ export const deepamalaiplotPositions: PlotPosition[] = [
 export const deepamalaiplotPlots: Plot[] = [
   {
     id: "1",
-    sqft: 1089,
+    sqft: 1073,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "2",
-    sqft: 1089,
+    sqft: 787,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "3",
-    sqft: 1089,
+    sqft: 1148,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "4",
-    sqft: 1089,
+    sqft: 1178,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "5",
-    sqft: 1089,
+    sqft: 1195,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "6",
-    sqft: 1089,
+    sqft: 1205,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "7",
-    sqft: 1089,
+    sqft: 1218,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "8",
-    sqft: 1089,
+    sqft: 1893,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "9",
-    sqft: 1089,
+    sqft: 1091,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "10",
-    sqft: 1089,
+    sqft: 1084,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "11",
-    sqft: 1089,
+    sqft: 1073,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "12",
-    sqft: 1089,
+    sqft: 923,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "13",
-    sqft: 1089,
+    sqft: 991,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "14",
-    sqft: 1089,
+    sqft: 610,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "15",
-    sqft: 1089,
+    sqft: 638,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "16",
-    sqft: 1089,
+    sqft: 663,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "17",
-    sqft: 1089,
+    sqft: 688,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "18",
-    sqft: 1089,
+    sqft: 710,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "19",
-    sqft: 1089,
+    sqft: 735,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "20",
-    sqft: 1089,
+    sqft: 760,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "21",
-    sqft: 1089,
+    sqft: 783,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "22",
-    sqft: 1089,
+    sqft: 808,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "23",
-    sqft: 1089,
+    sqft: 830,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "24",
-    sqft: 1089,
+    sqft: 922,
     status: "Available",
     dimensions: "40' x 30'"
   },
