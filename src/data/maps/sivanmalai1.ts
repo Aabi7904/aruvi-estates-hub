@@ -1275,1135 +1275,1135 @@ export const sivanmalai1plotPositions: PlotPosition[] = [
 export const sivanmalai1plotPlots: Plot[] = [
   {
     id: "1",
-    sqft: 1089,
+    sqft: 880,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "2",
-    sqft: 1089,
+    sqft: 880,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "3",
-    sqft: 1089,
+    sqft: 880,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "4",
-    sqft: 1089,
+    sqft: 880,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "5",
-    sqft: 1089,
+    sqft: 880,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "6",
-    sqft: 1089,
+    sqft: 880,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "13",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "14",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "33",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "34",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "17",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "18",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "19",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "20",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "21",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "22",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "23",
-    sqft: 1089,
+    sqft: 708.75,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "24",
-    sqft: 1089,
+    sqft: 713,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "25",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "26",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "27",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "28",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "29",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "30",
-    sqft: 1089,
+    sqft: 700,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "36",
-    sqft: 1089,
+    sqft: 1295,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "37",
-    sqft: 1089,
+    sqft: 1295,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "38",
-    sqft: 1089,
+    sqft: 1295,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "39",
-    sqft: 1089,
+    sqft: 1295,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "40",
-    sqft: 1089,
+    sqft: 1295,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "41",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "42",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "46",
-    sqft: 1089,
+    sqft: 896.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "47",
-    sqft: 1089,
+    sqft: 896.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "48",
-    sqft: 1089,
+    sqft: 876,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "49",
-    sqft: 1089,
+    sqft: 2490,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "50",
-    sqft: 1089,
+    sqft: 2502,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "51",
-    sqft: 1089,
+    sqft: 2632,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "66",
-    sqft: 1089,
+    sqft: 850.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "67",
-    sqft: 1089,
+    sqft: 1031,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "69",
-    sqft: 1089,
+    sqft: 1325,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "70",
-    sqft: 1089,
+    sqft: 1113,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "73",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "74",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "75",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "76",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "77",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "78",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "79",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "80",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "81",
-    sqft: 1089,
+    sqft: 840,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "84",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "85",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "86",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "87",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "88",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "89",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "90",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "92",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "94",
-    sqft: 1089,
+    sqft: 797.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "97",
-    sqft: 1089,
+    sqft: 785,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "98",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "99",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "101",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "103",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "104",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "105",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "106",
-    sqft: 1089,
+    sqft: 656,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "112",
-    sqft: 1089,
+    sqft: 792.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "113",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "115",
-    sqft: 1089,
+    sqft: 1240,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "116",
-    sqft: 1089,
+    sqft: 1237.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "117",
-    sqft: 1089,
+    sqft: 1235,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "120",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "121",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "122",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "124",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "125",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "126",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "128",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "129",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "130",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "131",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "134",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "135",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "136",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "137",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "139",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "140",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "141",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "143",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "144",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "145",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "148",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "149",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "150",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "151",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "152",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "155",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "156",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "157",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "158",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "159",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "162",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "163",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "164",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "165",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "168",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "169",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "170",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "171",
-    sqft: 1089,
+    sqft: 511.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "173",
-    sqft: 1089,
+    sqft: 1005,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "174",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "175",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "176",
-    sqft: 1089,
+    sqft: 800,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "179",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "180",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "181",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "182",
-    sqft: 1089,
+    sqft: 577.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "183",
-    sqft: 1089,
+    sqft: 595,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "7",
-    sqft: 1089,
+    sqft: 1863,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "8",
-    sqft: 1089,
+    sqft: 1112,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "9",
-    sqft: 1089,
+    sqft: 950,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "10",
-    sqft: 1089,
+    sqft: 1131,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "11",
-    sqft: 1089,
+    sqft: 1355,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "12",
-    sqft: 1089,
+    sqft: 1390,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "15",
-    sqft: 1089,
+    sqft: 687.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "16",
-    sqft: 1089,
+    sqft: 687.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "31",
-    sqft: 1089,
+    sqft: 687.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "32",
-    sqft: 1089,
+    sqft: 687.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "35",
-    sqft: 1089,
+    sqft: 3267,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "43",
-    sqft: 1089,
+    sqft: 967.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "44",
-    sqft: 1089,
+    sqft: 994.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "45",
-    sqft: 1089,
+    sqft: 1059.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "59",
-    sqft: 1089,
+    sqft: 955,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "60",
-    sqft: 1089,
+    sqft: 970,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "61",
-    sqft: 1089,
+    sqft: 985,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "62",
-    sqft: 1089,
+    sqft: 1380.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "63",
-    sqft: 1089,
+    sqft: 1266,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "64",
-    sqft: 1089,
+    sqft: 1019,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "65",
-    sqft: 1089,
+    sqft: 1487.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "52",
-    sqft: 1089,
+    sqft: 961,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "53",
-    sqft: 1089,
+    sqft: 727.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "54",
-    sqft: 1089,
+    sqft: 1520,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "55",
-    sqft: 1089,
+    sqft: 802.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "56",
-    sqft: 1089,
+    sqft: 847.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "57",
-    sqft: 1089,
+    sqft: 887.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "58",
-    sqft: 1089,
+    sqft: 927.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "68",
-    sqft: 1089,
+    sqft: 1312.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "71",
-    sqft: 1089,
+    sqft: 11000.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "72",
-    sqft: 1089,
+    sqft: 1153,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "91",
-    sqft: 1089,
+    sqft: 1375,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "82",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "83",
-    sqft: 1089,
+    sqft: 1000,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "93",
-    sqft: 1089,
+    sqft: 787.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "95",
-    sqft: 1089,
+    sqft: 780,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "96",
-    sqft: 1089,
+    sqft: 764,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "100",
-    sqft: 1089,
+    sqft: 787.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "102",
-    sqft: 1089,
+    sqft: 1037.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "107",
-    sqft: 1089,
+    sqft: 727,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "108",
-    sqft: 1089,
+    sqft: 865,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "109",
-    sqft: 1089,
+    sqft: 817.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "110",
-    sqft: 1089,
+    sqft: 750,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "111",
-    sqft: 1089,
+    sqft: 787.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "114",
-    sqft: 1089,
+    sqft: 1380,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "118",
-    sqft: 1089,
+    sqft: 1678,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "119",
-    sqft: 1089,
+    sqft: 1625,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "127",
-    sqft: 1089,
+    sqft: 787.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "123",
-    sqft: 1089,
+    sqft: 787.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "132",
-    sqft: 1089,
+    sqft: 818.75,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "133",
-    sqft: 1089,
+    sqft: 1197,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "138",
-    sqft: 1089,
+    sqft: 787.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "142",
-    sqft: 1089,
+    sqft: 787.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "146",
-    sqft: 1089,
+    sqft: 2213,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "147",
-    sqft: 1089,
+    sqft: 516.25,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "153",
-    sqft: 1089,
+    sqft: 1037.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "154",
-    sqft: 1089,
+    sqft: 1037.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "160",
-    sqft: 1089,
+    sqft: 389,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "161",
-    sqft: 1089,
+    sqft: 694,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "166",
-    sqft: 1089,
+    sqft: 917.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "167",
-    sqft: 1089,
+    sqft: 917.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "172",
-    sqft: 1089,
+    sqft: 663,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "177",
-    sqft: 1089,
+    sqft: 1187.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "178",
-    sqft: 1089,
+    sqft: 1037.50,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "184",
-    sqft: 1089,
+    sqft: 985,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "185",
-    sqft: 1089,
+    sqft: 516,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "186",
-    sqft: 1089,
+    sqft: 493,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "187",
-    sqft: 1089,
+    sqft: 474,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "188",
-    sqft: 1089,
+    sqft: 452,
     status: "Available",
     dimensions: "40' x 30'"
   },
   {
     id: "189",
-    sqft: 1089,
+    sqft: 439,
     status: "Available",
     dimensions: "40' x 30'"
   },
