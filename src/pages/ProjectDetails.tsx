@@ -34,62 +34,62 @@ import {
 import { getMapData } from '../data/maps/mapRegistry';
 
 /* ASSETS */
-import locationQr from '../assets/location-qr.jpeg';
-import semmozhiQr from '../assets/semlocation.png';
-import comingSoonImg from '../assets/coming-soon.jpg';
-import tamilAruviImg from '../assets/tamil-aruvi.png';
-import sivanmalaiSamuLogo from '../assets/sivanmalai_samu.png';
-import thulasiLogo from '../assets/Thulasi_Nagar.png';
-import tamilThendralLogo from '../assets/Tamil_Thendral_Nagar.png';
+import locationQr from '../assets/location-qr.webp';
+import semmozhiQr from '../assets/semlocation.webp';
+import comingSoonImg from '../assets/coming-soon.webp';
+import tamilAruviImg from '../assets/tamil-aruvi.webp';
+import sivanmalaiSamuLogo from '../assets/sivanmalai_samu.webp';
+import thulasiLogo from '../assets/Thulasi_Nagar.webp';
+import tamilThendralLogo from '../assets/Tamil_Thendral_Nagar.webp';
 
 /* DEFAULT */
-import g1 from '../assets/g1.jpg';
-import g2 from '../assets/g2.jpg';
-import g3 from '../assets/g3.jpg';
-import g4 from '../assets/g4.jpg';
-import g5 from '../assets/g5.jpg';
-import g6 from '../assets/g6.jpg';
-import g7 from '../assets/g7.jpg';
+import g1 from '../assets/g1.webp';
+import g2 from '../assets/g2.webp';
+import g3 from '../assets/g3.webp';
+import g4 from '../assets/g4.webp';
+import g5 from '../assets/g5.webp';
+import g6 from '../assets/g6.webp';
+import g7 from '../assets/g7.webp';
 
 /* AMUTHA SURABI */
-import asn1 from '../assets/asn1.jpeg';
-import asn2 from '../assets/asn2.jpeg';
-import asn3 from '../assets/asn3.jpeg';
-import asn4 from '../assets/asn4.jpeg';
-import asn5 from '../assets/asn5.jpeg';
-import asn6 from '../assets/asn6.jpeg';
-import asn7 from '../assets/asn7.jpeg';
-import asn8 from '../assets/asn8.jpeg';
-import asn9 from '../assets/asn9.jpeg';
+import asn1 from '../assets/asn1.webp';
+import asn2 from '../assets/asn2.webp';
+import asn3 from '../assets/asn3.webp';
+import asn4 from '../assets/asn4.webp';
+import asn5 from '../assets/asn5.webp';
+import asn6 from '../assets/asn6.webp';
+import asn7 from '../assets/asn7.webp';
+import asn8 from '../assets/asn8.webp';
+import asn9 from '../assets/asn9.webp';
 
 /* RAGHAVENDRA */
-import rg1 from '../assets/rg1.jpeg';
-import rg2 from '../assets/rg2.jpeg';
-import rg3 from '../assets/rg3.jpeg';
-import rg4 from '../assets/rg4.jpeg';
-import rg6 from '../assets/rg6.jpeg';
-import rg8 from '../assets/rg8.jpeg';
-import rg9 from '../assets/rg9.jpeg';
+import rg1 from '../assets/rg1.webp';
+import rg2 from '../assets/rg2.webp';
+import rg3 from '../assets/rg3.webp';
+import rg4 from '../assets/rg4.webp';
+import rg6 from '../assets/rg6.webp';
+import rg8 from '../assets/rg8.webp';
+import rg9 from '../assets/rg9.webp';
 
 /* TAMIL THENDRAL */
-import ttn1 from '../assets/ttn1.jpeg';
-import ttn2 from '../assets/ttn2.jpeg';
-import ttn3 from '../assets/ttn3.jpeg';
-import ttn4 from '../assets/ttn4.jpeg';
-import ttn5 from '../assets/ttn5.jpeg';
-import ttn6 from '../assets/ttn6.jpeg';
-import ttn7 from '../assets/ttn7.jpeg';
+import ttn1 from '../assets/ttn1.webp';
+import ttn2 from '../assets/ttn2.webp';
+import ttn3 from '../assets/ttn3.webp';
+import ttn4 from '../assets/ttn4.webp';
+import ttn5 from '../assets/ttn5.webp';
+import ttn6 from '../assets/ttn6.webp';
+import ttn7 from '../assets/ttn7.webp';
 
 /* TAMIL ARUVI */
-import tan1 from '../assets/tan1.jpeg';
-import tan2 from '../assets/tan2.jpeg';
-import tan3 from '../assets/tan3.jpeg';
-import tan4 from '../assets/tan4.jpeg';
-import tan5 from '../assets/tan5.jpeg';
-import tan6 from '../assets/tan6.jpeg';
-import tan7 from '../assets/tan7.jpeg';
-import tan8 from '../assets/tan8.jpeg';
-import tan9 from '../assets/tan9.jpeg';
+import tan1 from '../assets/tan1.webp';
+import tan2 from '../assets/tan2.webp';
+import tan3 from '../assets/tan3.webp';
+import tan4 from '../assets/tan4.webp';
+import tan5 from '../assets/tan5.webp';
+import tan6 from '../assets/tan6.webp';
+import tan7 from '../assets/tan7.webp';
+import tan8 from '../assets/tan8.webp';
+import tan9 from '../assets/tan9.webp';
 
 /* MASTER PLAN */
 import { MasterPlanContainer } from '../components/MasterPlan/MasterPlanContainer';
@@ -206,7 +206,7 @@ const ProjectDetails = () => {
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
-                      <img src={img} className="w-full h-full object-cover" />
+                      <img src={img} className="w-full h-full object-cover" loading='lazy' />
                     </SwiperSlide>
                   ))}
                 </Swiper>

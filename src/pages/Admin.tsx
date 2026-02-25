@@ -4,12 +4,19 @@ import AdminLogin from '@/components/admin/AdminLogin';
 import AdminDashboard from '@/components/admin/AdminDashboard';
 import { ProjectData } from '@/components/admin/ProjectForm';
 import { useToast } from '@/hooks/use-toast';
-import { PlotStatus } from '@/components/admin/PlotManager'; // 🆕 IMPORT THIS
+import { PlotStatus } from '@/components/admin/PlotManager'; 
 
 // --- FIREBASE IMPORTS ---
-import { auth, db } from '@/lib/firebase'; 
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+// (auth imports removed, only database imports remain)
+import { db } from '@/lib/firebase'; 
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+
+// ---------------------------------------------------------
+// 🔐 CHANGE YOUR USERNAME AND PASSWORD HERE
+// ---------------------------------------------------------
+const ADMIN_EMAIL = "admin@thamizharuvi.com"; 
+const ADMIN_PASSWORD = "admin123"; 
+// ---------------------------------------------------------
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,20 +25,20 @@ const Admin = () => {
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const { toast } = useToast();
 
-  // 1. CHECK AUTH STATUS & FETCH DATA ON LOAD
+  // 1. CHECK LOCAL STORAGE ON LOAD (PERSISTENCE)
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+    const initAuth = async () => {
+      // Check browser storage to see if admin logged in previously
+      const isLoggedIn = localStorage.getItem("isAdminLoggedIn") === "true";
+      
+      if (isLoggedIn) {
         setIsAuthenticated(true);
-        fetchProjects(); 
-      } else {
-        setIsAuthenticated(false);
-        setProjects([]);
+        await fetchProjects(); 
       }
       setIsLoading(false);
-    });
+    };
 
-    return () => unsubscribe();
+    initAuth();
   }, []);
 
   // 2. HELPER: FETCH PROJECTS FROM FIRESTORE
@@ -49,7 +56,7 @@ const Admin = () => {
     }
   };
 
-  // 3. HELPER: UPLOAD IMAGE TO CLOUDINARY
+  // 3. HELPER: UPLOAD IMAGE TO CLOUDINARY (WITH OPTIMIZATION)
   const uploadToCloudinary = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -78,8 +85,13 @@ const Admin = () => {
       }
       
       const data = await response.json();
-      console.log("Image uploaded successfully:", data.secure_url);
-      return data.secure_url;
+      
+      // 🚀 MAGIC FIX: Add 'f_auto,q_auto' to the URL to instantly compress images
+      // This will fix the slow loading speed your client mentioned!
+      const optimizedUrl = data.secure_url.replace('/upload/', '/upload/f_auto,q_auto/');
+      
+      console.log("Image uploaded and optimized successfully:", optimizedUrl);
+      return optimizedUrl;
     } catch (error) {
       console.error("Upload function error:", error);
       throw error; 
@@ -88,26 +100,31 @@ const Admin = () => {
 
   // --- HANDLERS ---
 
+  // 🔐 HARDCODED LOGIN LOGIC
   const handleLogin = async (email: string, password: string) => {
     setIsLoading(true);
     setLoginError('');
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
+    
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      // Save session to local storage
+      localStorage.setItem("isAdminLoggedIn", "true");
+      
       toast({ title: 'Welcome back!', description: 'Logged in successfully.' });
-    } catch (error: any) {
-      console.error("Login error:", error);
-      setLoginError(error.message || 'Invalid email or password');
+      await fetchProjects();
+    } else {
+      setLoginError('Invalid email or password');
     }
+    
     setIsLoading(false);
   };
 
   const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      toast({ title: 'Logged out', description: 'See you soon!' });
-    } catch (error) {
-      console.error("Logout error", error);
-    }
+    // Clear session from local storage
+    localStorage.removeItem("isAdminLoggedIn");
+    setIsAuthenticated(false);
+    setProjects([]);
+    toast({ title: 'Logged out', description: 'See you soon!' });
   };
 
   // --- UPDATED: HANDLE ADD PROJECT ---
@@ -150,7 +167,7 @@ const Admin = () => {
         status: data.status || "Ongoing",
         imageUrl: imageUrl,       
         layoutImage: layoutImageUrl, 
-        galleryImages: finalGalleryImages, // <--- Save Gallery Array
+        galleryImages: finalGalleryImages, 
         plots: data.plots || "",
         createdAt: new Date().toISOString()
       });
@@ -199,13 +216,11 @@ const Admin = () => {
       if (data.galleryFiles && data.galleryFiles.length > 0) {
          console.log(`Uploading ${data.galleryFiles.length} new gallery files...`);
          const uploadPromises = data.galleryFiles.map(file => uploadToCloudinary(file));
-         // Using Promise.all ensures we get all URLs before proceeding
          newGalleryUrls = await Promise.all(uploadPromises);
          console.log("New Gallery URLs uploaded:", newGalleryUrls);
       }
       
       // 4. --- MERGE: Combine old retained URLs + New uploaded URLs ---
-      // IMPORTANT: Explicitly use empty array fallback to prevent crashes
       const oldGalleryImages = data.galleryImages || []; 
       const finalGalleryImages = [...oldGalleryImages, ...newGalleryUrls];
 
@@ -220,7 +235,7 @@ const Admin = () => {
         status: data.status || "Ongoing",
         imageUrl: imageUrl || "",
         layoutImage: layoutImageUrl || "",
-        galleryImages: finalGalleryImages, // <--- Correctly saves the merged array
+        galleryImages: finalGalleryImages, 
         plots: data.plots || ""
       });
 
@@ -236,7 +251,6 @@ const Admin = () => {
 
     } catch (error) {
       console.error("Edit Project Error:", error);
-      // More descriptive error toast
       toast({ 
         title: 'Error', 
         description: 'Failed to update project. Check console for details.', 
@@ -258,18 +272,16 @@ const Admin = () => {
     }
   };
 
-  // 🆕 NEW HANDLER: UPDATE PLOT STATUSES
+  // --- NEW HANDLER: UPDATE PLOT STATUSES ---
   const handleUpdatePlots = async (projectId: string, plots: PlotStatus[]) => {
     setIsLoading(true);
     try {
       const projectRef = doc(db, "projects", projectId);
       
-      // Update only the plotStatuses field in Firestore
       await updateDoc(projectRef, {
         plotStatuses: plots
       });
 
-      // Update local state to reflect changes instantly
       setProjects(prev => prev.map(p => 
         p.id === projectId ? { ...p, plotStatuses: plots } : p
       ));
@@ -300,7 +312,6 @@ const Admin = () => {
           onAddProject={handleAddProject}
           onEditProject={handleEditProject}
           onDeleteProject={handleDeleteProject}
-          // 🆕 PASS THE NEW HANDLER HERE
           onUpdatePlots={handleUpdatePlots} 
         />
       ) : (

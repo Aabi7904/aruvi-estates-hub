@@ -2,21 +2,21 @@ import { Plot } from "@/types/plot";
 // Adjust these import paths if your files are in different folders
 import { plotsData, plotPositions } from "./plotData"; 
 import { amuthaPlots, amuthaPositions } from "./amuthaSurabiData";
-import amuthaMapImage from "../../assets/Amutha Surabi Nagar-images-1.jpg";
+import amuthaMapImage from "../../assets/Amutha Surabi Nagar-images-1.webp";
 import { highwayPlots, highwayPositions } from "./sivanmalai3";
-import highwayMapImage from "../../assets/sivanmalai3layout.png";
+import highwayMapImage from "../../assets/sivanmalai3layout.webp";
 import { raghavendraPlots, raghavendraPositions } from "./raghavendra";
-import raghavendraMapImage from "../../assets/raghavendralayout.png";
+import raghavendraMapImage from "../../assets/raghavendralayout.webp";
 import { semozhinagarPlots, semozhinagarPositions } from "./semozhinagar";
-import semozhi from "../../assets/semozhilayout.jpg"
+import semozhi from "../../assets/semozhilayout.webp"
 import { sivanmalai2plotPlots, sivanmalai2plotPositions } from "./sivanmalai2plot";
-import sivanmalai2plotMapImage from "../../assets/sivanmalai2layout.png";
-import aaavenue from "../../assets/aa-avenue-masterplan.jpg"
-import sivan1img from "../../assets/sivan1.png"
+import sivanmalai2plotMapImage from "../../assets/sivanmalai2layout.webp";
+import aaavenue from "../../assets/aa-avenue-masterplan.webp"
+import sivan1img from "../../assets/sivan1.webp"
 import { sivanmalai1plotPlots, sivanmalai1plotPositions } from "./sivanmalai1";
 
 import {deepamalaiplotPlots, deepamalaiplotPositions} from "./deepamali";
-import deepamaliMapImage from "../../assets/deepa malai nagar .jpeg";
+import deepamaliMapImage from "../../assets/deepa malai nagar .webp";
 // 1. Define the Types
 export interface PlotPosition {
   id: string;

@@ -26,7 +26,7 @@ const AboutSection = () => {
               {/* Changed max-w-sm to max-w-md for wider width */}
               <div className="relative rounded-2xl overflow-hidden shadow-card max-w-md mx-auto lg:mx-0">
                 <img
-                  src="shabeer.jpeg"
+                  src="shabeer.webp"
                   alt="Mr. Shabeer - Founder"
                   // Changed h-[420px] to h-[500px] for taller height
                   className="w-full h-[500px] object-cover"

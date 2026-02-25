@@ -3,19 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Shield, Award, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import heroBg from '@/assets/hero-bg.jpg';
-import logo from '@/assets/logo.png';
+import heroBg from '@/assets/hero-bg.webp';
+import logo from '@/assets/logo.webp';
 
 // Your slideshow images
 const slideImages = [
-  "tvmhill.jpg",
- "img1.jpg",
-  "img2.jpg",
-  "img3.jpg",
-  "img4.jpg",
-  "img5.jpg",
-  "img6.jpg",
-  "img7.jpg",
+  "tvmhill.webp",
+ "img1.webp",
+  "img2.webp",
+  "img3.webp",
+  "img4.webp",
+  "img5.webp",
+  "img6.webp",
+  "img7.webp",
   heroBg
 ];
 

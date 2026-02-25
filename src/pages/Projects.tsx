@@ -13,11 +13,11 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 // IMPORT IMAGES
-import comingSoonImg from '@/assets/coming-soon.jpg';
-import tamilAruviImg from '@/assets/tamil-aruvi.png'; 
-import sivanmalaiSamuLogo from '@/assets/sivanmalai_samu.png'; 
-import thulasiLogo from '@/assets/Thulasi_Nagar.png';
-import tamilThendralLogo from '@/assets/Tamil_Thendral_Nagar.png';
+import comingSoonImg from '@/assets/coming-soon.webp';
+import tamilAruviImg from '@/assets/tamil-aruvi.webp'; 
+import sivanmalaiSamuLogo from '@/assets/sivanmalai_samu.webp'; 
+import thulasiLogo from '@/assets/Thulasi_Nagar.webp';
+import tamilThendralLogo from '@/assets/Tamil_Thendral_Nagar.webp';
 
 interface Project {
   id: string;

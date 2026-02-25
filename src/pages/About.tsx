@@ -76,7 +76,7 @@ const About = () => {
               >
                 <div className="relative rounded-2xl overflow-hidden shadow-card">
                   <img
-                    src="shabeer.jpeg"
+                    src="shabeer.webp"
                     alt="Mr. Shabeer - Founder"
                     className="w-full aspect-[4/5] object-cover"
                   />
