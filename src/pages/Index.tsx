@@ -17,13 +17,13 @@ const Index = () => {
         <title>Thamizh Aruvi Real Estate | Premium Plots in Tiruvannamalai</title>
         <meta name="description" content="Discover premium DTCP & RERA approved plots in Tiruvannamalai. 12+ years of trust, 1000+ happy families. Your dream home starts here with Thamizh Aruvi Real Estate." />
         <meta name="keywords" content="real estate, plots, Tiruvannamalai, DTCP approved, RERA registered, land, property, Thamizh Aruvi" />
-        <link rel="canonical" href="https://thamizharvui.com" />
+        <link rel="canonical" href="https://tiruvannamalairealestates.in" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Thamizh Aruvi Real Estate | Premium Plots in Tiruvannamalai" />
         <meta property="og:description" content="Premium DTCP & RERA approved plots in Tiruvannamalai. 12+ years of excellence." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://thamizharvui.com" />
+        <meta property="og:url" content="https://tiruvannamalairealestates.in" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />

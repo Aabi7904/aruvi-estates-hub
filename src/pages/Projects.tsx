@@ -59,8 +59,9 @@ const Projects = () => {
   return (
     <>
       <Helmet>
-        <title>Our Projects | Thamizh Aruvi Real Estate</title>
-      </Helmet>
+  <title>Our Projects & Premium Layouts | Thamizh Aruvi Real Estate</title>
+  <meta name="description" content="Browse our exclusive, DTCP approved residential layouts in prime Tiruvannamalai locations. Find ongoing, completed, and upcoming projects." />
+</Helmet>
 
       <main className="min-h-screen bg-background">
         <Navbar />

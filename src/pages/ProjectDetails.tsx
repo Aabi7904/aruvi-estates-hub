@@ -176,8 +176,9 @@ const ProjectDetails = () => {
   return (
     <>
       <Helmet>
-        <title>{project.title}</title>
-      </Helmet>
+  <title>{project.title} | Thamizh Aruvi Real Estate</title>
+  <meta name="description" content={`Explore ${project.title} by Thamizh Aruvi Real Estate in ${project.location}. View plot availability, master plans, and site gallery.`} />
+</Helmet>
       <Navbar />
       <main className="pt-24 pb-12 bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4">
