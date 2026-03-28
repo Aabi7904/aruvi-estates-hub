@@ -26,8 +26,8 @@ const About = () => {
         <Navbar />
         
         {/* Hero / Our Story Section */}
-        <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
+        <section className="pt-36 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
           <div className="container-custom mx-auto relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               
@@ -70,13 +70,13 @@ const About = () => {
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="relative max-w-md mx-auto"
+                className="relative max-w-lg mx-auto"
               >
                 <div className="rounded-2xl overflow-hidden shadow-card">
                   <img
                     src="tamilaruvimdnew.webp"
                     alt="Mr. Shabeer - Founder"
-                    className="w-full aspect-[4/5] object-cover"
+                   className="w-full object-contain"
                   />
                   <div className="px-6 py-4 bg-background">
                     <h3 className="text-xl font-bold text-primary mb-1">Mr.A.R.Shabeer Ahamed</h3>
