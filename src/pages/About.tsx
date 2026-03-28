@@ -26,7 +26,6 @@ const About = () => {
         <Navbar />
         
         {/* Hero / Our Story Section */}
-        {/* UPDATED: Changed pt-32 to pt-24 to move the section up */}
         <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
           <div className="container-custom mx-auto relative z-10">
@@ -71,19 +70,17 @@ const About = () => {
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                // UPDATED: Added max-w-md and mx-auto to restrict width and center it (making it smaller)
                 className="relative max-w-md mx-auto"
               >
-                <div className="relative rounded-2xl overflow-hidden shadow-card">
+                <div className="rounded-2xl overflow-hidden shadow-card">
                   <img
-                    src="tamilaruvimd (1).webp"
+                    src="tamilaruvimdnew.webp"
                     alt="Mr. Shabeer - Founder"
                     className="w-full aspect-[4/5] object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-2xl font-bold text-background mb-1">Mr.A.R.Shabeer Ahamed</h3>
-                    <p className="text-background/80">Founder & Managing Director</p>
+                  <div className="px-6 py-4 bg-background">
+                    <h3 className="text-xl font-bold text-primary mb-1">Mr.A.R.Shabeer Ahamed</h3>
+                    <p className="text-muted-foreground text-sm">Founder & Managing Director</p>
                   </div>
                 </div>
               </motion.div>
@@ -151,7 +148,6 @@ const About = () => {
             </motion.div>
 
             <div className="relative">
-              {/* Vertical Line */}
               <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border hidden md:block" />
 
               <div className="space-y-12">
