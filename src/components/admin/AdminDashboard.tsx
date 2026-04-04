@@ -20,7 +20,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Pencil, Trash2, LogOut, Building2, CheckCircle, Clock, Grid } from 'lucide-react';
+import { Plus, Pencil, Trash2, LogOut, Building2, CheckCircle, Clock, Grid, CalendarClock } from 'lucide-react';
 import ProjectForm, { ProjectData } from './ProjectForm';
 import PlotManager, { PlotStatus } from './PlotManager';
 
@@ -34,7 +34,7 @@ interface AdminDashboardProps {
   onUpdatePlots?: (projectId: string, plots: PlotStatus[]) => void;
 }
 
-/* Mock data (NO features field) */
+/* Mock data */
 const mockProjects: ProjectData[] = [
   {
     id: '1',
@@ -62,6 +62,25 @@ const mockProjects: ProjectData[] = [
   },
 ];
 
+// ✅ Helper: normalize status to lowercase
+const norm = (status?: string) => status?.toLowerCase() ?? '';
+
+// ✅ Helper: get badge variant per status
+const getBadgeVariant = (status?: string): 'default' | 'secondary' | 'outline' => {
+  const s = norm(status);
+  if (s === 'completed') return 'secondary';
+  if (s === 'upcoming') return 'outline';
+  return 'default'; // ongoing
+};
+
+// ✅ Helper: get badge label per status
+const getBadgeLabel = (status?: string) => {
+  const s = norm(status);
+  if (s === 'completed') return 'Completed';
+  if (s === 'upcoming') return 'Upcoming';
+  return 'Ongoing';
+};
+
 const AdminDashboard = ({
   onLogout,
   projects = mockProjects,
@@ -75,7 +94,6 @@ const AdminDashboard = ({
   const [editingProject, setEditingProject] = useState<ProjectData | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  // --- NEW STATE FOR PLOT MANAGER ---
   const [isPlotManagerOpen, setIsPlotManagerOpen] = useState(false);
   const [selectedProjectForPlots, setSelectedProjectForPlots] = useState<ProjectData | null>(null);
 
@@ -106,7 +124,6 @@ const AdminDashboard = ({
     }
   };
 
-  // --- NEW HANDLERS FOR PLOT MANAGER ---
   const handleOpenPlotManager = (project: ProjectData) => {
     setSelectedProjectForPlots(project);
     setIsPlotManagerOpen(true);
@@ -117,8 +134,10 @@ const AdminDashboard = ({
     setIsPlotManagerOpen(false);
   };
 
-  const ongoingCount = projects.filter(p => p.status === 'ongoing').length;
-  const completedCount = projects.filter(p => p.status === 'completed').length;
+  // ✅ FIX: normalize + count all three statuses
+  const ongoingCount   = projects.filter(p => norm(p.status) === 'ongoing').length;
+  const completedCount = projects.filter(p => norm(p.status) === 'completed').length;
+  const upcomingCount  = projects.filter(p => norm(p.status) === 'upcoming').length;
 
   return (
     <div className="min-h-screen bg-muted/30">
@@ -137,8 +156,8 @@ const AdminDashboard = ({
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* Stats — now 4 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -172,6 +191,19 @@ const AdminDashboard = ({
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-secondary">{completedCount}</div>
+            </CardContent>
+          </Card>
+
+          {/* ✅ NEW: Upcoming stat card */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Upcoming
+              </CardTitle>
+              <CalendarClock className="w-4 h-4 text-yellow-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-yellow-500">{upcomingCount}</div>
             </CardContent>
           </Card>
         </div>
@@ -225,17 +257,21 @@ const AdminDashboard = ({
                       <TableCell className="text-muted-foreground">{project.price}</TableCell>
 
                       <TableCell>
+                        {/* ✅ FIX: badge handles ongoing / completed / upcoming */}
                         <Badge
-                          variant={project.status === 'completed' ? 'secondary' : 'default'}
+                          variant={getBadgeVariant(project.status)}
+                          className={
+                            norm(project.status) === 'upcoming'
+                              ? 'border-yellow-500 text-yellow-600 bg-yellow-50'
+                              : ''
+                          }
                         >
-                          {project.status === 'completed' ? 'Completed' : 'Ongoing'}
+                          {getBadgeLabel(project.status)}
                         </Badge>
                       </TableCell>
 
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          
-                          {/* 🆕 NEW: MANAGE PLOTS BUTTON */}
                           <Button
                             variant="ghost"
                             size="icon"
@@ -284,8 +320,8 @@ const AdminDashboard = ({
         isSubmitting={isLoading}
       />
 
-      {/* 🆕 NEW: PLOT MANAGER DIALOG */}
-      <PlotManager 
+      {/* Plot Manager Dialog */}
+      <PlotManager
         isOpen={isPlotManagerOpen}
         onClose={() => setIsPlotManagerOpen(false)}
         project={selectedProjectForPlots}
