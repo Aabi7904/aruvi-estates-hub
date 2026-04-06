@@ -2,8 +2,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { Plot } from "@/types/plot"; 
 import { MapControls } from "./MapControls";
 import { PlotShape } from "./PlotShape";
-import { Legend } from "./Legend";
-// Import the type for Positions
+// import { Legend } from "./Legend"; ❌ Removed
 import { PlotPosition } from "@/data/maps/mapRegistry";
 
 interface InteractiveMapProps {
@@ -12,8 +11,6 @@ interface InteractiveMapProps {
   onSelectPlot: (plot: Plot) => void;
   imageUrl: string;
   initialScale?: number;
-  
-  // 🆕 NEW PROPS: Dynamic Data
   plotPositions: PlotPosition[];
   mapDimensions: { width: number; height: number };
 }
@@ -24,11 +21,10 @@ export function InteractiveMap({
   onSelectPlot,
   imageUrl,
   initialScale = 0.4,
-  plotPositions,   // <--- Now dynamic
-  mapDimensions,   // <--- Now dynamic
+  plotPositions,
+  mapDimensions,
 }: InteractiveMapProps) {
   
-  // Destructure dynamic dimensions
   const { width, height } = mapDimensions;
 
   return (
@@ -46,7 +42,7 @@ export function InteractiveMap({
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <MapControls onZoomIn={zoomIn} onZoomOut={zoomOut} onReset={resetTransform} />
-            <Legend />
+            {/* <Legend /> ❌ Removed */}
 
             <TransformComponent
               wrapperClass="!w-full !h-full"
@@ -61,19 +57,16 @@ export function InteractiveMap({
                     src={imageUrl || "/placeholder.jpg"}
                     alt="Master Plan Layout"
                     className="block max-w-none select-none pointer-events-none"
-                    // 🆕 Use dynamic dimensions
                     style={{ width: width, height: "auto" }}
                     draggable={false}
                   />
 
                   <svg
                     className="absolute inset-0 w-full h-full"
-                    // 🆕 Use dynamic viewBox
                     viewBox={`0 0 ${width} ${height}`}
                     preserveAspectRatio="none"
                   >
                     {plots.map((plot) => {
-                      // 🆕 Find position in the passed PROP array
                       const position = plotPositions.find((p) => p.id === plot.id);
                       if (!position) return null;
 
