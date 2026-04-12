@@ -1,10 +1,8 @@
-// src/components/admin/PlotManager.tsx
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Plus, Trash2, RefreshCw, Save } from 'lucide-react';
 import { ProjectData } from './ProjectForm';
@@ -12,7 +10,7 @@ import { ProjectData } from './ProjectForm';
 // Define the shape of our Plot Status
 export interface PlotStatus {
   id: string;
-  status: 'Available' | 'Sold' | 'Reserved';
+  status: 'Available' | 'Sold';
 }
 
 interface PlotManagerProps {
@@ -31,19 +29,22 @@ const PlotManager = ({ isOpen, onClose, project, onSave, isSaving }: PlotManager
   // Load existing plots when opening
   useEffect(() => {
     if (project && project.plotStatuses) {
-      setPlots(project.plotStatuses);
+      // ⚠️ FIXED TS ERROR: Cast p.status to a string safely check for legacy 'Reserved' data
+      const cleanedPlots = project.plotStatuses.map(p => ({
+        ...p,
+        status: (p.status as string === 'Reserved' ? 'Available' : p.status) as 'Available' | 'Sold'
+      }));
+      setPlots(cleanedPlots);
     } else {
       setPlots([]);
     }
   }, [project, isOpen]);
 
-  // Toggle Status: Available -> Sold -> Reserved -> Available
+  // Toggle Status: Available <-> Sold
   const toggleStatus = (id: string) => {
     setPlots(prev => prev.map(p => {
       if (p.id === id) {
-        if (p.status === 'Available') return { ...p, status: 'Sold' };
-        if (p.status === 'Sold') return { ...p, status: 'Reserved' };
-        return { ...p, status: 'Available' };
+        return { ...p, status: p.status === 'Available' ? 'Sold' : 'Available' };
       }
       return p;
     }));
@@ -82,8 +83,7 @@ const PlotManager = ({ isOpen, onClose, project, onSave, isSaving }: PlotManager
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Sold': return 'bg-red-500 hover:bg-red-600';
-      case 'Reserved': return 'bg-orange-500 hover:bg-orange-600';
-      default: return 'bg-green-500 hover:bg-green-600';
+      default: return 'bg-green-500 hover:bg-green-600'; // Available
     }
   };
 
@@ -125,7 +125,7 @@ const PlotManager = ({ isOpen, onClose, project, onSave, isSaving }: PlotManager
                   key={plot.id}
                   onClick={() => toggleStatus(plot.id)}
                   className={`
-                    cursor-pointer p-2 rounded-lg text-center text-white text-xs font-bold shadow-sm transition-all transform hover:scale-105
+                    cursor-pointer p-2 rounded-lg text-center text-white text-xs font-bold shadow-sm transition-all transform hover:scale-105 select-none
                     ${getStatusColor(plot.status)}
                   `}
                 >

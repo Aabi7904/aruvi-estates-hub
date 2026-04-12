@@ -107,7 +107,7 @@ const RAGHAVENDRA_GALLERY = [rg1, rg2, rg3, rg4, rg6, rg8, rg9];
 const TAMIL_THENDRAL_GALLERY = [ttn1, ttn2, ttn3, ttn4, ttn5, ttn6, ttn7];
 const TAMIL_ARUVI_GALLERY = [tan1, tan2, tan3, tan4, tan5, tan6, tan7, tan8, tan9];
 
-// ⚠️ FIXED: Added 'export' keyword so other files can import this
+// ⚠️ FIXED: Removed 'Reserved' from the status types below
 export interface Project {
   id: string;
   title: string;
@@ -116,7 +116,7 @@ export interface Project {
   imageUrl: string;
   mapLink?: string;
   layoutImage?: string;
-  plotStatuses?: { id: string; status: 'Available' | 'Sold' | 'Reserved' }[];
+  plotStatuses?: { id: string; status: 'Available' | 'Sold' }[];
 }
 
 const ProjectDetails = () => {
