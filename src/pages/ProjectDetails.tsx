@@ -123,19 +123,55 @@ const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!id) return;
-    getDoc(doc(db, 'projects', id)).then((snap) => {
-      if (snap.exists()) {
-        setProject({ id: snap.id, ...snap.data() } as Project);
-      }
-    });
+    if (!id) {
+      setLoading(false);
+      setNotFound(true);
+      return;
+    }
+    setLoading(true);
+    setNotFound(false);
+    getDoc(doc(db, 'projects', id))
+      .then((snap) => {
+        if (snap.exists()) {
+          setProject({ id: snap.id, ...snap.data() } as Project);
+        } else {
+          setNotFound(true);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setNotFound(true);
+      })
+      .finally(() => setLoading(false));
   }, [id]);
 
-  if (!project) return null;
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <p className="text-muted-foreground">Loading project details...</p>
+      </div>
+    );
+  }
 
-  const titleLower = project.title.toLowerCase();
+  if (notFound || !project) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-muted">
+        <div className="text-center">
+          <h1 className="mb-4 text-4xl font-bold">404</h1>
+          <p className="mb-4 text-xl text-muted-foreground">Project not found</p>
+          <a href="/projects" className="text-primary underline hover:text-primary/90">
+            Back to Projects
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  const titleLower = (project.title || '').toLowerCase();
   const locLower = project.location?.toLowerCase() || '';
 
   const gallery =
@@ -263,11 +299,21 @@ const ProjectDetails = () => {
                 <MapIcon className="w-6 h-6 text-[#108e66]" />
                 <h2 className="text-2xl font-bold">Check Plot Availability</h2>
               </div>
-              <MasterPlanContainer
-                imageUrl={mapImageToUse}
-                mapData={currentMapData}
-                project={project}
-              />
+              {currentMapData ? (
+                <MasterPlanContainer
+                  imageUrl={mapImageToUse}
+                  mapData={currentMapData}
+                  project={project}
+                />
+              ) : (
+                <div className="flex items-center justify-center w-full h-[600px] border border-border rounded-xl overflow-hidden shadow-lg bg-background">
+                  <img
+                    src={project.layoutImage}
+                    alt={`${project.title} Master Plan`}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+              )}
             </div>
           )}
         </div>
